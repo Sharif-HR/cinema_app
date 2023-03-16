@@ -5,6 +5,7 @@
         static void Main(string[] args)
         {
             // Commented from vscode
+            // test comment 2
             Console.WriteLine("Welocome to our Cinema App!!");
         }
     }
