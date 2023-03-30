@@ -16,7 +16,7 @@ static class Menu
         }
         else if (input == "2")
         {
-            
+
             UserRegistration.Start();
         }
         else
