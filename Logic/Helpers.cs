@@ -2,7 +2,6 @@ using System.Security;
 static class Helpers
 {
     public static String PasswordToAstriks(){
-        Console.WriteLine(@$"please enter your password:");
         SecureString pass = new SecureString();
         string pass2 = string.Empty;
         ConsoleKeyInfo keyInfo;

@@ -24,4 +24,54 @@ static class Inputs {
         }
         return input;
     }
+
+    public static string? PasswordInput(bool mustBeStrong = true, int minLength = 8, int maxLength = 32) {
+        Console.WriteLine("Enter your password: \n>");
+        bool loop = true;
+        string input = "";
+
+        while(loop) {
+            input = Helpers.PasswordToAstriks();
+            if(mustBeStrong) {
+                if(input.Length < minLength || input.Length > maxLength) {
+                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long.");
+                    continue;
+                }
+
+                if(!input.Any(char.IsUpper)) {
+                    Console.WriteLine("Password must contain at least one uppercase character.");
+
+                    continue;
+                }
+
+                if(!input.Any(char.IsLower)) {
+                    Console.WriteLine("Password must contain at least one lowercase character.");
+                    continue;
+                }
+
+                if(input.Contains(" ")) {
+                    Console.WriteLine("Password can't contain a white space.");
+                    continue;
+                }
+
+                string specialChars = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
+                char[] specialCh = specialChars.ToCharArray();
+                foreach(char ch in specialCh) {
+                    if(input.Contains(ch)) {
+                        loop = false;
+                        return input;
+                    }
+                }
+            }
+        }
+
+        return input;
+    }
+
+    public static string? OptionalInput(string label) {
+        Console.WriteLine(label + "\n>");
+        string? input = Console.ReadLine();
+
+        return input;
+    }
 }
