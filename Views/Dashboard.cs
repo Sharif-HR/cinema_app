@@ -1,3 +1,5 @@
+namespace View;
+
 static class Dashboard
 {
     //Shows the dashboard(similar to the Menu).

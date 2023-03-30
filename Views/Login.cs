@@ -1,4 +1,6 @@
-static class UserLogin
+namespace View;
+
+static class Login
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
 

@@ -1,4 +1,6 @@
-static class UserRegistration
+namespace View;
+
+static class Register
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
 
