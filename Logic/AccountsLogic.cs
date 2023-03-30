@@ -23,23 +23,25 @@ class AccountsLogic
     public void UpdateList(AccountModel acc)
     {
         //Find if there is already an model with the same id
-        int index = _accounts.FindIndex(s => s.Id == acc.Id);
+        int index = _accounts.FindIndex(s => s.EmailAddress == acc.EmailAddress);
 
         if (index != -1)
         {
             //update existing model
-            _accounts[index] = acc;
+            //_accounts[index] = acc;
+            Console.WriteLine("Already found an account with the same email adress.");
         }
         else
         {
             //add new model
             _accounts.Add(acc);
+            Console.WriteLine("Registration complete.");
         }
         AccountsAccess.WriteAll(_accounts);
 
     }
 
-    public AccountModel GetById(int id)
+    public AccountModel GetById(string id)
     {
         return _accounts.Find(i => i.Id == id);
     }
@@ -52,6 +54,13 @@ class AccountsLogic
         }
         CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount;
+    }
+    
+    public string GenerateUUID()
+    {
+        // Generates a new unique user ID.
+        string uuid = Guid.NewGuid().ToString();
+        return uuid;
     }
 }
 

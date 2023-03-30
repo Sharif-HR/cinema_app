@@ -4,25 +4,44 @@
 class AccountModel
 {
     [JsonPropertyName("id")]
-    public int Id { get; set; }
+    public string Id { get; set; }
 
-    [JsonPropertyName("emailAddress")]
-    public string EmailAddress { get; set; }
+    [JsonPropertyName("username")]
+    public string Username { get; set; }
 
     [JsonPropertyName("password")]
     public string Password { get; set; }
 
-    [JsonPropertyName("fullName")]
-    public string FullName { get; set; }
+    [JsonPropertyName("emailAddress")]
+    public string EmailAddress { get; set; }
 
-    public AccountModel(int id, string emailAddress, string password, string fullName)
+    [JsonPropertyName("phoneNumber")]
+    public string PhoneNumber { get; set; }
+
+    [JsonPropertyName("firstName")]
+    public string FirstName { get; set; }
+
+    [JsonPropertyName("lastName")]
+    public string LastName { get; set; }
+
+    [JsonPropertyName("isEligible")]
+    public bool IsEligible { get; set; }
+
+    [JsonPropertyName("role")]
+    public string Role { get; set; }
+
+    public AccountModel(string id, string username, string password, string emailAddress, string phoneNumber, string firstName, string lastName, bool isEligible, string role)
     {
         Id = id;
+        Username = username;
         EmailAddress = emailAddress;
         Password = password;
-        FullName = fullName;
+        PhoneNumber = phoneNumber;
+        FirstName = firstName;
+        LastName = lastName;
+        IsEligible = isEligible;
+        Role = role;
     }
-
 }
 
 
