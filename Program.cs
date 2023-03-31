@@ -1,3 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Welcome to this amazing program");
-View.Menu.Start();
+﻿using System;
+
+namespace CinemaApp
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Clear();
+            Views.Menu MenuPage = new();
+            MenuPage.Render();
+        }
+    }
+}

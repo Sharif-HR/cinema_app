@@ -1,12 +1,15 @@
-namespace View;
+namespace Views;
 
-static class Dashboard
+class Dashboard : ViewTemplate
 {
     //Shows the dashboard(similar to the Menu).
     //Options shown depends on the role of the user.
-    static private AccountsLogic accountsLogic = new AccountsLogic();    
-    static public void Start(AccountModel acc)
+    static private AccountsLogic accountsLogic = new AccountsLogic();
+    public Dashboard() : base("Dashboard") { }
+    public void Render(AccountModel acc)
     {
+        base.Render();
+
         if (acc.Role == "Admin")
         {
             Console.WriteLine("Enter 1 to see a list of available movies.");

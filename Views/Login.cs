@@ -1,11 +1,12 @@
-namespace View;
+namespace Views;
 
-static class Login
+class Login : ViewTemplate
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
 
+    public Login() : base("Login") { }
 
-    public static void Start()
+    public override void Render()
     {
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Please enter your email address");
@@ -17,12 +18,13 @@ static class Login
         {
             //Console.WriteLine($"Welcome back {acc.FirstName} {acc.LastName}");
             //Console.WriteLine("Your email number is " + acc.EmailAddress);
-
-            Dashboard.Start(acc);
+            Dashboard dashboard = new();
+            dashboard.Render(acc);
         }
         else
         {
             Console.WriteLine("No account found with that email and/or password");
+            Helpers.Continue();
         }
     }
 }

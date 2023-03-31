@@ -25,4 +25,9 @@ static class Helpers
             return pass2;
         }
     }
+
+    public static void Continue() {
+        Console.WriteLine("Press any key to continue");
+        Console.ReadKey();
+    }
 }

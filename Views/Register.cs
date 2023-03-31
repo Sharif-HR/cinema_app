@@ -1,11 +1,13 @@
-namespace View;
+namespace Views;
 
-static class Register
+class Register : ViewTemplate
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
+    // private Menu MenuPage = new();
 
+    public Register() : base("Register") { }
 
-    public static void Start()
+    public void Render()
     {
         Console.WriteLine("Welcome to the registration page.");
         string id = accountsLogic.GenerateUUID();
@@ -16,14 +18,14 @@ static class Register
         string? email = Inputs.InputField("Enter your email:");
         string? phoneNumber = Inputs.OptionalInput("Enter your phonenumber (optional):");
         string? password = Inputs.PasswordInput();
-        // string? isEligible = Inputs.InputField("Eligible (Y/n):", true, new List<string>(){"y", "n", "Y", "N"});
-        bool isEligible = Inputs.CheckboxInput("Are you a student or Elderly?");
+        bool isEligible = Inputs.CheckboxInput("Are you a student?");
 
         AccountModel acc = new AccountModel(id, userName, password, email, phoneNumber, firstName, lastName, isEligible, "Customer");
         accountsLogic.UpdateList(acc);
+        Console.WriteLine("Registration complete.");
+        Helpers.Continue();
 
-
-        Menu.Start();
+        // MenuPage.Render();
     }
 
 

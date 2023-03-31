@@ -35,7 +35,6 @@ class AccountsLogic
         {
             //add new model
             _accounts.Add(acc);
-            Console.WriteLine("Registration complete.");
         }
         AccountsAccess.WriteAll(_accounts);
 
@@ -55,7 +54,7 @@ class AccountsLogic
         CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount;
     }
-    
+
     public string GenerateUUID()
     {
         // Generates a new unique user ID.
