@@ -30,7 +30,7 @@ class AccountModel
     [JsonPropertyName("role")]
     public string Role { get; set; }
 
-    public AccountModel(string id, string username, string password, string emailAddress, string phoneNumber, string firstName, string lastName, string isEligible, string role)
+    public AccountModel(string id, string username, string password, string emailAddress, string phoneNumber, string firstName, string lastName, bool isEligible, string role)
     {
         Id = id;
         Username = username;
@@ -39,7 +39,7 @@ class AccountModel
         PhoneNumber = phoneNumber;
         FirstName = firstName;
         LastName = lastName;
-        IsEligible = (isEligible == "Y" || isEligible == "y") ? true : false;
+        IsEligible = isEligible;
         Role = role;
     }
 }

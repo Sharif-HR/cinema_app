@@ -16,7 +16,8 @@ static class Register
         string? email = Inputs.InputField("Enter your email:");
         string? phoneNumber = Inputs.OptionalInput("Enter your phonenumber (optional):");
         string? password = Inputs.PasswordInput();
-        string? isEligible = Inputs.InputField("Eligible (Y/n):", true, new List<string>(){"y", "n", "Y", "N"});
+        // string? isEligible = Inputs.InputField("Eligible (Y/n):", true, new List<string>(){"y", "n", "Y", "N"});
+        bool isEligible = Inputs.CheckboxInput("Are you a student or Elderly?");
 
         AccountModel acc = new AccountModel(id, userName, password, email, phoneNumber, firstName, lastName, isEligible, "Customer");
         accountsLogic.UpdateList(acc);

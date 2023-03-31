@@ -74,4 +74,19 @@ static class Inputs {
 
         return input;
     }
+
+    public static bool CheckboxInput(string label) {
+        List<string> choices = new(){"Y", "N"};
+        bool loop = true;
+
+        Console.WriteLine(label + "Y/n");
+        string? input = Console.ReadLine() ?? "";
+        while(loop) {
+            if(!choices.Contains(input.ToUpper())) {
+                Console.WriteLine($"{input} is not a valid option.");
+            }
+            loop = false;
+        }
+        return (input == "Y" || input == "y") ? true : false;
+    }
 }
