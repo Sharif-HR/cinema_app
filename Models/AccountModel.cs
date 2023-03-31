@@ -24,13 +24,13 @@ class AccountModel
     [JsonPropertyName("lastName")]
     public string LastName { get; set; }
 
-    [JsonPropertyName("isEligible")]
-    public bool IsEligible { get; set; }
+    [JsonPropertyName("isStudent")]
+    public bool IsStudent { get; set; }
 
     [JsonPropertyName("role")]
     public string Role { get; set; }
 
-    public AccountModel(string id, string username, string password, string emailAddress, string phoneNumber, string firstName, string lastName, bool isEligible, string role)
+    public AccountModel(string id, string username, string password, string emailAddress, string phoneNumber, string firstName, string lastName, bool isStudent, string role)
     {
         Id = id;
         Username = username;
@@ -39,7 +39,7 @@ class AccountModel
         PhoneNumber = phoneNumber;
         FirstName = firstName;
         LastName = lastName;
-        IsEligible = isEligible;
+        IsStudent = isStudent;
         Role = role;
     }
 }

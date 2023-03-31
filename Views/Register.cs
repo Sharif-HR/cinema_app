@@ -18,9 +18,9 @@ class Register : ViewTemplate
         string? email = Inputs.InputField("Enter your email:");
         string? phoneNumber = Inputs.OptionalInput("Enter your phonenumber (optional):");
         string? password = Inputs.PasswordInput();
-        bool isEligible = Inputs.CheckboxInput("Are you a student?");
+        bool isStudent = Inputs.CheckboxInput("Are you a student?");
 
-        AccountModel acc = new AccountModel(id, userName, password, email, phoneNumber, firstName, lastName, isEligible, "Customer");
+        AccountModel acc = new AccountModel(id, userName, password, email, phoneNumber, firstName, lastName, isStudent, "Customer");
         accountsLogic.UpdateList(acc);
         Console.WriteLine("Registration complete.");
         Helpers.Continue();
