@@ -37,7 +37,6 @@ class AccountsLogic
             _accountsList.Add(acc);
         }
         AccountsAccess.WriteAll(_accountsList);
-
     }
 
     public AccountModel GetById(string id)
@@ -47,6 +46,7 @@ class AccountsLogic
 
     public AccountModel CheckLogin(string email, string password)
     {
+        _accountsList = AccountsAccess.LoadAll();
         if (email == null || password == null)
         {
             return null;
