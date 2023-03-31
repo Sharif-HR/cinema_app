@@ -21,6 +21,7 @@ static class Helpers
         }
         while(keyInfo.Key != ConsoleKey.Enter);
         {
+            Console.WriteLine();
             return pass2;
         }
     }
