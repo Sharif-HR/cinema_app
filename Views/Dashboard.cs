@@ -5,64 +5,123 @@ class Dashboard : ViewTemplate
     //Shows the dashboard(similar to the Menu).
     //Options shown depends on the role of the user.
     static private AccountsLogic accountsLogic = new AccountsLogic();
-    public Dashboard() : base("Dashboard") { }
-    public void Render(AccountModel acc)
+    private const string ADMINROLE = "admin";
+    private const string CUSTOMERROLE = "customer";
+    private string _userRole;
+
+    public Dashboard(string role) : base($"{role} - Dashboard")
+    {
+        this._userRole = role;
+    }
+
+    public override void Render()
     {
         base.Render();
 
-        if (acc.Role == "Admin")
+        switch (_userRole)
         {
-            Console.WriteLine("Enter 1 to see a list of available movies.");
-            Console.WriteLine("Enter 2 to view your reservations.");
-            Console.WriteLine("Enter 3 to edit movies");
+            case ADMINROLE:
+                AdminOptions();
+                break;
 
-            string input = Console.ReadLine();
-            if (input == "1")
-            {
-                Console.WriteLine("Needs to be implemented.");
-            }
-            else if (input == "2")
-            {
-                Console.WriteLine("Needs to be implemented.");
-            }
-            else if (input == "3")
-            {
-                Console.WriteLine("Needs to be implemented.");
-            }
-            else
-            {
-                Console.WriteLine("Invalid input.");
-            }
-        }
-        else if (acc.Role == "Customer")
-        {
-            Console.WriteLine("Enter 1 to see a list of available movies.");
-            Console.WriteLine("Enter 2 to view your reservations.");
-            Console.WriteLine("Enter 3 to log out");
+            case CUSTOMERROLE:
+                CustomerOptions();
+                break;
 
-            string input = Console.ReadLine();
-            if (input == "1")
-            {
-                Console.WriteLine("Needs to be implemented.");
-            }
-            else if (input == "2")
-            {
-                Console.WriteLine("Needs to be implemented.");
-            }
-            else if (input == "3")
-            {
-                Console.WriteLine("Needs to be implemented.");
-            }
-            else
-            {
-                Console.WriteLine("Invalid input.");
-            }
-        }
-        else
-        {
-            Console.WriteLine($"Error: Role cannot be {acc.Role}");
+            default:
+                ShowRedirect();
+                return;
         }
     }
 
 
+    private void AdminOptions()
+    {
+        while(true){
+            base.Render();
+            ShowAdminMenu();
+
+            string AdminInput = Console.ReadLine();
+            switch(AdminInput){
+                case "1":
+                    Console.WriteLine("Comingsoon");
+                    Helpers.Continue();
+                    break;
+                
+                case "4":
+                    LogOutMsg();
+                    return;
+                
+                default:
+                    Helpers.Divider();
+                    Console.WriteLine("Invalid input.");
+                    Helpers.Continue();
+                    break;
+            }
+        }
+    }
+
+
+
+    private void CustomerOptions()
+    {
+        while(true){
+            base.Render();
+            ShowCustomerMenu();
+
+            string CustomerInput = Console.ReadLine();
+            switch (CustomerInput)
+            {
+                case "1":
+                    Console.WriteLine("Comingsoon");
+                    Helpers.Continue();
+                    break;
+
+                case "3":
+                    LogOutMsg();
+                    return;
+
+                default:
+                    Helpers.Divider();
+                    Console.WriteLine("Invalid input.");
+                    Helpers.Continue();
+                    break;
+            }
+        }
+
+    }
+
+
+    private void LogOutMsg(){
+        Console.WriteLine("Logging out...");
+        Thread.Sleep(1400);
+    }
+
+    
+
+
+    private void ShowRedirect()
+    {
+        Helpers.Divider();
+        Console.WriteLine("Error: Something went wrong. You will be redirected to the main menu.");
+        Helpers.Continue();
+    }
+
+    private void ShowAdminMenu(){
+        Console.Write(@"
+1. View list of current movies.
+2. View reservations.
+3. Manage movies.
+3. Manage refreshments.
+4. Log out.
+> ");
+    }
+
+    private void ShowCustomerMenu(){
+        Console.Write(@"
+1. View list of current movies.
+2. View reservations.
+3. Log out.
+> ");
+    }
 }

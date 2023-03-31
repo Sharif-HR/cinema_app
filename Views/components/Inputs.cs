@@ -5,7 +5,8 @@ static class Inputs {
         string? input = null;
 
         while(loop) {
-            Console.WriteLine(label + "\n>");
+            Console.WriteLine(label);
+            Console.Write("> ");
             input = Console.ReadLine();
 
             if(input == "") {
@@ -26,7 +27,9 @@ static class Inputs {
     }
 
     public static string? PasswordInput(bool mustBeStrong = true, int minLength = 8, int maxLength = 32) {
-        Console.WriteLine("Enter your password: \n>");
+        Console.WriteLine("Enter your password:");
+        Console.Write("> ");
+
         bool loop = true;
         string input = "";
 

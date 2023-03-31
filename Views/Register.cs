@@ -3,13 +3,12 @@ namespace Views;
 class Register : ViewTemplate
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
-    // private Menu MenuPage = new();
 
     public Register() : base("Register") { }
 
-    public void Render()
+    public override void Render()
     {
-        Console.WriteLine("Welcome to the registration page.");
+        base.Render();
         string id = accountsLogic.GenerateUUID();
 
         string? userName = Inputs.InputField("Enter your username");
@@ -20,12 +19,12 @@ class Register : ViewTemplate
         string? password = Inputs.PasswordInput();
         bool isStudent = Inputs.CheckboxInput("Are you a student?");
 
-        AccountModel acc = new AccountModel(id, userName, password, email, phoneNumber, firstName, lastName, isStudent, "Customer");
+        AccountModel acc = new AccountModel(id, userName, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
         accountsLogic.UpdateList(acc);
+
+        Helpers.Divider();
         Console.WriteLine("Registration complete.");
         Helpers.Continue();
-
-        // MenuPage.Render();
     }
 
 

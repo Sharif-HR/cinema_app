@@ -30,4 +30,8 @@ static class Helpers
         Console.WriteLine("Press any key to continue");
         Console.ReadKey();
     }
+
+    public static void Divider(){
+        Console.WriteLine("\n----------------------------------------");
+    }
 }

@@ -4,33 +4,39 @@ class Menu : ViewTemplate
 {
     private Register RegisterPage = new();
     private Login LoginPage = new();
-    public Menu() : base("Menu") { }
+    public Menu() : base("Super Cinema 2023") { }
 
     //This shows the menu. You can call back to this method to show the menu again
     //after another presentation method is completed.
     //You could edit this to show different menus depending on the user's role
     public override void Render()
     {
-        bool loop = true;
-        while(loop) {
+        while(true) {
             base.Render();
 
-            Console.WriteLine("Enter 1 to login");
-            Console.WriteLine("Enter 2 to register");
+            Console.Write(@"1. Login
+2. Register
+3. Exit (Temporary for Development)
+> ");
 
-            string input = Console.ReadLine();
-            if (input == "1")
-            {
-                LoginPage.Render();
-            }
-            else if (input == "2")
-            {
-                RegisterPage.Render();
-            }
-            else
-            {
-                Console.WriteLine("Invalid input");
-                Render();
+            string UserInput = Console.ReadLine();
+            switch(UserInput){
+                case "1":
+                    LoginPage.Render();
+                    break;
+                
+                case "2":
+                    RegisterPage.Render();
+                    break;
+                
+                case "3":
+                    Console.WriteLine("Closing Cinema-app...");
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid input");
+                    Helpers.Continue();
+                    break;
             }
         }
 

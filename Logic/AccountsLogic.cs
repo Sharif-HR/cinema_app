@@ -7,7 +7,7 @@ using System.Text.Json;
 //This class is not static so later on we can use inheritance and interfaces
 class AccountsLogic
 {
-    private List<AccountModel> _accounts;
+    private List<AccountModel> _accountsList;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -16,14 +16,14 @@ class AccountsLogic
 
     public AccountsLogic()
     {
-        _accounts = AccountsAccess.LoadAll();
+        _accountsList = AccountsAccess.LoadAll();
     }
 
 
     public void UpdateList(AccountModel acc)
     {
         //Find if there is already an model with the same id
-        int index = _accounts.FindIndex(s => s.EmailAddress == acc.EmailAddress);
+        int index = _accountsList.FindIndex(s => s.EmailAddress == acc.EmailAddress);
 
         if (index != -1)
         {
@@ -34,15 +34,15 @@ class AccountsLogic
         else
         {
             //add new model
-            _accounts.Add(acc);
+            _accountsList.Add(acc);
         }
-        AccountsAccess.WriteAll(_accounts);
+        AccountsAccess.WriteAll(_accountsList);
 
     }
 
     public AccountModel GetById(string id)
     {
-        return _accounts.Find(i => i.Id == id);
+        return _accountsList.Find(i => i.Id == id);
     }
 
     public AccountModel CheckLogin(string email, string password)
@@ -51,7 +51,8 @@ class AccountsLogic
         {
             return null;
         }
-        CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
+
+        CurrentAccount = _accountsList.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount;
     }
 

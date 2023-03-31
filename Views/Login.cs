@@ -2,28 +2,28 @@ namespace Views;
 
 class Login : ViewTemplate
 {
-    static private AccountsLogic accountsLogic = new AccountsLogic();
+    static private AccountsLogic accountsLogic = new AccountsLogic(); 
 
     public Login() : base("Login") { }
 
     public override void Render()
     {
-        Console.WriteLine("Welcome to the login page");
-        Console.WriteLine("Please enter your email address");
-        string email = Console.ReadLine();
-        Console.WriteLine("Please enter your password");
-        string password = Console.ReadLine();
-        AccountModel acc = accountsLogic.CheckLogin(email, password);
-        if (acc != null)
+        base.Render();
+        string Email = Inputs.InputField("Enter your email: ");
+        string Password = Inputs.InputField("Enter your password: ");
+        
+        AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
+        
+        
+        if (UserAccount != null)
         {
-            //Console.WriteLine($"Welcome back {acc.FirstName} {acc.LastName}");
-            //Console.WriteLine("Your email number is " + acc.EmailAddress);
-            Dashboard dashboard = new();
-            dashboard.Render(acc);
+            Dashboard DasboardPage = new(role:UserAccount.Role);
+            DasboardPage.Render();
         }
         else
-        {
-            Console.WriteLine("No account found with that email and/or password");
+        {   
+            Helpers.Divider();
+            Console.WriteLine("No account found with that email and/or password.");
             Helpers.Continue();
         }
     }
