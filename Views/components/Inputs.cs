@@ -1,4 +1,5 @@
 static class Inputs {
+    // deprecated?
     public static string? InputField(string label, bool inputIsChoice = false, List<string>? choices = null) {
         bool loop = true;
         choices = choices ?? new List<string>();
@@ -25,6 +26,26 @@ static class Inputs {
         }
         return input;
     }
+
+
+    public static int InputNumber(string label){
+        while(true){
+            // enter moive duration in minutes
+            Console.WriteLine(label);
+            Console.Write("> ");
+            string numberStr = Console.ReadLine();
+            
+            
+            if(Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr)){
+                return int.Parse(numberStr);
+            }
+            else{
+                Helpers.WarningMessage("This field accepts numbers only.");
+            }
+
+        }
+    }
+
 
     public static string? PasswordInput(bool mustBeStrong = true, int minLength = 8, int maxLength = 32) {
         Console.WriteLine("Enter your password:");

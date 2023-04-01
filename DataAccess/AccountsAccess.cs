@@ -2,7 +2,7 @@ using System.Text.Json;
 
 static class AccountsAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"Data/accounts.json"));
+    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"data/accounts.json"));
 
 
     public static List<AccountModel> LoadAll()

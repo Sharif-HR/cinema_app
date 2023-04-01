@@ -30,9 +30,9 @@ class AccountModel
     [JsonPropertyName("role")]
     public string Role { get; set; }
 
-    public AccountModel(string id, string username, string password, string emailAddress, string phoneNumber, string firstName, string lastName, bool isStudent, string role)
+    public AccountModel(string username, string password, string emailAddress, string phoneNumber, string firstName, string lastName, bool isStudent, string role, string id = null)
     {
-        Id = id;
+        Id = string.IsNullOrWhiteSpace(id) ? Helpers.GenUid() : id;
         Username = username;
         EmailAddress = emailAddress;
         Password = password;

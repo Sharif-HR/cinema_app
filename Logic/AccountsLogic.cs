@@ -55,13 +55,6 @@ class AccountsLogic
         CurrentAccount = _accountsList.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount;
     }
-
-    public string GenerateUUID()
-    {
-        // Generates a new unique user ID.
-        string uuid = Guid.NewGuid().ToString();
-        return uuid;
-    }
 }
 
 

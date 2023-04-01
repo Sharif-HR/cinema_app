@@ -4,11 +4,10 @@ class Dashboard : ViewTemplate
 {
     //Shows the dashboard(similar to the Menu).
     //Options shown depends on the role of the user.
-    static private AccountsLogic accountsLogic = new AccountsLogic();
     private const string ADMINROLE = "admin";
     private const string CUSTOMERROLE = "customer";
     private string _userRole;
-
+    private ManageMovies ManageMoviesPage = new();
     public Dashboard(string role) : base($"{role} - Dashboard")
     {
         this._userRole = role;
@@ -18,7 +17,7 @@ class Dashboard : ViewTemplate
     {
         base.Render();
 
-        switch (_userRole)
+        switch (_userRole.ToLower())
         {
             case ADMINROLE:
                 AdminOptions();
@@ -47,8 +46,12 @@ class Dashboard : ViewTemplate
                     Console.WriteLine("Comingsoon");
                     Helpers.Continue();
                     break;
+
+                case "3":
+                    ManageMoviesPage.Render();
+                    break;
                 
-                case "4":
+                case "5":
                     LogOutMsg();
                     return;
                 
@@ -94,10 +97,8 @@ class Dashboard : ViewTemplate
 
     private void LogOutMsg(){
         Console.WriteLine("Logging out...");
-        Thread.Sleep(1400);
+        Thread.Sleep(700);
     }
-
-    
 
 
     private void ShowRedirect()
@@ -108,12 +109,11 @@ class Dashboard : ViewTemplate
     }
 
     private void ShowAdminMenu(){
-        Console.Write(@"
-1. View list of current movies.
+        Console.Write(@"1. View list of current movies.
 2. View reservations.
 3. Manage movies.
-3. Manage refreshments.
-4. Log out.
+4. Manage refreshments.
+5. Log out.
 > ");
     }
 

@@ -9,8 +9,6 @@ class Register : ViewTemplate
     public override void Render()
     {
         base.Render();
-        string id = accountsLogic.GenerateUUID();
-
         string? userName = Inputs.InputField("Enter your username");
         string? firstName = Inputs.InputField("Enter your first name:");
         string? lastName = Inputs.InputField("Enter your last name:");
@@ -19,7 +17,7 @@ class Register : ViewTemplate
         string? password = Inputs.PasswordInput();
         bool isStudent = Inputs.CheckboxInput("Are you a student?");
 
-        AccountModel acc = new AccountModel(id, userName, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
+        AccountModel acc = new AccountModel(userName, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
         accountsLogic.UpdateList(acc);
 
         Helpers.Divider();
