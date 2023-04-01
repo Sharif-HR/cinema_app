@@ -1,3 +1,24 @@
 [
-
+  {
+    "id": "2fc0c458-740d-4a07-9ad6-1d093553e36e",
+    "username": "admin",
+    "password": "Password!1",
+    "emailAddress": "admin@admin.com",
+    "phoneNumber": "",
+    "firstName": "baap",
+    "lastName": "III",
+    "isStudent": true,
+    "role": "admin"
+  },
+  {
+    "id": "3ab867c3-b53a-4fc5-954d-e0be934021da",
+    "username": "Hans_JWZ",
+    "password": "123Welkom!@#",
+    "emailAddress": "hans@jwz.com",
+    "phoneNumber": "",
+    "firstName": "hans",
+    "lastName": "som",
+    "isStudent": true,
+    "role": "admin"
+  }
 ]
