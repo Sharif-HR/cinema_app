@@ -16,6 +16,26 @@ static class Helpers
         return Guid.NewGuid().ToString();
     }
 
+    public static bool IsValidEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email)) {
+            WarningMessage("Please enter a valid email.");
+            return false;
+        }
+
+        try
+        {
+            var mailAddress = new System.Net.Mail.MailAddress(email);
+
+            return true;
+        }
+        catch
+        {
+            WarningMessage("Please enter a valid email.");
+            return false;
+        }
+    }
+
     public static bool IsDigitsOnly(string str)
     {
         foreach (char c in str)
