@@ -10,6 +10,18 @@ abstract class ViewTemplate {
         Console.WriteLine("---------------------------");
     }
 
+    public string InputField(string label) {
+        while(true){
+            Console.WriteLine(label);
+            Console.Write("> ");
+            string userInput = Console.ReadLine();
+
+            if(!string.IsNullOrWhiteSpace(userInput)){
+                return userInput;
+            }
+        }
+    }
+
     public string PasswordToAstriks(){
         var pass = string.Empty;
         ConsoleKey key;
@@ -81,5 +93,43 @@ abstract class ViewTemplate {
             }
         }
         return input;
+    }
+
+    public string OptionalInput(string label) {
+        Console.WriteLine(label + "\n>");
+        string? input = Console.ReadLine();
+        return input;
+    }
+
+
+    public bool CheckboxInput(string label) {
+        List<string> choices = new(){"Y", "N"};
+        bool loop = true;
+
+        Console.WriteLine(label + "Y/n");
+        string? input = Console.ReadLine() ?? "";
+        while(loop) {
+            if(!choices.Contains(input.ToUpper())) {
+                Console.WriteLine($"{input} is not a valid option.");
+            }
+            loop = false;
+        }
+        return (input == "Y" || input == "y") ? true : false;
+    }
+
+    public int InputNumber(string label){
+        while(true){
+            // enter moive duration in minutes
+            Console.WriteLine(label);
+            Console.Write("> ");
+            string numberStr = Console.ReadLine();
+
+            if(Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr)){
+                return int.Parse(numberStr);
+            }
+            else{
+                Helpers.WarningMessage("This field accepts numbers only.");
+            }
+        }
     }
 }

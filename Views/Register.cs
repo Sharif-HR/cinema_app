@@ -9,13 +9,13 @@ class Register : ViewTemplate
     public override void Render()
     {
         base.Render();
-        string? userName = Inputs.InputField("Enter your username");
-        string? firstName = Inputs.InputField("Enter your first name:");
-        string? lastName = Inputs.InputField("Enter your last name:");
-        string? email = Inputs.InputField("Enter your email:");
-        string? phoneNumber = Inputs.OptionalInput("Enter your phonenumber (optional):");
+        string? userName = base.InputField("Enter your username");
+        string? firstName = base.InputField("Enter your first name:");
+        string? lastName = base.InputField("Enter your last name:");
+        string? email = base.InputField("Enter your email:");
+        string? phoneNumber = base.OptionalInput("Enter your phonenumber (optional):");
         string? password = base.InputPassword("Enter you password:", true);
-        bool isStudent = Inputs.CheckboxInput("Are you a student?");
+        bool isStudent = base.CheckboxInput("Are you a student?");
 
         AccountModel acc = new AccountModel(userName, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
         accountsLogic.UpdateList(acc);

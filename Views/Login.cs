@@ -9,7 +9,7 @@ class Login : ViewTemplate
     public override void Render()
     {
         base.Render();
-        string Email = Inputs.InputField("Enter your email: ");
+        string Email = base.InputField("Enter your email: ");
         string Password = base.InputPassword("Enter password: ");
 
         AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);

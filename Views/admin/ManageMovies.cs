@@ -46,9 +46,9 @@ class ManageMovies : ViewTemplate
     private void CreateMovieForm()
     {
         base.Render();
-        string title = Inputs.InputField("Movie title:");
-        int duration = Inputs.InputNumber("Movie duration (in minutes):");
-        string summary = Inputs.InputField("Movie summary:");
+        string title = base.InputField("Movie title:");
+        int duration = base.InputNumber("Movie duration (in minutes):");
+        string summary = base.InputField("Movie summary:");
 
         MovieModel NewMovie = new(title: title, duration: duration, summary: summary);
         _movieLogic.AddMovie(NewMovie);
