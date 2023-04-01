@@ -14,7 +14,7 @@ class Register : ViewTemplate
         string? lastName = Inputs.InputField("Enter your last name:");
         string? email = Inputs.InputField("Enter your email:");
         string? phoneNumber = Inputs.OptionalInput("Enter your phonenumber (optional):");
-        string? password = Inputs.PasswordInput();
+        string? password = base.InputPassword("Enter you password:");
         bool isStudent = Inputs.CheckboxInput("Are you a student?");
 
         AccountModel acc = new AccountModel(userName, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
