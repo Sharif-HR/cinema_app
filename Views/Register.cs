@@ -17,7 +17,7 @@ class Register : ViewTemplate
         string? password = base.InputPassword("Enter you password:", true);
         bool isStudent = base.CheckboxInput("Are you a student?");
 
-        AccountModel acc = new AccountModel(username, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
+        AccountModel acc = new(username, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
         _accountsLogic.AddAccount(acc);
 
         Helpers.Divider();

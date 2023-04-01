@@ -6,6 +6,8 @@ abstract class ViewTemplate {
     }
     public virtual void Render() {
         Console.Clear();
+        this.CinemaLogo();
+        Console.WriteLine("---------------------------");
         Console.WriteLine(this.Title);
         Console.WriteLine("---------------------------");
     }
@@ -131,5 +133,18 @@ abstract class ViewTemplate {
                 Helpers.WarningMessage("This field accepts numbers only.");
             }
         }
+    }
+
+    private void CinemaLogo() {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(@"
+   _____ _ _                   _____ _
+  / ____(_) |                 / ____(_)
+ | (___  _| |_   _____ _ __  | |     _ _ __   ___ _ __ ___   __ _
+  \___ \| | \ \ / / _ \ '__| | |    | | '_ \ / _ \ '_ ` _ \ / _` |
+  ____) | | |\ V /  __/ |    | |____| | | | |  __/ | | | | | (_| |
+ |_____/|_|_| \_/ \___|_|     \_____|_|_| |_|\___|_| |_| |_|\__,_|
+        ");
+        Console.ResetColor();
     }
 }
