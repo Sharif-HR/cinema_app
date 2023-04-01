@@ -10,10 +10,7 @@ abstract class ViewTemplate {
         Console.WriteLine("---------------------------");
     }
 
-    public string InputPassword(string label){
-        Console.WriteLine(label);
-        Console.Write("> ");
-
+    public string PasswordToAstriks(){
         var pass = string.Empty;
         ConsoleKey key;
 
@@ -34,8 +31,55 @@ abstract class ViewTemplate {
             }
 
             if(key == ConsoleKey.Enter && !string.IsNullOrWhiteSpace(pass)){
+                Console.WriteLine();
                 return pass;
             }
         }
+    }
+
+    public string InputPassword(string label, bool mustBeStrong = false, int minLength = 8, int maxLength = 32) {
+        bool loop = true;
+        string input = "";
+
+        while(loop) {
+            Console.WriteLine(label);
+            Console.Write("> ");
+            input = this.PasswordToAstriks();
+
+            if(mustBeStrong) {
+                if(input.Length < minLength || input.Length > maxLength) {
+                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long.");
+                    continue;
+                }
+
+                if(!input.Any(char.IsUpper)) {
+                    Console.WriteLine("Password must contain at least one uppercase character.");
+
+                    continue;
+                }
+
+                if(!input.Any(char.IsLower)) {
+                    Console.WriteLine("Password must contain at least one lowercase character.");
+                    continue;
+                }
+
+                if(input.Contains(" ")) {
+                    Console.WriteLine("Password can't contain a white space.");
+                    continue;
+                }
+
+                string specialChars = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
+                char[] specialCh = specialChars.ToCharArray();
+                foreach(char ch in specialCh) {
+                    if(input.Contains(ch)) {
+                        loop = false;
+                        return input;
+                    }
+                }
+            } else {
+                loop = false;
+            }
+        }
+        return input;
     }
 }
