@@ -1,8 +1,24 @@
 [
   {
-    "id": "84c52388-2da2-4f9f-aef8-05ecb85ff485",
-    "title": "de gevonden steen",
-    "duration": 8,
-    "summary": "ik heb izje goeie steen gevonden"
+    "id": "315750ce-390c-4689-84ea-fc6d80a05496",
+    "title": "batman",
+    "duration": 120,
+    "summary": "badman ollo",
+    "genres": [
+      "action",
+      "comedy"
+    ],
+    "releasedate": "12/20/2018"
+  },
+  {
+    "id": "704beb79-e0d5-4426-bfd0-7915e933b66e",
+    "title": "steen deel 2",
+    "duration": 12,
+    "summary": "nog mooiere steen",
+    "genres": [
+      "comedy",
+      "romance"
+    ],
+    "releasedate": "10/28/2024"
   }
 ]

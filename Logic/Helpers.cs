@@ -60,4 +60,9 @@ static class Helpers
         Console.WriteLine(message);
         Console.ResetColor();
     }
+
+    public static string ListToString(List<string> list){
+        string value = string.Join(",", list);
+        return value;
+    }
 }

@@ -13,4 +13,13 @@ class MovieLogic
         _movieAccess.WriteAll(_movieList);
         Console.WriteLine("Movie Added!");
     }
+
+       public void SaveMovies(){
+        _movieAccess.WriteAll(_movieList);
+    }
+
+    public List<MovieModel> GetMovies(){
+        ReloadMovies();
+        return _movieList;
+    }
 }

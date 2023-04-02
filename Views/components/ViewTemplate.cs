@@ -1,3 +1,5 @@
+using System.Globalization;
+
 abstract class ViewTemplate {
     private string Title;
 
@@ -134,6 +136,52 @@ abstract class ViewTemplate {
             }
         }
     }
+
+
+    public List<string> InputMultiple(string label){
+        Console.WriteLine(label);
+        Helpers.WarningMessage("(Enter multiple values comma separated)");
+        Console.Write("> ");
+        string userInput = Console.ReadLine();
+
+         
+        List<string> values = new List<string>(userInput.Split(','));
+        
+        for(int i =0; i < values.Count; i++){
+            values[i] = values[i].Trim();
+        }
+
+        return values;
+    }
+
+
+    public object InputDate(string label, bool isDateOnly=true){
+        while (true)
+        {
+            try{
+                Console.WriteLine("Enter date in this format (YYYY-MM-DD)");
+                Console.WriteLine(label);
+                string userInput = Console.ReadLine();
+                if (DateOnly.TryParse(userInput, out DateOnly result))
+                {
+                    if(isDateOnly){
+                        return result;
+                    }
+                    else{
+                        return result.ToString();
+                    }
+                }
+                else{
+                    Helpers.WarningMessage("Invalid Date input. Date format must be (YYYY-MM-DD) -> (2020-10-20).");
+
+                }
+            }
+            catch{
+                Helpers.WarningMessage("Invalid Date input. Date format must be (YYYY-MM-DD) -> (2020-10-20).");
+            }
+        }
+    }
+
 
     private void CinemaLogo() {
         Console.ForegroundColor = ConsoleColor.Red;
