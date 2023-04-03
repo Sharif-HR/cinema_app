@@ -1,6 +1,6 @@
 using ConsoleTables;
 
-class MovieLogic
+public class MovieLogic
 {
     private MovieAccess _movieAccess = new();
     private List<MovieModel> _movieList;

@@ -1,6 +1,6 @@
 namespace Views;
 
-class Login : ViewTemplate
+public class Login : ViewTemplate
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
 

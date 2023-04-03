@@ -20,5 +20,15 @@
       "romance"
     ],
     "releasedate": "10/28/2024"
+  },
+  {
+    "id": "c4ff5fe7-f57b-4c38-b521-6603a5631223",
+    "title": "Master mind",
+    "duration": 120,
+    "summary": "Master mind movie",
+    "genres": [
+      "Action"
+    ],
+    "releasedate": "10/10/2022"
   }
 ]

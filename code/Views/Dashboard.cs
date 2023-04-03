@@ -1,6 +1,6 @@
 namespace Views;
 
-class Dashboard : ViewTemplate
+public class Dashboard : ViewTemplate
 {
     //Shows the dashboard(similar to the Menu).
     //Options shown depends on the role of the user.

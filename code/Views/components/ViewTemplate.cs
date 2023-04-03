@@ -1,6 +1,6 @@
 using System.Globalization;
 
-abstract class ViewTemplate {
+public abstract class ViewTemplate {
     private string Title;
 
     public ViewTemplate(string title) {

@@ -1,7 +1,7 @@
 namespace Views;
 using System.Collections.Generic;
 
-class ManageMovies : ViewTemplate
+public class ManageMovies : ViewTemplate
 {
 
     private MovieLogic _movieLogic = new();

@@ -1,6 +1,6 @@
 using System.Reflection;
 
-static class Helpers
+public static class Helpers
 {
     public static void Continue() {
         Console.WriteLine("Press any key to continue");

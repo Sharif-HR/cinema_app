@@ -1,6 +1,6 @@
 namespace Views;
 
-class Menu : ViewTemplate
+public class Menu : ViewTemplate
 {
     private Register RegisterPage = new();
     private Login LoginPage = new();

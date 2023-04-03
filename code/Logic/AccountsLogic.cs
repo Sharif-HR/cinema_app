@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-class AccountsLogic
+public class AccountsLogic
 {
     private AccountAccess _accountAccess = new();
     private List<AccountModel> _accountsList;

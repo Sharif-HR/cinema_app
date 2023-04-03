@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-abstract class Access<Model>
+public abstract class Access<Model>
 {
     private static string _path;
     public Access(string path){

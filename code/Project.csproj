@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>CinemaApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -9,5 +10,4 @@
   <ItemGroup>
     <PackageReference Include="ConsoleTables" Version="2.4.2" />
   </ItemGroup>
-
 </Project>
