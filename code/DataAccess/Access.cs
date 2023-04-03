@@ -2,9 +2,16 @@ using System.Text.Json;
 
 public abstract class Access<Model>
 {
-    private static string _path;
-    public Access(string path){
-        _path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @$"{path}"));
+    public string _path {get;set;}
+
+    public Access(string dataPath, string overwriteRootPath= null){
+        if(overwriteRootPath != null){
+            _path = @$"{overwriteRootPath}/{dataPath}";
+        }
+        else{
+            _path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @$"{dataPath}"));
+        }
+
     }
     // Data/accounts.json
     public virtual List<Model> LoadAll()

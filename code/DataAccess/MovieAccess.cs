@@ -1,5 +1,5 @@
 public class MovieAccess : Access<MovieModel>
 {
-    public MovieAccess():base("Data/movies.json"){}
+    public MovieAccess(string overwritePath = null) : base("data/movies.json", overwritePath) { }
 
 }

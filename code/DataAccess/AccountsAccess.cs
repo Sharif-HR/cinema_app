@@ -1,4 +1,4 @@
 public class AccountAccess : Access<AccountModel>
 {
-    public AccountAccess() : base("Data/accounts.json") { }
+    public AccountAccess(string overwritePath=null) : base("data/accounts.json", overwritePath) { }
 }

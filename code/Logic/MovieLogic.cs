@@ -2,10 +2,13 @@ using ConsoleTables;
 
 public class MovieLogic
 {
-    private MovieAccess _movieAccess = new();
+    private MovieAccess _movieAccess;
     private List<MovieModel> _movieList;
 
-    public MovieLogic() => ReloadMovies();
+    public MovieLogic(string overwritePath=null){
+        _movieAccess = new(overwritePath);
+        ReloadMovies();
+    }
 
     private void ReloadMovies() => _movieList = _movieAccess.LoadAll();
 

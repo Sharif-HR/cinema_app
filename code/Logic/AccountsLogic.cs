@@ -5,15 +5,16 @@ using System.Text.Json;
 
 public class AccountsLogic
 {
-    private AccountAccess _accountAccess = new();
+    private AccountAccess _accountAccess;
     private List<AccountModel> _accountsList;
 
     private void ReloadAccounts(){
         _accountsList = _accountAccess.LoadAll();
     }
 
-    public AccountsLogic()
+    public AccountsLogic(string overWritePath=null)
     {
+        _accountAccess = new(overWritePath);
         ReloadAccounts();
     }
 
