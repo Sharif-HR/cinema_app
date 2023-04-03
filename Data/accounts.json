@@ -19,6 +19,6 @@
     "firstName": "hans",
     "lastName": "som",
     "isStudent": true,
-    "role": "admin"
+    "role": "customer"
   }
 ]
