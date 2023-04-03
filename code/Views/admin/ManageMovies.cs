@@ -68,7 +68,7 @@ public class ManageMovies : ViewTemplate
     {
         base.Render();
         var movies = _movieLogic.GetMovies();
-        _movieLogic.GenerateMoviesTable(true);
+        Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(movies));
         Helpers.Continue();
     }
 

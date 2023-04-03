@@ -68,17 +68,6 @@ public static class Helpers
     }
 
 
-    public static List<string> GetAttributes(object model)
-    {
-        List<string> attributes = new List<string>();
-        PropertyInfo[] propertyInfos = model.GetType().GetProperties();
-        foreach (PropertyInfo propertyInfo in propertyInfos)
-        {
-            attributes.Add(propertyInfo.Name);
-        }
-        return attributes;
-    }
-
     public static string TruncateString(string longString, int maxLength){
         return longString.Substring(0, Math.Min(longString.Length, maxLength)) + "...";
     }

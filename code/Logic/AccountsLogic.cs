@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-public class AccountsLogic
+
+public class AccountsLogic: LogicTemplate
 {
     private AccountAccess _accountAccess;
     private List<AccountModel> _accountsList;
@@ -12,11 +13,18 @@ public class AccountsLogic
         _accountsList = _accountAccess.LoadAll();
     }
 
-    public AccountsLogic(string overWritePath=null)
+    public AccountsLogic(string overWritePath=null): base()
     {
         _accountAccess = new(overWritePath);
         ReloadAccounts();
     }
+
+
+    public List<AccountModel> GetAccounts(){
+        ReloadAccounts();
+        return _accountsList;
+    }
+
 
     public bool EmailExists(string email){
 
@@ -55,8 +63,6 @@ public class AccountsLogic
         AccountModel foundAccount = _accountsList.Find(i => i.EmailAddress == email && i.Password == password);
         return foundAccount;
     }
-
-
 
 }
 

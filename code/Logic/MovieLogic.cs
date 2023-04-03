@@ -1,11 +1,10 @@
-using ConsoleTables;
-
-public class MovieLogic
+public class MovieLogic : LogicTemplate
 {
     private MovieAccess _movieAccess;
     private List<MovieModel> _movieList;
 
-    public MovieLogic(string overwritePath=null){
+    public MovieLogic(string overwritePath = null) : base()
+    {
         _movieAccess = new(overwritePath);
         ReloadMovies();
     }
@@ -29,35 +28,4 @@ public class MovieLogic
         ReloadMovies();
         return _movieList;
     }
-
-
-    public ConsoleTable GenerateMoviesTable(bool consolePrint = false)
-    {
-        ConsoleTable movieTable;
-        ReloadMovies();
-
-        var options = new ConsoleTableOptions
-        {
-            Columns = new[] { "ID", "Title", "Duration", "Summary", "Genres", "Releasedate" },
-            EnableCount = false
-        };
-
-        movieTable = new ConsoleTable(options);
-        for(int i = 0; i < _movieList.Count; i++){
-            movieTable.AddRow(
-                i+1,
-                _movieList[i].Title,
-                _movieList[i].Duration,
-                Helpers.TruncateString(_movieList[i].Summary, 15),
-                Helpers.TruncateString(Helpers.ListToString(_movieList[i].Genres), 15),
-                _movieList[i].ReleaseDate
-            );
-        }
-        
-        if(consolePrint) Console.WriteLine(movieTable);
-        
-        return movieTable;
-    }
-
-
 }

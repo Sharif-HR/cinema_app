@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using System.Reflection;
 
 
 public class MovieModel
@@ -29,5 +30,19 @@ public class MovieModel
         Summary = summary;
         Genres = genres;
         ReleaseDate = releasedate;
+    }
+
+
+    public List<string> GetAttributes()
+    {
+        List<string> attributes = new List<string>();
+        PropertyInfo[] propertyInfos = this.GetType().GetProperties();
+        foreach (PropertyInfo propertyInfo in propertyInfos)
+        {
+            if(propertyInfo.Name != "Id"){
+                attributes.Add(propertyInfo.Name);
+            }
+        }
+        return attributes;
     }
 }

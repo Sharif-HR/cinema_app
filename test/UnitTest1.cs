@@ -32,4 +32,24 @@ public class UnitTest1
 
         Assert.Equal(false, loginSuccess);
     }
+
+
+    [Fact]
+    public void testModelTable(){
+
+        AccountsLogic accountsLogic = new(@"C:\Users\shari\source\repos\Project_b\cinema_app\code\");
+        var accountsList = accountsLogic.GetAccounts();
+
+        MovieLogic movieLogic = new(@"C:\Users\shari\source\repos\Project_b\cinema_app\code\");
+        var movieList = movieLogic.GetMovies();
+
+        var accountsTable = accountsLogic.GenerateModelTable<AccountModel>(accountsList);
+        var moviesTable = movieLogic.GenerateModelTable<MovieModel>(movieList);
+        
+        Console.WriteLine(accountsTable);
+        Console.WriteLine(moviesTable);
+        
+
+        Helpers.SuccessMessage("done!");
+    }
 }
