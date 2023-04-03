@@ -31,7 +31,7 @@ class ManageMovies : ViewTemplate
                     break;
 
                 case "4":
-                    ShowMovies();
+                    ShowMoviesTable();
                     break;
 
                 case "5":
@@ -64,22 +64,14 @@ class ManageMovies : ViewTemplate
     }
 
 
-    private void ShowMovies()
+    private void ShowMoviesTable()
     {
         base.Render();
         var movies = _movieLogic.GetMovies();
-
-
-        for (int i = 0; i < movies.Count; i++)
-        {
-            // Console.WriteLine("{0,-10} {1,-30} {2,-10} {3,-50} {4,-50} {5,-50}", i + 1, movies[i].Title, movies[i].Duration, movies[i].Summary, Helpers.ListToString(movies[i].Genres), movies[i].ReleaseDate);
-            string row = String.Format("|{0,5}|{1,30}|{2,5}|{3,10}|{4,50}|{4,12}|", i + 1, movies[i].Title, movies[i].Duration, movies[i].Summary, Helpers.ListToString(movies[i].Genres), movies[i].ReleaseDate);
-            Console.WriteLine(row);
-        }
+        _movieLogic.GenerateMoviesTable(true);
         Helpers.Continue();
-        // SelectMovie();
     }
-    
+
 
     private void SelectMovie()
     {

@@ -8,7 +8,7 @@ class Dashboard : ViewTemplate
     private const string CUSTOMERROLE = "customer";
     private string _userRole;
     private ManageMovies ManageMoviesPage = new();
-    public Dashboard(string role) : base($"{role} - Dashboard")
+    public Dashboard(string role) : base($"{Helpers.CapitalizeFirstLetter(role)} - Dashboard")
     {
         this._userRole = role;
     }
@@ -47,11 +47,11 @@ class Dashboard : ViewTemplate
                     Helpers.Continue();
                     break;
 
-                case "3":
+                case "2":
                     ManageMoviesPage.Render();
                     break;
                 
-                case "5":
+                case "4":
                     LogOutMsg();
                     return;
                 
@@ -109,11 +109,10 @@ class Dashboard : ViewTemplate
     }
 
     private void ShowAdminMenu(){
-        Console.Write(@"1. View list of current movies.
-2. View reservations.
-3. Manage movies.
-4. Manage refreshments.
-5. Log out.
+        Console.Write(@"1. View reservations.
+2. Manage movies.
+3. Manage refreshments.
+4. Log out.
 > ");
     }
 
