@@ -39,8 +39,9 @@ public abstract class LogicTemplate
 
                     rowContent.Add(strModelAttribute);
                 }
-                else{
-                    rowContent.Add((i+1).ToString());
+                else
+                {
+                    rowContent.Add((i + 1).ToString());
                 }
             }
 

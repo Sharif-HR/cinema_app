@@ -1,12 +1,16 @@
 using System.Globalization;
+using System.Reflection;
 
-public abstract class ViewTemplate {
+public abstract class ViewTemplate
+{
     private string Title;
 
-    public ViewTemplate(string title) {
+    public ViewTemplate(string title)
+    {
         this.Title = title;
     }
-    public virtual void Render() {
+    public virtual void Render()
+    {
         Console.Clear();
         this.CinemaLogo();
         Console.WriteLine("---------------------------");
@@ -14,23 +18,27 @@ public abstract class ViewTemplate {
         Console.WriteLine("---------------------------");
     }
 
-    public string InputField(string label) {
-        while(true){
+    public string InputField(string label)
+    {
+        while (true)
+        {
             Console.WriteLine(label);
             Console.Write("> ");
             string userInput = Console.ReadLine();
 
-            if(!string.IsNullOrWhiteSpace(userInput)){
+            if (!string.IsNullOrWhiteSpace(userInput))
+            {
                 return userInput;
             }
         }
     }
 
-    public string PasswordToAstriks(){
+    public string PasswordToAstriks()
+    {
         var pass = string.Empty;
         ConsoleKey key;
 
-        while(true)
+        while (true)
         {
             var keyInfo = Console.ReadKey(intercept: true);
             key = keyInfo.Key;
@@ -46,74 +54,90 @@ public abstract class ViewTemplate {
                 pass += keyInfo.KeyChar;
             }
 
-            if(key == ConsoleKey.Enter && !string.IsNullOrWhiteSpace(pass)){
+            if (key == ConsoleKey.Enter && !string.IsNullOrWhiteSpace(pass))
+            {
                 Console.WriteLine();
                 return pass;
             }
         }
     }
 
-    public string InputPassword(string label, bool mustBeStrong = false, int minLength = 8, int maxLength = 32) {
+    public string InputPassword(string label, bool mustBeStrong = false, int minLength = 8, int maxLength = 32)
+    {
         bool loop = true;
         string input = "";
 
-        while(loop) {
+        while (loop)
+        {
             Console.WriteLine(label);
             Console.Write("> ");
             input = this.PasswordToAstriks();
 
-            if(mustBeStrong) {
-                if(input.Length < minLength || input.Length > maxLength) {
+            if (mustBeStrong)
+            {
+                if (input.Length < minLength || input.Length > maxLength)
+                {
                     Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long.");
                     continue;
                 }
 
-                if(!input.Any(char.IsUpper)) {
+                if (!input.Any(char.IsUpper))
+                {
                     Console.WriteLine("Password must contain at least one uppercase character.");
 
                     continue;
                 }
 
-                if(!input.Any(char.IsLower)) {
+                if (!input.Any(char.IsLower))
+                {
                     Console.WriteLine("Password must contain at least one lowercase character.");
                     continue;
                 }
 
-                if(input.Contains(" ")) {
+                if (input.Contains(" "))
+                {
                     Console.WriteLine("Password can't contain a white space.");
                     continue;
                 }
 
                 string specialChars = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
                 char[] specialCh = specialChars.ToCharArray();
-                foreach(char ch in specialCh) {
-                    if(input.Contains(ch)) {
+                foreach (char ch in specialCh)
+                {
+                    if (input.Contains(ch))
+                    {
                         loop = false;
                         return input;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 loop = false;
             }
         }
         return input;
     }
 
-    public string OptionalInput(string label) {
+    public string OptionalInput(string label)
+    {
         Console.WriteLine(label + "\n>");
         string? input = Console.ReadLine();
         return input;
     }
 
 
-    public bool CheckboxInput(string label) {
-        List<string> choices = new(){"Y", "N"};
+    public bool CheckboxInput(string label)
+    {
+        List<string> choices = new() { "Y", "N" };
         bool loop = true;
 
         Console.WriteLine(label + "Y/n");
         string? input = Console.ReadLine() ?? "";
-        while(loop) {
-            if(!choices.Contains(input.ToUpper())) {
+        while (loop)
+        {
+            if (!choices.Contains(input.ToUpper()))
+            {
                 Console.WriteLine($"{input} is not a valid option.");
             }
             loop = false;
@@ -121,33 +145,45 @@ public abstract class ViewTemplate {
         return (input == "Y" || input == "y") ? true : false;
     }
 
-    public int InputNumber(string label){
-        while(true){
-            // enter moive duration in minutes
-            Console.WriteLine(label);
-            Console.Write("> ");
-            string numberStr = Console.ReadLine();
+    public int InputNumber(string label)
+    {
+        while (true)
+        {
+            try
+            {
+                // enter moive duration in minutes
+                Console.WriteLine(label);
+                Console.Write("> ");
+                string numberStr = Console.ReadLine();
 
-            if(Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr)){
-                return int.Parse(numberStr);
+                if (Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
+                {
+                    return int.Parse(numberStr);
+                }
+                else
+                {
+                    Helpers.WarningMessage("This field accepts numbers only.");
+                }
             }
-            else{
-                Helpers.WarningMessage("This field accepts numbers only.");
+            catch{
+                Helpers.WarningMessage("Number is to long enter a smaller number");
             }
         }
     }
 
 
-    public List<string> InputMultiple(string label){
+    public List<string> InputMultiple(string label)
+    {
         Console.WriteLine(label);
         Helpers.WarningMessage("(Enter multiple values comma separated)");
         Console.Write("> ");
         string userInput = Console.ReadLine();
 
-         
+
         List<string> values = new List<string>(userInput.Split(','));
-        
-        for(int i =0; i < values.Count; i++){
+
+        for (int i = 0; i < values.Count; i++)
+        {
             values[i] = values[i].Trim();
         }
 
@@ -155,35 +191,108 @@ public abstract class ViewTemplate {
     }
 
 
-    public object InputDate(string label, bool isDateOnly=true){
+    public object InputDate(string label, bool isDateOnly = true)
+    {
         while (true)
         {
-            try{
+            try
+            {
                 Console.WriteLine("Enter date in this format (YYYY-MM-DD)");
                 Console.WriteLine(label);
                 string userInput = Console.ReadLine();
                 if (DateOnly.TryParse(userInput, out DateOnly result))
                 {
-                    if(isDateOnly){
+                    if (isDateOnly)
+                    {
                         return result;
                     }
-                    else{
+                    else
+                    {
                         return result.ToString();
                     }
                 }
-                else{
+                else
+                {
                     Helpers.WarningMessage("Invalid Date input. Date format must be (YYYY-MM-DD) -> (2020-10-20).");
 
                 }
             }
-            catch{
+            catch
+            {
                 Helpers.WarningMessage("Invalid Date input. Date format must be (YYYY-MM-DD) -> (2020-10-20).");
             }
         }
     }
 
+    public virtual List<T> EditModelFromList<T>(List<T> modelList)
+    {
+        bool loop = true;
+        while (loop)
+        {
+            int modelIndex = InputNumber("Enter movie ID:");
 
-    private void CinemaLogo() {
+            if (modelList.Count < modelIndex || modelIndex < 0)
+            {
+                Helpers.WarningMessage("Enter a correct ID");
+            }
+            else
+            {
+
+                if (modelIndex == 0)
+                {
+                    modelIndex++;
+                }
+                else
+                {
+                    modelIndex--;
+                }
+
+                Console.WriteLine("edit title");
+                string input = Console.ReadLine();
+                PropertyInfo propertyInfo = typeof(T).GetProperty("Title");
+                propertyInfo.SetValue(modelList[modelIndex], input);
+                loop = false;
+            }
+        }
+
+        return modelList;
+    }
+
+
+    public virtual List<T> DeleteModelFromList<T>(List<T> modelList)
+    {
+        bool loop = true;
+        while (loop)
+        {
+            int modelIndex = InputNumber("Enter movie ID:");
+
+            if (modelList.Count < modelIndex || modelIndex < 0)
+            {
+                Helpers.WarningMessage("Enter a correct ID");
+            }
+            else
+            {
+
+                if (modelIndex == 0)
+                {
+                    modelIndex++;
+                }
+                else
+                {
+                    modelIndex--;
+                }
+
+                modelList.RemoveAt(modelIndex);
+                loop = false;
+            }
+        }
+
+        return modelList;
+    }
+
+
+    private void CinemaLogo()
+    {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(@"
    _____ _ _                   _____ _

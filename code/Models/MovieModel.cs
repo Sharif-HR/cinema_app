@@ -21,6 +21,12 @@ public class MovieModel
     [JsonPropertyName("releasedate")]
     public object ReleaseDate {get;set;}
 
+    // [JsonPropertyName("showtime")]
+    // public object ShowTime {get;set;}
+    // Moet datatime zijn of alleen time?
+
+
+
 
     public MovieModel(string title, int duration, string summary, List<string> genres, object releasedate, string id = null)
     {

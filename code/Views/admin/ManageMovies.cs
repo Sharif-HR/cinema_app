@@ -30,8 +30,19 @@ public class ManageMovies : ViewTemplate
                     CreateMovieForm();
                     break;
 
-                case "4":
+                case "2":
                     ShowMoviesTable();
+                    SelectMovie();
+                    break;
+
+                case "3":
+                    ShowMoviesTable();
+                    DeleteMovie();
+                    break;
+
+
+                case "4":
+                    ShowMoviesTable(true);
                     break;
 
                 case "5":
@@ -64,37 +75,32 @@ public class ManageMovies : ViewTemplate
     }
 
 
-    private void ShowMoviesTable()
+    private void ShowMoviesTable(bool pressContinue = false)
     {
         base.Render();
         var movies = _movieLogic.GetMovies();
         Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(movies));
-        Helpers.Continue();
+
+        if (pressContinue) Helpers.Continue();
     }
 
 
     private void SelectMovie()
     {
-        bool loop = true;
-        while (loop)
-        {
-            int movieIndex = base.InputNumber("Enter movie ID:");
-            var movies = _movieLogic.GetMovies();
+        var movies = _movieLogic.GetMovies();
+        var updatedMovies = base.EditModelFromList<MovieModel>(movies);
+        _movieLogic.SaveMovies();
+        Helpers.SuccessMessage("Movie updated!");
+        Helpers.Continue();
+    }
 
-            if (movies.Count < movieIndex || movieIndex < 0)
-            {
-                Helpers.WarningMessage("Enter a correct ID");
-            }
-            else
-            {
-                Console.WriteLine("edit title");
-                string input = Console.ReadLine();
-                movies[movieIndex].Title = input;
-                _movieLogic.SaveMovies();
-                loop = false;
-            }
-
-        }
+    private void DeleteMovie()
+    {
+        var movies = _movieLogic.GetMovies();
+        base.DeleteModelFromList<MovieModel>(movies);
+        _movieLogic.SaveMovies();
+        Helpers.SuccessMessage("Movie Deleted!");
+        Helpers.Continue();
     }
 
 

@@ -18,9 +18,16 @@ public class MovieLogic : LogicTemplate
         Console.WriteLine("Movie Added!");
     }
 
-    public void SaveMovies()
+    public void SaveMovies(List<MovieModel> movieList = null)
     {
-        _movieAccess.WriteAll(_movieList);
+        if (movieList != null)
+        {
+            _movieAccess.WriteAll(movieList);
+        }
+        else
+        {
+            _movieAccess.WriteAll(_movieList);
+        }
     }
 
     public List<MovieModel> GetMovies()
