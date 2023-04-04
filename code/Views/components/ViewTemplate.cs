@@ -165,7 +165,8 @@ public abstract class ViewTemplate
                     Helpers.WarningMessage("This field accepts numbers only.");
                 }
             }
-            catch{
+            catch
+            {
                 Helpers.WarningMessage("Number is to long enter a smaller number");
             }
         }
@@ -226,10 +227,23 @@ public abstract class ViewTemplate
 
     public virtual List<T> EditModelFromList<T>(List<T> modelList)
     {
+        if (modelList.Count == 0)
+        {
+            return modelList;
+        }
+
         bool loop = true;
         while (loop)
         {
             int modelIndex = InputNumber("Enter movie ID:");
+            if (modelIndex == 0)
+            {
+                modelIndex++;
+            }
+            else
+            {
+                modelIndex--;
+            }
 
             if (modelList.Count < modelIndex || modelIndex < 0)
             {
@@ -238,29 +252,75 @@ public abstract class ViewTemplate
             else
             {
 
-                if (modelIndex == 0)
+                Dictionary<string, Type> properties = new Dictionary<string, Type>();
+                foreach (var prop in typeof(T).GetProperties())
                 {
-                    modelIndex++;
-                }
-                else
-                {
-                    modelIndex--;
+                    properties[prop.Name] = prop.PropertyType;
                 }
 
-                Console.WriteLine("edit title");
-                string input = Console.ReadLine();
+                Console.WriteLine("Choose what you want to edit:");
+                foreach (var attr in properties)
+                {
+                    if (attr.Key != "Id")
+                    {
+                        Console.WriteLine(attr.Key);
+                    }
+                }
+
+
+                string userInput;
+                while (true)
+                {
+                    userInput = InputField("");
+                    if (!properties.ContainsKey(userInput))
+                    {
+                        Helpers.WarningMessage("Incorrect input.");
+                        continue;
+                    }
+                    break;
+                }
+
+
+                string editInput = InputField($"Edit {userInput}:");
+
+
+                Type chosenProperty = properties[userInput];
+                object toUpdatedValue;
+                switch (chosenProperty)
+                {
+
+                    case var t when t == typeof(int):
+                        toUpdatedValue = Int32.Parse(editInput);
+                        break;
+
+                    case var t when t == typeof()
+
+
+                }
+
+
+
+
+
+
+
+
                 PropertyInfo propertyInfo = typeof(T).GetProperty("Title");
-                propertyInfo.SetValue(modelList[modelIndex], input);
+                propertyInfo.SetValue(modelList[modelIndex], userInput);
                 loop = false;
             }
         }
-
+        Helpers.SuccessMessage("Movie updated!");
         return modelList;
     }
 
 
     public virtual List<T> DeleteModelFromList<T>(List<T> modelList)
     {
+        if (modelList.Count == 0)
+        {
+            return modelList;
+        }
         bool loop = true;
         while (loop)
         {
@@ -286,7 +346,7 @@ public abstract class ViewTemplate
                 loop = false;
             }
         }
-
+        Helpers.SuccessMessage("Movie Deleted!");
         return modelList;
     }
 
