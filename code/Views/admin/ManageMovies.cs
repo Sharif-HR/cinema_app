@@ -68,9 +68,11 @@ public class ManageMovies : ViewTemplate
         List<string> genreList = base.InputMultiple("Movie genres:");
         var releaseDate = base.InputDate("Movie release date:", false);
 
-
         MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate);
-        _movieLogic.AddMovie(NewMovie);
+        var movies = _movieLogic.GetMovies();
+        var newMovieList = AddModel<MovieModel>(movies, NewMovie);
+        _movieLogic.SaveMovies(newMovieList);
+        Helpers.SuccessMessage("Movie added!");
         Helpers.Continue();
     }
 
@@ -88,7 +90,7 @@ public class ManageMovies : ViewTemplate
     private void SelectMovie()
     {
         var movies = _movieLogic.GetMovies();
-        var updatedMovies = base.EditModelFromList<MovieModel>(movies);
+        var updatedMovies = base.EditMovie(movies);
         _movieLogic.SaveMovies();
         Helpers.SuccessMessage("Movie updated!");
         Helpers.Continue();

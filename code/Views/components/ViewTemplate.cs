@@ -165,7 +165,8 @@ public abstract class ViewTemplate
                     Helpers.WarningMessage("This field accepts numbers only.");
                 }
             }
-            catch{
+            catch
+            {
                 Helpers.WarningMessage("Number is to long enter a smaller number");
             }
         }
@@ -226,10 +227,23 @@ public abstract class ViewTemplate
 
     public virtual List<T> EditModelFromList<T>(List<T> modelList)
     {
+        if (modelList.Count == 0)
+        {
+            return modelList;
+        }
+
         bool loop = true;
         while (loop)
         {
             int modelIndex = InputNumber("Enter movie ID:");
+            if (modelIndex == 0)
+            {
+                modelIndex++;
+            }
+            else
+            {
+                modelIndex--;
+            }
 
             if (modelList.Count < modelIndex || modelIndex < 0)
             {
@@ -238,29 +252,153 @@ public abstract class ViewTemplate
             else
             {
 
-                if (modelIndex == 0)
+                Dictionary<string, Type> properties = new Dictionary<string, Type>();
+                foreach (var prop in typeof(T).GetProperties())
                 {
-                    modelIndex++;
-                }
-                else
-                {
-                    modelIndex--;
+                    properties[prop.Name] = prop.PropertyType;
                 }
 
-                Console.WriteLine("edit title");
-                string input = Console.ReadLine();
+                Console.WriteLine("Choose what you want to edit:");
+                foreach (var attr in properties)
+                {
+                    if (attr.Key != "Id")
+                    {
+                        Console.WriteLine(attr.Key);
+                    }
+                }
+
+
+                string userInput;
+                while (true)
+                {
+                    userInput = InputField("");
+                    if (!properties.ContainsKey(userInput))
+                    {
+                        Helpers.WarningMessage("Incorrect input.");
+                        continue;
+                    }
+                    break;
+                }
+
+
+                string editInput = InputField($"Edit {userInput}:");
+
+
+                Type chosenProperty = properties[userInput];
+                object toUpdatedValue;
+                switch (chosenProperty)
+                {
+
+                    case var t when t == typeof(int):
+                        toUpdatedValue = Int32.Parse(editInput);
+                        break;
+
+                    case var t when t == typeof(string):
+                        break;
+                }
+
                 PropertyInfo propertyInfo = typeof(T).GetProperty("Title");
-                propertyInfo.SetValue(modelList[modelIndex], input);
+                propertyInfo.SetValue(modelList[modelIndex], userInput);
                 loop = false;
             }
         }
-
+        Helpers.SuccessMessage("Movie updated!");
         return modelList;
     }
 
+    public virtual List<MovieModel> EditMovie(List<MovieModel> movieList) {
+        if (movieList.Count == 0)
+        {
+            return movieList;
+        }
 
+        bool loop = true;
+        while (loop)
+        {
+            int modelIndex = InputNumber("Enter movie ID:");
+            if (modelIndex == 0)
+            {
+                modelIndex++;
+            }
+            else
+            {
+                modelIndex--;
+            }
+
+            if (movieList.Count < modelIndex || modelIndex < 0)
+            {
+                Helpers.WarningMessage("Enter a correct ID");
+            }
+            else
+            {
+
+                Dictionary<string, Type> properties = new Dictionary<string, Type>();
+                foreach (var prop in typeof(MovieModel).GetProperties())
+                {
+                    properties[prop.Name] = prop.PropertyType;
+                }
+
+                Console.WriteLine("Choose what you want to edit:");
+                foreach (var attr in properties)
+                {
+                    if (attr.Key != "Id")
+                    {
+                        Console.WriteLine(attr.Key);
+                    }
+                }
+
+
+                string userInput;
+                while (true)
+                {
+                    userInput = InputField("");
+                    if (!properties.ContainsKey(userInput))
+                    {
+                        Helpers.WarningMessage("Incorrect input.");
+                        continue;
+                    }
+                    break;
+                }
+                string editInput;
+                object toUpdatedValue;
+                toUpdatedValue = "";
+
+                while(true) {
+                    editInput = InputField($"Edit {userInput}:");
+
+                    Type chosenProperty = properties[userInput];
+                    switch (chosenProperty)
+                    {
+                        case var t when t == typeof(int):
+                            try {
+                                toUpdatedValue = Int32.Parse(editInput);
+                            }
+                            catch (Exception e){
+                                Helpers.WarningMessage(e.Message);
+                                continue;
+                            }
+                            break;
+
+                        case var t when t == typeof(string):
+                            toUpdatedValue = editInput;
+                            break;
+                    }
+                    break;
+                }
+
+                PropertyInfo propertyInfo = typeof(MovieModel).GetProperty(userInput);
+                propertyInfo.SetValue(movieList[modelIndex], toUpdatedValue);
+                loop = false;
+            }
+        }
+        return movieList;
+    }
     public virtual List<T> DeleteModelFromList<T>(List<T> modelList)
     {
+        if (modelList.Count == 0)
+        {
+            return modelList;
+        }
         bool loop = true;
         while (loop)
         {
@@ -286,22 +424,33 @@ public abstract class ViewTemplate
                 loop = false;
             }
         }
-
+        Helpers.SuccessMessage("Movie Deleted!");
         return modelList;
     }
 
+    public virtual List<T> AddModel<T>(List<T> modelList, T model)
+    {
+        modelList.Add(model);
+        return modelList;
+    }
 
     private void CinemaLogo()
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(@"
-   _____ _ _                   _____ _
-  / ____(_) |                 / ____(_)
- | (___  _| |_   _____ _ __  | |     _ _ __   ___ _ __ ___   __ _
-  \___ \| | \ \ / / _ \ '__| | |    | | '_ \ / _ \ '_ ` _ \ / _` |
-  ____) | | |\ V /  __/ |    | |____| | | | |  __/ | | | | | (_| |
- |_____/|_|_| \_/ \___|_|     \_____|_|_| |_|\___|_| |_| |_|\__,_|
-        ");
+
+
+ ____          ___                               ____
+/\  _`\    __ /\_ \                             /\  _`\    __
+\ \,\L\_\ /\_\\//\ \    __  __     __   _ __    \ \ \/\_\ /\_\     ___       __     ___ ___       __
+ \/_\__ \ \/\ \ \ \ \  /\ \/\ \  /'__`\/\`'__\   \ \ \/_/_\/\ \  /' _ `\   /'__`\ /' __` __`\   /'__`\
+   /\ \L\ \\ \ \ \_\ \_\ \ \_/ |/\  __/\ \ \/     \ \ \L\ \\ \ \ /\ \/\ \ /\  __/ /\ \/\ \/\ \ /\ \L\.\_
+   \ `\____\\ \_\/\____\\ \___/ \ \____\\ \_\      \ \____/ \ \_\\ \_\ \_\\ \____\\ \_\ \_\ \_\\ \__/.\_\
+    \/_____/ \/_/\/____/ \/__/   \/____/ \/_/       \/___/   \/_/ \/_/\/_/ \/____/ \/_/\/_/\/_/ \/__/\/_/
+
+
+
+");
         Console.ResetColor();
     }
 }
