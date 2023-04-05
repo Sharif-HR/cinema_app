@@ -32,7 +32,7 @@ public class ManageMovies : ViewTemplate
 
                 case "2":
                     ShowMoviesTable();
-                    SelectMovie();
+                    EditMovie();
                     break;
 
                 case "3":
@@ -87,7 +87,7 @@ public class ManageMovies : ViewTemplate
     }
 
 
-    private void SelectMovie()
+    private void EditMovie()
     {
         var movies = _movieLogic.GetMovies();
         var updatedMovies = base.EditMovie(movies);
@@ -99,9 +99,16 @@ public class ManageMovies : ViewTemplate
     private void DeleteMovie()
     {
         var movies = _movieLogic.GetMovies();
-        base.DeleteModelFromList<MovieModel>(movies);
-        _movieLogic.SaveMovies();
-        Helpers.SuccessMessage("Movie Deleted!");
+        if (movies.Count == 0)
+        {
+            Helpers.WarningMessage("You have no movies to delete.");
+        }
+        else
+        {
+            base.DeleteModelFromList<MovieModel>(movies);
+            _movieLogic.SaveMovies();
+        }
+
         Helpers.Continue();
     }
 
