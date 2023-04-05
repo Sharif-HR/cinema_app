@@ -66,7 +66,7 @@ public class ManageMovies : ViewTemplate
         int duration = base.InputNumber("Movie duration (in minutes):");
         string summary = base.InputField("Movie summary:");
         List<string> genreList = base.InputMultiple("Movie genres:");
-        string releaseDate = (string)base.InputDate("Movie release date:", false);
+        var releaseDate = base.InputDate("Movie release date:", false);
 
         MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate);
         var movies = _movieLogic.GetMovies();

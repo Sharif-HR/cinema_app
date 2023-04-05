@@ -19,7 +19,7 @@ public class MovieModel
     public List<string> Genres { get; set;}
     
     [JsonPropertyName("releasedate")]
-    public object ReleaseDate {get;set;}
+    public string ReleaseDate {get;set;}
 
     // [JsonPropertyName("showtime")]
     // public object ShowTime {get;set;}
@@ -28,7 +28,7 @@ public class MovieModel
 
 
 
-    public MovieModel(string title, int duration, string summary, List<string> genres, object releasedate, string id = null)
+    public MovieModel(string title, int duration, string summary, List<string> genres, string releasedate, string id = null)
     {
         Id = string.IsNullOrWhiteSpace(id) ? Helpers.GenUid() : id;
         Title = title;

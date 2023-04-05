@@ -173,15 +173,13 @@ public abstract class ViewTemplate
     }
 
 
-    public List<string> InputMultiple(string label, string userInput = null)
+    public List<string> InputMultiple(string label)
     {
         Console.WriteLine(label);
         Helpers.WarningMessage("(Enter multiple values comma separated)");
         Console.Write("> ");
+        string userInput = Console.ReadLine();
 
-        if(userInput == null){
-            userInput = Console.ReadLine();
-        }
 
         List<string> values = new List<string>(userInput.Split(','));
 
@@ -200,7 +198,7 @@ public abstract class ViewTemplate
         {
             try
             {
-                Console.WriteLine("Enter date in this format (DD-MM-YYYY)");
+                Console.WriteLine("Enter date in this format (YYYY-MM-DD)");
                 Console.WriteLine(label);
                 string userInput = Console.ReadLine();
                 if (DateOnly.TryParse(userInput, out DateOnly result))
@@ -216,13 +214,13 @@ public abstract class ViewTemplate
                 }
                 else
                 {
-                    Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY) -> (20-10-2020).");
+                    Helpers.WarningMessage("Invalid Date input. Date format must be (YYYY-MM-DD) -> (2020-10-20).");
 
                 }
             }
             catch
             {
-                Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY) -> (20-10-2020).");
+                Helpers.WarningMessage("Invalid Date input. Date format must be (YYYY-MM-DD) -> (2020-10-20).");
             }
         }
     }
@@ -308,8 +306,7 @@ public abstract class ViewTemplate
         return modelList;
     }
 
-    public virtual List<MovieModel> EditMovie(List<MovieModel> movieList)
-    {
+    public virtual List<MovieModel> EditMovie(List<MovieModel> movieList) {
         if (movieList.Count == 0)
         {
             return movieList;
@@ -336,7 +333,6 @@ public abstract class ViewTemplate
             {
 
                 Dictionary<string, Type> properties = new Dictionary<string, Type>();
-                
                 foreach (var prop in typeof(MovieModel).GetProperties())
                 {
                     properties[prop.Name] = prop.PropertyType;
@@ -363,32 +359,29 @@ public abstract class ViewTemplate
                     }
                     break;
                 }
-                
                 string editInput;
                 object toUpdatedValue;
                 toUpdatedValue = "";
 
-                while (true)
-                {
+                while(true) {
+                    editInput = InputField($"Edit {userInput}:");
+
                     Type chosenProperty = properties[userInput];
                     switch (chosenProperty)
                     {
                         case var t when t == typeof(int):
-                            toUpdatedValue = InputNumber("edit duration: ");
+                            try {
+                                toUpdatedValue = Int32.Parse(editInput);
+                            }
+                            catch (Exception e){
+                                Helpers.WarningMessage(e.Message);
+                                continue;
+                            }
                             break;
+
                         case var t when t == typeof(string):
-                            if(userInput == "ReleaseDate"){
-                                toUpdatedValue = InputDate("edit ReleaseDate: ", false);
-                            }
-                            else{
-                                toUpdatedValue = InputField($"edit {userInput}:");
-                            }
+                            toUpdatedValue = editInput;
                             break;
-                        
-                        case var t when t == typeof(List<String>):                            
-                            toUpdatedValue = InputMultiple("edit Genre:");
-                            break;
-                        
                     }
                     break;
                 }

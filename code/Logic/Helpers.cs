@@ -75,4 +75,17 @@ public static class Helpers
     public static string CapitalizeFirstLetter(string str){
         return char.ToUpper(str[0]) + str.Substring(1);
     }
+
+
+    public static bool IsValidDateOnly(string input)
+    {
+        if (DateOnly.TryParse(input, out DateOnly result))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
