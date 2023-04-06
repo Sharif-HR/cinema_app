@@ -3,6 +3,7 @@ namespace Views;
 public class Register : ViewTemplate
 {
     static private AccountsLogic _accountsLogic = new AccountsLogic();
+    private Dashboard customerDashboardPage= new("customer");
 
     public Register() : base("Register") { }
 
@@ -13,9 +14,9 @@ public class Register : ViewTemplate
         string? firstName = base.InputField("Enter your first name:");
         string? lastName = base.InputField("Enter your last name:");
         string? email = EmailInput();
-        string? phoneNumber = base.OptionalInput("Enter your phonenumber (optional):");
+        string? phoneNumber = base.InputPhoneNumber("Enter your phonenumber:", true);
         string? password = base.InputPassword("Enter you password:", true);
-        bool isStudent = base.CheckboxInput("Are you a student?");
+        bool isStudent = base.CheckboxInput("Are you a student? (Press 'y' for Yes or 'n' for No)");
 
         AccountModel acc = new(username, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
         _accountsLogic.AddAccount(acc);
@@ -23,6 +24,10 @@ public class Register : ViewTemplate
         Helpers.Divider();
         Helpers.SuccessMessage("Registration complete.");
         Helpers.Continue();
+
+        customerDashboardPage.Render();
+        return;
+
     }
 
 

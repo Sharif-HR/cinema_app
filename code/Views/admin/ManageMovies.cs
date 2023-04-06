@@ -90,9 +90,17 @@ public class ManageMovies : ViewTemplate
     private void EditMovie()
     {
         var movies = _movieLogic.GetMovies();
-        var updatedMovies = base.EditMovie(movies);
-        _movieLogic.SaveMovies();
-        Helpers.SuccessMessage("Movie updated!");
+        if (movies.Count == 0)
+        {
+            Helpers.WarningMessage("You have no movies to edit.");
+        }
+        else
+        {
+            var updatedMovies = base.EditMovie(movies);
+            _movieLogic.SaveMovies();
+            Helpers.SuccessMessage("Movie updated!");
+        }
+
         Helpers.Continue();
     }
 

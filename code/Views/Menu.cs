@@ -14,12 +14,13 @@ public class Menu : ViewTemplate
         while(true) {
             base.Render();
 
-            Console.Write(@"1. Login
+            Console.Write(@"Please select an option:
+1. Login
 2. Register
-3. Exit (Temporary for Development)
-> ");
+3. Exit (Temporary for Development)");
 
-            string UserInput = Console.ReadLine();
+            Helpers.Divider();
+            string UserInput = InputField("Enter a number:");
             switch(UserInput){
                 case "1":
                     LoginPage.Render();

@@ -13,9 +13,9 @@ public abstract class ViewTemplate
     {
         Console.Clear();
         this.CinemaLogo();
-        Console.WriteLine("---------------------------");
+        Helpers.Divider(false);
         Console.WriteLine(this.Title);
-        Console.WriteLine("---------------------------");
+        Helpers.Divider(false);
     }
 
     public string InputField(string label)
@@ -119,30 +119,86 @@ public abstract class ViewTemplate
         return input;
     }
 
+
+    public string InputPhoneNumber(string label, bool isOptional = false)
+    {
+        Console.WriteLine(label);
+        Helpers.WarningMessage("optional: Press enter to skip this field.");
+        string? input;
+        while (true)
+        {
+            Console.Write("> ");
+            input = Console.ReadLine();
+
+            if (Helpers.ContainsLetters(input))
+            {
+                Helpers.WarningMessage("Letters are not allowed.");
+                continue;
+            }
+
+            if (isOptional)
+            {
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    return null;
+                }
+            }
+            
+            break;
+        }
+
+        return input;
+    }
+
     public string OptionalInput(string label)
     {
-        Console.WriteLine(label + "\n>");
+        Console.WriteLine(label);
+        Helpers.WarningMessage("optional: Press enter to skip this field.");
         string? input = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            return null;
+        }
+
         return input;
     }
 
 
     public bool CheckboxInput(string label)
     {
-        List<string> choices = new() { "Y", "N" };
-        bool loop = true;
-
-        Console.WriteLine(label + "Y/n");
-        string? input = Console.ReadLine() ?? "";
-        while (loop)
+        string[] options = { "y", "n" };
+        while (true)
         {
-            if (!choices.Contains(input.ToUpper()))
+            Console.WriteLine(label);
+            Console.Write("> ");
+            string userInput = Console.ReadLine();
+            string warningMessage = "Invalid input. Please enter y or n.";
+
+            if (string.IsNullOrWhiteSpace(userInput) == true)
             {
-                Console.WriteLine($"{input} is not a valid option.");
+                Helpers.WarningMessage(warningMessage);
+                continue;
             }
-            loop = false;
+
+            string userInputLower = userInput.ToLower();
+            if (!options.Contains(userInputLower))
+            {
+                Helpers.WarningMessage(warningMessage);
+                continue;
+            }
+
+            if (userInputLower == "y")
+            {
+                return true;
+            }
+            else if (userInputLower == "n")
+            {
+                return false;
+            }
         }
-        return (input == "Y" || input == "y") ? true : false;
+
+
     }
 
     public int InputNumber(string label)
@@ -179,7 +235,8 @@ public abstract class ViewTemplate
         Helpers.WarningMessage("(Enter multiple values comma separated)");
         Console.Write("> ");
 
-        if(userInput == null){
+        if (userInput == null)
+        {
             userInput = Console.ReadLine();
         }
 
@@ -336,7 +393,7 @@ public abstract class ViewTemplate
             {
 
                 Dictionary<string, Type> properties = new Dictionary<string, Type>();
-                
+
                 foreach (var prop in typeof(MovieModel).GetProperties())
                 {
                     properties[prop.Name] = prop.PropertyType;
@@ -363,7 +420,7 @@ public abstract class ViewTemplate
                     }
                     break;
                 }
-                
+
                 string editInput;
                 object toUpdatedValue;
                 toUpdatedValue = "";
@@ -377,18 +434,20 @@ public abstract class ViewTemplate
                             toUpdatedValue = InputNumber("edit duration: ");
                             break;
                         case var t when t == typeof(string):
-                            if(userInput == "ReleaseDate"){
+                            if (userInput == "ReleaseDate")
+                            {
                                 toUpdatedValue = InputDate("edit ReleaseDate: ", false);
                             }
-                            else{
+                            else
+                            {
                                 toUpdatedValue = InputField($"edit {userInput}:");
                             }
                             break;
-                        
-                        case var t when t == typeof(List<String>):                            
+
+                        case var t when t == typeof(List<String>):
                             toUpdatedValue = InputMultiple("edit Genre:");
                             break;
-                        
+
                     }
                     break;
                 }
