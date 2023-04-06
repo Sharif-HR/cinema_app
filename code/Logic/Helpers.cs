@@ -34,6 +34,23 @@ public static class Helpers
             return false;
         }
 
+        bool atBeforeDot = false;
+        bool HasDot = false; 
+        foreach(char c in email){
+            if(c == '@'){
+                atBeforeDot = true;
+            }
+
+            if(c == '.' && atBeforeDot){
+                HasDot = true;
+            }
+        }
+
+        if(!HasDot){
+            WarningMessage("Please enter a valid email.");
+            return false;
+        }
+
         try
         {
             var mailAddress = new System.Net.Mail.MailAddress(email);

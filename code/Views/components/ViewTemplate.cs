@@ -77,26 +77,26 @@ public abstract class ViewTemplate
             {
                 if (input.Length < minLength || input.Length > maxLength)
                 {
-                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long.");
+                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
                     continue;
                 }
 
                 if (!input.Any(char.IsUpper))
                 {
-                    Console.WriteLine("Password must contain at least one uppercase character.");
+                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
 
                     continue;
                 }
 
                 if (!input.Any(char.IsLower))
                 {
-                    Console.WriteLine("Password must contain at least one lowercase character.");
+                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
                     continue;
                 }
 
                 if (input.Contains(" "))
                 {
-                    Console.WriteLine("Password can't contain a white space.");
+                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
                     continue;
                 }
 
