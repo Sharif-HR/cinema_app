@@ -284,6 +284,39 @@ public abstract class ViewTemplate
         }
     }
 
+    public object InputShowTime(string label, bool isDateOnly = true)
+    {
+        while (true)
+        {
+            try
+            {
+                Console.WriteLine("Enter date and time in this format (DD-MM-YYYY HH:mm)");
+                Console.WriteLine(label);
+                string userInput = Console.ReadLine();
+                if (DateTime.TryParse(userInput, out DateTime result))
+                {
+                    if (isDateOnly)
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        return result.ToString("dd-MM-yyyy HH:mm");
+                    }
+                }
+                else
+                {
+                    Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY HH:mm) -> (20-10-2020 17:30).");
+
+                }
+            }
+            catch
+            {
+                Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY HH:mm) -> (20-10-2020 17:30).");
+            }
+        }
+    }
+
     public virtual List<T> EditModelFromList<T>(List<T> modelList)
     {
         if (modelList.Count == 0)

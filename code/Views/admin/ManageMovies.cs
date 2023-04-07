@@ -67,8 +67,9 @@ public class ManageMovies : ViewTemplate
         string summary = base.InputField("Movie summary:");
         List<string> genreList = base.InputMultiple("Movie genres:");
         string releaseDate = (string)base.InputDate("Movie release date:", false);
+        string showTime = (string)base.InputShowTime("Movie showtime:", false);
 
-        MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate);
+        MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate, showtime: showTime);
         var movies = _movieLogic.GetMovies();
         var newMovieList = AddModel<MovieModel>(movies, NewMovie);
         _movieLogic.SaveMovies(newMovieList);
