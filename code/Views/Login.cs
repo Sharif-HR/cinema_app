@@ -8,23 +8,31 @@ public class Login : ViewTemplate
 
     public override void Render()
     {
-        base.Render();
-        string Email = base.InputField("Enter your email: ");
-        string Password = base.InputPassword("Enter password: ");
-
-        AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
-
-
-        if (UserAccount != null)
+        while (true)
         {
-            Dashboard DasboardPage = new(role:UserAccount.Role);
-            DasboardPage.Render();
-        }
-        else
-        {
-            Helpers.Divider();
-            Console.WriteLine("No account found with that email and/or password.");
-            Helpers.Continue();
+            base.Render();
+            string Email = base.InputField("Enter your email: ");
+            string Password = base.InputPassword("Enter password: ");
+
+            AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
+
+
+            if (UserAccount != null)
+            {
+                Dashboard DasboardPage = new(role: UserAccount.Role);
+                DasboardPage.Render();
+                return;
+            }
+            else
+            {
+                Helpers.Divider();
+                Helpers.WarningMessage("Login failed. Do you want to try again?");
+            }
+
+            bool tryLogin  = CheckboxInput("Press 'y' for Yes or 'n' for No");
+            if(tryLogin == false){
+                return;
+            }
         }
     }
 }

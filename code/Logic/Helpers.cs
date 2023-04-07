@@ -2,13 +2,22 @@ using System.Reflection;
 
 public static class Helpers
 {
-    public static void Continue() {
+    public static void Continue()
+    {
         Console.WriteLine("Press any key to continue");
         Console.ReadKey();
     }
 
-    public static void Divider(){
-        Console.WriteLine("\n----------------------------------------");
+    public static void Divider(bool hasEnter = true)
+    {
+        if (hasEnter)
+        {
+            Console.WriteLine("\n----------------------------------------");
+        }
+        else
+        {
+            Console.WriteLine("----------------------------------------");
+        }
     }
 
 
@@ -19,7 +28,25 @@ public static class Helpers
 
     public static bool IsValidEmail(string email)
     {
-        if (string.IsNullOrWhiteSpace(email)) {
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            WarningMessage("Please enter a valid email.");
+            return false;
+        }
+
+        bool atBeforeDot = false;
+        bool HasDot = false; 
+        foreach(char c in email){
+            if(c == '@'){
+                atBeforeDot = true;
+            }
+
+            if(c == '.' && atBeforeDot){
+                HasDot = true;
+            }
+        }
+
+        if(!HasDot){
             WarningMessage("Please enter a valid email.");
             return false;
         }
@@ -48,8 +75,14 @@ public static class Helpers
         return true;
     }
 
+    public static  bool ContainsLetters(string str)
+    {
+        return System.Text.RegularExpressions.Regex.IsMatch(str, @"[a-zA-Z]");
+    }
 
-    public static void WarningMessage(string message){
+
+    public static void WarningMessage(string message)
+    {
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(message);
         Console.ResetColor();
@@ -62,17 +95,33 @@ public static class Helpers
         Console.ResetColor();
     }
 
-    public static string ListToString(List<string> list){
+    public static string ListToString(List<string> list)
+    {
         string value = string.Join(",", list);
         return value;
     }
 
 
-    public static string TruncateString(string longString, int maxLength){
+    public static string TruncateString(string longString, int maxLength)
+    {
         return longString.Substring(0, Math.Min(longString.Length, maxLength)) + "...";
     }
 
-    public static string CapitalizeFirstLetter(string str){
+    public static string CapitalizeFirstLetter(string str)
+    {
         return char.ToUpper(str[0]) + str.Substring(1);
+    }
+
+
+    public static bool IsValidDateOnly(string input)
+    {
+        if (DateOnly.TryParse(input, out DateOnly result))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

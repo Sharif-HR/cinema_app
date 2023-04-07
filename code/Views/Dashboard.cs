@@ -36,28 +36,34 @@ public class Dashboard : ViewTemplate
 
     private void AdminOptions()
     {
-        while(true){
+        while (true)
+        {
             base.Render();
             ShowAdminMenu();
 
-            string AdminInput = Console.ReadLine();
-            switch(AdminInput){
+            string AdminInput = InputField("Enter a number:");
+            switch (AdminInput)
+            {
                 case "1":
-                    Console.WriteLine("Comingsoon");
+                    Helpers.WarningMessage("Coming soon!");
                     Helpers.Continue();
                     break;
 
                 case "2":
                     ManageMoviesPage.Render();
                     break;
-                
+
+                case "3":
+                    Helpers.WarningMessage("Coming soon!");
+                    Helpers.Continue();
+                    break;
                 case "4":
                     LogOutMsg();
                     return;
-                
+
                 default:
                     Helpers.Divider();
-                    Console.WriteLine("Invalid input.");
+                    Helpers.WarningMessage("Invalid input. Please enter one of the number shown above.");
                     Helpers.Continue();
                     break;
             }
@@ -68,11 +74,12 @@ public class Dashboard : ViewTemplate
 
     private void CustomerOptions()
     {
-        while(true){
+        while (true)
+        {
             base.Render();
             ShowCustomerMenu();
 
-            string CustomerInput = Console.ReadLine();
+            string CustomerInput = InputField("Enter a number:");
             switch (CustomerInput)
             {
                 case "1":
@@ -86,7 +93,7 @@ public class Dashboard : ViewTemplate
 
                 default:
                     Helpers.Divider();
-                    Console.WriteLine("Invalid input.");
+                    Helpers.WarningMessage("Invalid input. Please enter one of the number shown above.");
                     Helpers.Continue();
                     break;
             }
@@ -95,9 +102,10 @@ public class Dashboard : ViewTemplate
     }
 
 
-    private void LogOutMsg(){
+    private void LogOutMsg()
+    {
         Console.WriteLine("Logging out...");
-        Thread.Sleep(700);
+        Thread.Sleep(1200);
     }
 
 
@@ -108,19 +116,22 @@ public class Dashboard : ViewTemplate
         Helpers.Continue();
     }
 
-    private void ShowAdminMenu(){
-        Console.Write(@"1. View reservations.
+    private void ShowAdminMenu()
+    {
+        Console.WriteLine(@"1. View reservations.
 2. Manage movies.
 3. Manage refreshments.
-4. Log out.
-> ");
+4. Log out.");
+        Helpers.Divider(false);
     }
 
-    private void ShowCustomerMenu(){
-        Console.Write(@"
+    private void ShowCustomerMenu()
+    {
+        Console.WriteLine(@"
 1. View list of current movies.
 2. View reservations.
-3. Log out.
-> ");
+3. Log out.");
+        Helpers.Divider(false);
+
     }
 }
