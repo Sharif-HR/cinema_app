@@ -284,12 +284,75 @@ public abstract class ViewTemplate
         }
     }
 
+    public List<ReturnValue> InputDropdownMenu<ReturnValue>(string label, List<ReturnValue> choices) {
+        List<ReturnValue> availableChoices = choices;
+        List<ReturnValue> chosenValues = new(){};
+        int index = 0;
+
+        while(true) {
+            Console.WriteLine("Select a option");
+            Helpers.PrintListContent<ReturnValue>(choices, true);
+            string userInput = this.InputField("");
+
+            //convert string to int in order to add & remove the value based of an index
+            try {
+                index = Convert.ToInt32(userInput);
+            } catch (FormatException) {
+                Helpers.WarningMessage("You can only enter the numbers");
+            }
+
+            try {
+                chosenValues.Add(availableChoices[index]);
+                availableChoices.RemoveAt(index);
+            } catch (ArgumentOutOfRangeException) {
+                Helpers.WarningMessage("You can only select the options that are shown.");
+            }
+
+            if(availableChoices.Count == 0) break;
+        }
+
+        return chosenValues;
+    }
+
+    private int SelectFromModelList<T>(List<T> modelList){
+        string modelName = typeof(T).Name.ToLower();
+        modelName = modelName.Substring(0, modelName.Length - 5);
+
+        while(true){
+            int modelIndex = InputNumber($"Enter {modelName} ID:");
+
+            if (modelIndex == 0)
+            {
+                modelIndex++;
+            }
+            else
+            {
+                modelIndex--;
+            }
+
+            if (modelList.Count < modelIndex || modelIndex < 0)
+            {
+                Helpers.WarningMessage("Enter a correct ID");
+                continue;
+            }
+
+
+            return modelIndex;
+        }
+    }
+
+    // TODO exit this function option
     public virtual List<T> EditModelFromList<T>(List<T> modelList)
     {
-        if (modelList.Count == 0)
-        {
-            return modelList;
-        }
+        int selectedIndex = this.SelectFromModelList<T>(modelList);
+        List<string> modelProperties = Helpers.GetProperties<T>();
+
+        Console.WriteLine("Choose what you want to edit:");
+        Helpers.PrintListContent(modelProperties, true);
+
+
+        Helpers.Continue();
+        return null;
 
         bool loop = true;
         while (loop)
@@ -342,12 +405,11 @@ public abstract class ViewTemplate
 
                 string editInput = InputField($"Edit {userInput}:");
 
-
+                // TODO 4 parameters meegeven aan TemplateLogic: index,chosenAttribute,updatedValue,<model>
                 Type chosenProperty = properties[userInput];
                 object toUpdatedValue;
                 switch (chosenProperty)
                 {
-
                     case var t when t == typeof(int):
                         toUpdatedValue = Int32.Parse(editInput);
                         break;

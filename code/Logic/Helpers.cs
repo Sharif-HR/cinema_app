@@ -35,7 +35,7 @@ public static class Helpers
         }
 
         bool atBeforeDot = false;
-        bool HasDot = false; 
+        bool HasDot = false;
         foreach(char c in email){
             if(c == '@'){
                 atBeforeDot = true;
@@ -122,6 +122,35 @@ public static class Helpers
         else
         {
             return false;
+        }
+    }
+
+    public static bool IsEmptyList<T>(List<T> list){
+        return (list.Count == 0);
+    }
+
+    public static List<string> GetProperties<Type>(){
+        List<string> list = new();
+        foreach (var prop in typeof(Type).GetProperties())
+        {
+            list.Add(prop.Name);
+        }
+
+        return list;
+    }
+
+    public static void PrintListContent<ReturnValue>(List<ReturnValue> list, bool isNumberd=false){
+
+        if(isNumberd){
+            for(int i=0; i < list.Count; i++){
+                Console.WriteLine($"{i}. {list[i]}");
+            }
+        }
+        else{
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }

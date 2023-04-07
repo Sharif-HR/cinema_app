@@ -96,7 +96,7 @@ public class ManageMovies : ViewTemplate
         }
         else
         {
-            var updatedMovies = base.EditMovie(movies);
+            var updatedMovies = base.EditModelFromList(movies);
             _movieLogic.SaveMovies();
             Helpers.SuccessMessage("Movie updated!");
         }
