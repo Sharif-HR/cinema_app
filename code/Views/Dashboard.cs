@@ -8,6 +8,7 @@ public class Dashboard : ViewTemplate
     private const string CUSTOMERROLE = "customer";
     private string _userRole;
     private ManageMovies ManageMoviesPage = new();
+    private MovieView CustomerMoviePage = new();
     public Dashboard(string role) : base($"{Helpers.CapitalizeFirstLetter(role)} - Dashboard")
     {
         this._userRole = role;
@@ -83,7 +84,11 @@ public class Dashboard : ViewTemplate
             switch (CustomerInput)
             {
                 case "1":
-                    Console.WriteLine("Comingsoon");
+                    CustomerMoviePage.Render();
+                    break;
+                
+                case "2":
+                    Console.WriteLine("Coming soon");
                     Helpers.Continue();
                     break;
 
@@ -93,7 +98,7 @@ public class Dashboard : ViewTemplate
 
                 default:
                     Helpers.Divider();
-                    Helpers.WarningMessage("Invalid input. Please enter one of the number shown above.");
+                    Helpers.WarningMessage("Invalid input. Please enter one of the numbers shown above.");
                     Helpers.Continue();
                     break;
             }
@@ -128,7 +133,7 @@ public class Dashboard : ViewTemplate
     private void ShowCustomerMenu()
     {
         Console.WriteLine(@"
-1. View list of current movies.
+1. View movies.
 2. View reservations.
 3. Log out.");
         Helpers.Divider(false);

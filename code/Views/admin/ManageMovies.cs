@@ -61,6 +61,7 @@ public class ManageMovies : ViewTemplate
 
     private void CreateMovieForm()
     {
+<<<<<<< Updated upstream
         base.Render();
         string title = base.InputField("Movie title:");
         int duration = base.InputNumber("Movie duration (in minutes):");
@@ -75,6 +76,33 @@ public class ManageMovies : ViewTemplate
         _movieLogic.SaveMovies(newMovieList);
         Helpers.SuccessMessage("Movie added!");
         Helpers.Continue();
+=======
+        while (true)
+        {
+            base.Render();
+            string GoBack = Helpers.GoBack("adding a movie");
+            if (GoBack == "back")
+            {
+                return;
+            }
+            if (GoBack == "continue")
+            {
+                string title = base.InputField("Movie title:");
+                int duration = base.InputNumber("Movie duration (in minutes):");
+                string summary = base.InputField("Movie summary:");
+                List<string> genreList = base.InputMultiple("Movie genres:");
+                string releaseDate = (string)base.InputDate("Movie release date:", false);
+
+                MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate);
+
+                var movies = _movieLogic.GetMovies();
+                var newMovieList = AddModel<MovieModel>(movies, NewMovie);
+                _movieLogic.SaveMovies(newMovieList);
+                Helpers.SuccessMessage("Movie added!");
+                Helpers.Continue();
+            }
+        }
+>>>>>>> Stashed changes
     }
 
 
@@ -97,9 +125,26 @@ public class ManageMovies : ViewTemplate
         }
         else
         {
+<<<<<<< Updated upstream
             var updatedMovies = base.EditModelFromList(movies);
             _movieLogic.SaveMovies();
             Helpers.SuccessMessage("Movie updated!");
+=======
+            while (true)
+            {
+                string GoBack = Helpers.GoBack("editing a movie");
+                if (GoBack == "back")
+                {
+                    return;
+                }
+                if (GoBack == "continue")
+                {
+                var updatedMovies = base.EditMovie(movies);
+                _movieLogic.SaveMovies();
+                Helpers.SuccessMessage("Movie updated!");
+                }
+            }
+>>>>>>> Stashed changes
         }
 
         Helpers.Continue();
@@ -114,8 +159,19 @@ public class ManageMovies : ViewTemplate
         }
         else
         {
-            base.DeleteModelFromList<MovieModel>(movies);
-            _movieLogic.SaveMovies();
+            while (true)
+            {    
+                string GoBack = Helpers.GoBack("deleting a movie");
+                if (GoBack == "back")
+                {
+                    return;
+                }
+                if (GoBack == "continue")
+                {
+                    base.DeleteModelFromList<MovieModel>(movies);
+                    _movieLogic.SaveMovies();
+                }
+            }
         }
 
         Helpers.Continue();

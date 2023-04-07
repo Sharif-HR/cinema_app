@@ -11,11 +11,11 @@ public abstract class ViewTemplate
     }
     public virtual void Render()
     {
-        Console.Clear();
-        this.CinemaLogo();
-        Helpers.Divider(false);
-        Console.WriteLine(this.Title);
-        Helpers.Divider(false);
+            Console.Clear();
+            this.CinemaLogo();
+            Helpers.Divider(false);
+            Console.WriteLine(this.Title);
+            Helpers.Divider(false);
     }
 
     public string InputField(string label)
@@ -581,13 +581,11 @@ public abstract class ViewTemplate
         Helpers.SuccessMessage("Movie Deleted!");
         return modelList;
     }
-
     public virtual List<T> AddModel<T>(List<T> modelList, T model)
     {
         modelList.Add(model);
         return modelList;
     }
-
     private void CinemaLogo()
     {
         Console.ForegroundColor = ConsoleColor.Red;
