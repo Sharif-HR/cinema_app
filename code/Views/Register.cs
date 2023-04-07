@@ -9,25 +9,35 @@ public class Register : ViewTemplate
 
     public override void Render()
     {
-        base.Render();
-        string? username = base.InputField("Enter your username");
-        string? firstName = base.InputField("Enter your first name:");
-        string? lastName = base.InputField("Enter your last name:");
-        string? email = EmailInput();
-        string? phoneNumber = base.InputPhoneNumber("Enter your phonenumber:", true);
-        string? password = base.InputPassword("Enter you password:", true);
-        bool isStudent = base.CheckboxInput("Are you a student? (Press 'y' for Yes or 'n' for No)");
+        while (true)
+        {
+            base.Render();
+            string GoBack = Helpers.GoBack("registering");
+            if (GoBack == "back")
+            {
+                return;
+            }
+            if (GoBack == "continue")
+            {
+                string? username = base.InputField("Enter your username");
+                string? firstName = base.InputField("Enter your first name:");
+                string? lastName = base.InputField("Enter your last name:");
+                string? email = EmailInput();
+                string? phoneNumber = base.InputPhoneNumber("Enter your phonenumber:", true);
+                string? password = base.InputPassword("Enter you password:", true);
+                bool isStudent = base.CheckboxInput("Are you a student? (Press 'y' for Yes or 'n' for No)");
 
-        AccountModel acc = new(username, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
-        _accountsLogic.AddAccount(acc);
+                AccountModel acc = new(username, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
+                _accountsLogic.AddAccount(acc);
 
-        Helpers.Divider();
-        Helpers.SuccessMessage("Registration complete.");
-        Helpers.Continue();
+                Helpers.Divider();
+                Helpers.SuccessMessage("Registration complete.");
+                Helpers.Continue();
 
-        customerDashboardPage.Render();
-        return;
-
+                customerDashboardPage.Render();
+                return;
+            }
+        }
     }
 
 
