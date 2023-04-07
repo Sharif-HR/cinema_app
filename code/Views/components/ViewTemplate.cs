@@ -75,29 +75,26 @@ public abstract class ViewTemplate
 
             if (mustBeStrong)
             {
+                bool hasError = false;
+                bool containsSC = false;
                 if (input.Length < minLength || input.Length > maxLength)
                 {
-                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
-                    continue;
+                    hasError = true;
                 }
 
                 if (!input.Any(char.IsUpper))
                 {
-                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
-
-                    continue;
+                    hasError = true;
                 }
 
                 if (!input.Any(char.IsLower))
                 {
-                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
-                    continue;
+                    hasError = true;
                 }
 
                 if (input.Contains(" "))
                 {
-                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
-                    continue;
+                    hasError = true;
                 }
 
                 string specialChars = @"%!@#$%^&*()?/>.<,:;'\|}]{[_~`+=-" + "\"";
@@ -106,9 +103,12 @@ public abstract class ViewTemplate
                 {
                     if (input.Contains(ch))
                     {
-                        loop = false;
+                        containsSC = true;
                         return input;
                     }
+                }
+                if (!containsSC || hasError){
+                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
                 }
             }
             else
