@@ -21,14 +21,14 @@ public class MovieModel
     [JsonPropertyName("releasedate")]
     public string ReleaseDate {get;set;}
 
-    // [JsonPropertyName("showtime")]
-    // public object ShowTime {get;set;}
+    [JsonPropertyName("showtime")]
+    public string ShowTime {get;set;}
     // Moet datatime zijn of alleen time?
 
 
 
 
-    public MovieModel(string title, int duration, string summary, List<string> genres, string releasedate, string id = null)
+    public MovieModel(string title, int duration, string summary, List<string> genres, string releasedate, string showtime, string id = null)
     {
         Id = string.IsNullOrWhiteSpace(id) ? Helpers.GenUid() : id;
         Title = title;
@@ -36,6 +36,7 @@ public class MovieModel
         Summary = summary;
         Genres = genres;
         ReleaseDate = releasedate;
+        ShowTime = showtime;
     }
 
 

@@ -32,7 +32,7 @@ public abstract class LogicTemplate
                         strModelAttribute = Helpers.ListToString((List<string>)rawModelAttribute);
                     }
 
-                    if (strModelAttribute.Length > 15)
+                    if (strModelAttribute.Length > 15 && modelPropertyName != "ShowTime")
                     {
                         strModelAttribute = Helpers.TruncateString(strModelAttribute, 15);
                     }
