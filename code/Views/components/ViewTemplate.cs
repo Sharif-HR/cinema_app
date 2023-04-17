@@ -260,27 +260,49 @@ public abstract class ViewTemplate
             {
                 Console.WriteLine("Enter date in this format (DD-MM-YYYY)");
                 Console.WriteLine(label);
-                string userInput = Console.ReadLine();
-                if (DateOnly.TryParse(userInput, out DateOnly result))
-                {
-                    if (isDateOnly)
-                    {
-                        return result;
-                    }
-                    else
-                    {
-                        return result.ToString();
-                    }
-                }
-                else
-                {
-                    Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY) -> (20-10-2020).");
+                string enteredDate = Console.ReadLine();
+                
+                DateOnly dateObject = DateOnly.ParseExact(enteredDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
+                if(isDateOnly == true){
+                    return dateObject;
+                }
+                
+                if(isDateOnly == false){
+                    return dateObject.ToString("dd-MM-yyyy");
                 }
             }
             catch
             {
                 Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY) -> (20-10-2020).");
+            }
+        }
+    }
+
+    public object InputDateTime(string label, bool isDateOnly = true)
+    {
+        while (true)
+        {
+            try
+            {
+                Console.WriteLine("Enter date and time in this format (HH:mm DD-MM-YYYY)");
+                Console.WriteLine(label);
+
+                string enterDateTime = Console.ReadLine();
+                DateTime dateObject = DateTime.ParseExact(enterDateTime, "HH:mm dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+                if(isDateOnly == true){
+                    return dateObject;
+                }
+
+                if(isDateOnly == false){
+                    return dateObject.ToString("HH:mm dd/MM/yyyy");
+                }
+
+            }
+            catch
+            {
+                Helpers.WarningMessage("Invalid Date input. Date format must be (HH:mm DD-MM-YYYY) -> (17:30 20-10-2020).");
             }
         }
     }
@@ -350,38 +372,7 @@ public abstract class ViewTemplate
         }
     }
     // TODO exit this function option
-    public object InputDateTime(string label, bool isDateOnly = true)
-    {
-        while (true)
-        {
-            try
-            {
-                Console.WriteLine("Enter date and time in this format (HH:mm DD-MM-YYYY)");
-                Console.WriteLine(label);
-                string userInput = Console.ReadLine();
-                if (DateTime.TryParse(userInput, out DateTime result))
-                {
-                    if (isDateOnly)
-                    {
-                        return result;
-                    }
-                    else
-                    {
-                        return result.ToString("HH:mm dd-MM-yyyy");
-                    }
-                }
-                else
-                {
-                    Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY HH:mm) -> (17:30 20-10-2020).");
 
-                }
-            }
-            catch
-            {
-                Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY HH:mm) -> (17:30 20-10-2020).");
-            }
-        }
-    }
 
     private void CinemaLogo()
     {
