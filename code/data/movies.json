@@ -1,36 +1,13 @@
 [
   {
-    "id": "315750ce-390c-4689-84ea-fc6d80a05496",
-    "title": "batman",
+    "id": "bca08ccc-ed55-4a98-a17f-f1908dda7559",
+    "title": "lsdjfa",
     "duration": 120,
-    "summary": "badman ollo",
+    "summary": "djfal",
     "genres": [
-      "action",
-      "comedy"
+      "dsnfaa"
     ],
-    "releasedate": "12/20/2018"
-  },
-  {
-    "id": "704beb79-e0d5-4426-bfd0-7915e933b66e",
-    "title": "steen deel 2",
-    "duration": 12,
-    "summary": "nog mooiere steen",
-    "genres": [
-      "comedy",
-      "romance",
-      "Action",
-      "Testing"
-    ],
-    "releasedate": "10/28/2024"
-  },
-  {
-    "id": "c4ff5fe7-f57b-4c38-b521-6603a5631223",
-    "title": "Master mind",
-    "duration": 120,
-    "summary": "Master mind movie",
-    "genres": [
-      "Action"
-    ],
-    "releasedate": "10/10/2022"
+    "releasedate": "05/05/2005",
+    "showtime": "12/12/2012"
   }
 ]
