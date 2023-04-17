@@ -62,32 +62,29 @@ public class ManageMovies : ViewTemplate, IManage
         while (true)
         {
             base.Render();
-            string GoBack = Helpers.GoBack("adding a movie");
-            if (GoBack == "back")
-            {
-                return;
-            }
-            if (GoBack == "continue")
-            {
-                string title = base.InputField("Movie title:");
-                int duration = base.InputNumber("Movie duration (in minutes):");
-                string summary = base.InputField("Movie summary:");
-                List<string> genreList = base.InputMultiple("Movie genres:");
-                string releaseDate = (string)base.InputDate("Movie release date:", false);
-                string showTime = (string)base.InputDateTime("Next Movie Showtime:", false);
+            
+            if (Helpers.GoBack2("adding a movie") == true){return;}
 
-                MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate, showtime: showTime);
+            string title = base.InputField("Movie title:");
+            int duration = base.InputNumber("Movie duration (in minutes):");
+            string summary = base.InputField("Movie summary:");
+            List<string> genreList = base.InputMultiple("Movie genres:");
+            string releaseDate = (string)base.InputDate("Movie release date:", false);
+            string showTime = (string)base.InputDateTime("Next Movie Showtime:", false);
 
-                _movieLogic.AddMovie(NewMovie);
-                Helpers.SuccessMessage("Movie added!");
-                Helpers.Continue();
-            }
+            MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate, showtime: showTime);
+
+            _movieLogic.AddMovie(NewMovie);
+            Helpers.SuccessMessage("Movie added!");
+            Helpers.Continue();
+            
         }
     }
 
     public void DeleteForm()
     {
         var movies = _movieLogic.GetMovies();
+        // TODO make method out of this
         if (movies.Count == 0)
         {
             Helpers.WarningMessage("You have no movies to delete.");
@@ -190,8 +187,17 @@ public class ManageMovies : ViewTemplate, IManage
 
     public void EditForm()
     {
-        ShowMoviesTable();
         var movies = _movieLogic.GetMovies();
+
+        if (movies.Count == 0)
+        {
+            Helpers.WarningMessage("You have no movies to edit.");
+            Helpers.Continue();
+            return;
+        }
+
+
+        ShowMoviesTable();
         int movieId = SelectFromModelList<MovieModel>(movies, true);
         var movieProperties = MovieProperties();
 
