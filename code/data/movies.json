@@ -1,13 +1,355 @@
 [
   {
-    "id": "bca08ccc-ed55-4a98-a17f-f1908dda7559",
-    "title": "lsdjfa",
+    "id": "c4ff5fe7-f57b-4c38-b521-6603a5631223",
+    "title": "Master mind",
     "duration": 120,
-    "summary": "djfal",
+    "summary": "Master mind movie",
     "genres": [
-      "dsnfaa"
+      "Action"
     ],
-    "releasedate": "05/05/2005",
-    "showtime": "12/12/2012"
+    "releasedate": "10/10/2022",
+    "showtime": "12:00 10/10/2022"
+  },
+  {
+    "id": "01",
+    "title": "The Last Heist",
+    "duration": 110,
+    "summary": "A group of criminals plan a heist of a high-security bank.",
+    "genres": [
+      "Action",
+      "Thriller"
+    ],
+    "releasedate": "05/01/2023",
+    "showtime": "18:00 05/01/2023"
+  },
+  {
+    "id": "02",
+    "title": "The Lost Expedition",
+    "duration": 105,
+    "summary": "A group of explorers search for a lost city in the jungle.",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releasedate": "05/03/2023",
+    "showtime": "15:30 05/03/2023"
+  },
+  {
+    "id": "03",
+    "title": "The Double Agent",
+    "duration": 115,
+    "summary": "A spy goes undercover to stop a terrorist attack.",
+    "genres": [
+      "Action",
+      "Thriller"
+    ],
+    "releasedate": "06/10/2023",
+    "showtime": "20:00 06/10/2023"
+  },
+  {
+    "id": "04",
+    "title": "The Final Countdown",
+    "duration": 125,
+    "summary": "A team of astronauts travel back in time to stop a nuclear war.",
+    "genres": [
+      "Action",
+      "Sci-Fi"
+    ],
+    "releasedate": "07/07/2023",
+    "showtime": "14:00 07/07/2023"
+  },
+  {
+    "id": "05",
+    "title": "The Perfect Heist",
+    "duration": 100,
+    "summary": "A group of thieves attempt to rob a casino.",
+    "genres": [
+      "Action",
+      "Crime"
+    ],
+    "releasedate": "08/01/2023",
+    "showtime": "19:30 08/01/2023"
+  },
+  {
+    "id": "06",
+    "title": "The Last Stand",
+    "duration": 120,
+    "summary": "A sheriff and his deputies defend their town against a gang of outlaws.",
+    "genres": [
+      "Action",
+      "Western"
+    ],
+    "releasedate": "09/05/2023",
+    "showtime": "16:30 09/05/2023"
+  },
+  {
+    "id": "07",
+    "title": "The Hacker",
+    "duration": 110,
+    "summary": "A computer expert hacks into a top-secret government system.",
+    "genres": [
+      "Action",
+      "Thriller"
+    ],
+    "releasedate": "10/20/2023",
+    "showtime": "21:00 10/20/2023"
+  },
+  {
+    "id": "08",
+    "title": "The Art of the Steal",
+    "duration": 105,
+    "summary": "A con artist tries to steal a valuable painting.",
+    "genres": [
+      "Action",
+      "Comedy"
+    ],
+    "releasedate": "11/15/2023",
+    "showtime": "18:00 11/15/2023"
+  },
+  {
+    "id": "10",
+    "title": "The Escape Plan",
+    "duration": 115,
+    "summary": "A prisoner tries to break out of a maximum security prison.",
+    "genres": [
+      "Action",
+      "Thriller"
+    ],
+    "releasedate": "12/05/2023",
+    "showtime": "19:30 12/05/2023"
+  },
+  {
+    "id": "11",
+    "title": "The Perfect Target",
+    "duration": 120,
+    "summary": "A hitman takes on his toughest assignment yet.",
+    "genres": [
+      "Action",
+      "Thriller"
+    ],
+    "releasedate": "01/10/2024",
+    "showtime": "20:00 01/10/2024"
+  },
+  {
+    "id": "12",
+    "title": "The Secret Agent",
+    "duration": 110,
+    "summary": "A spy must stop a terrorist plot to destroy a city.",
+    "genres": [
+      "Action",
+      "Thriller"
+    ],
+    "releasedate": "02/14/2024",
+    "showtime": "17:00 02/14/2024"
+  },
+  {
+    "id": "13",
+    "title": "The Ultimate Fight",
+    "duration": 125,
+    "summary": "Two martial artists battle for the championship.",
+    "genres": [
+      "Action",
+      "Sports"
+    ],
+    "releasedate": "03/20/2024",
+    "showtime": "19:00 03/20/2024"
+  },
+  {
+    "id": "14",
+    "title": "The Treasure Hunt",
+    "duration": 100,
+    "summary": "A group of adventurers search for lost treasure.",
+    "genres": [
+      "Action",
+      "Adventure"
+    ],
+    "releasedate": "04/15/2024",
+    "showtime": "16:30 04/15/2024"
+  },
+  {
+    "id": "15",
+    "title": "The Time Traveler",
+    "duration": 120,
+    "summary": "A scientist travels back in time to stop a catastrophic event.",
+    "genres": [
+      "Action",
+      "Sci-Fi"
+    ],
+    "releasedate": "05/10/2024",
+    "showtime": "20:30 05/10/2024"
+  },
+  {
+    "id": "16",
+    "title": "The Secret Society",
+    "duration": 110,
+    "summary": "A journalist uncovers a hidden organization that controls the world.",
+    "genres": [
+      "Action",
+      "Thriller"
+    ],
+    "releasedate": "06/20/2024",
+    "showtime": "18:00 06/20/2024"
+  },
+  {
+    "id": "17",
+    "title": "The Perfect Crime",
+    "duration": 105,
+    "summary": "A criminal mastermind pulls off the heist of the century.",
+    "genres": [
+      "Action",
+      "Crime"
+    ],
+    "releasedate": "07/05/2024",
+    "showtime": "21:00 07/05/2024"
+  },
+  {
+    "id": "1",
+    "title": "The Shawshank Redemption",
+    "duration": 142,
+    "summary": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "genres": [
+      "Drama"
+    ],
+    "releasedate": "09/10/1994",
+    "showtime": "20:00 09/10/1994"
+  },
+  {
+    "id": "2",
+    "title": "The Dark Knight",
+    "duration": 152,
+    "summary": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "genres": [
+      "Action",
+      "Crime",
+      "Drama"
+    ],
+    "releasedate": "07/18/2008",
+    "showtime": "21:00 07/18/2008"
+  },
+  {
+    "id": "3",
+    "title": "Pulp Fiction",
+    "duration": 154,
+    "summary": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    "genres": [
+      "Crime",
+      "Drama"
+    ],
+    "releasedate": "10/14/1994",
+    "showtime": "20:30 10/14/1994"
+  },
+  {
+    "id": "4",
+    "title": "The Silence of the Lambs",
+    "duration": 118,
+    "summary": "A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.",
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ],
+    "releasedate": "02/14/1991",
+    "showtime": "18:30 02/14/1991"
+  },
+  {
+    "id": "5",
+    "title": "Forrest Gump",
+    "duration": 142,
+    "summary": "The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75.",
+    "genres": [
+      "Drama",
+      "Romance"
+    ],
+    "releasedate": "07/06/1994",
+    "showtime": "19:00 07/06/1994"
+  },
+  {
+    "id": "6",
+    "title": "The Lord of the Rings: The Fellowship of the Ring",
+    "duration": 178,
+    "summary": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama"
+    ],
+    "releasedate": "12/19/2001",
+    "showtime": "20:30 12/19/2001"
+  },
+  {
+    "id": "11",
+    "title": "Inception",
+    "duration": 148,
+    "summary": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Sci-Fi"
+    ],
+    "releasedate": "07/16/2010",
+    "showtime": "22:00 07/16/2010"
+  },
+  {
+    "id": "12",
+    "title": "The Matrix",
+    "duration": 136,
+    "summary": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+    "genres": [
+      "Action",
+      "Sci-Fi"
+    ],
+    "releasedate": "03/31/1999",
+    "showtime": "19:30 03/31/1999"
+  },
+  {
+    "id": "13",
+    "title": "Goodfellas",
+    "duration": 146,
+    "summary": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners Jimmy Conway and Tommy DeVito in the Italian-American crime syndicate.",
+    "genres": [
+      "Biography",
+      "Crime",
+      "Drama"
+    ],
+    "releasedate": "09/19/1990",
+    "showtime": "21:30 09/19/1990"
+  },
+  {
+    "id": "14",
+    "title": "Saving Private Ryan",
+    "duration": 169,
+    "summary": "Following the Normandy Landings, a group of U.S. soldiers go behind enemy lines to retrieve a paratrooper whose brothers have been killed in action.",
+    "genres": [
+      "Drama",
+      "War"
+    ],
+    "releasedate": "07/24/1998",
+    "showtime": "18:00 07/24/1998"
+  },
+  {
+    "id": "15",
+    "title": "The Usual Suspects",
+    "duration": 106,
+    "summary": "A sole survivor tells of the twisty events leading up to a horrific gun battle on a boat, which began when five criminals met at a seemingly random police lineup.",
+    "genres": [
+      "Crime",
+      "Mystery",
+      "Thriller"
+    ],
+    "releasedate": "09/15/1995",
+    "showtime": "19:00 09/15/1995"
+  },
+  {
+    "id": "16",
+    "title": "The Green Mile",
+    "duration": 189,
+    "summary": "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.",
+    "genres": [
+      "Crime",
+      "Drama",
+      "Fantasy"
+    ],
+    "releasedate": "12/10/1999",
+    "showtime": "20:00 12/10/1999"
   }
 ]
