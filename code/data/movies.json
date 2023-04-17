@@ -5,10 +5,13 @@
     "duration": 120,
     "summary": "Master mind movie",
     "genres": [
-      "Action"
+      "Action",
+      "Fantasy",
+      "Sci-Fi",
+      "Crime"
     ],
-    "releasedate": "10/10/2022",
-    "showtime": "12:00 10/10/2022"
+    "releasedate": "12/10/2020",
+    "showtime": "19:00 13-04-2023"
   },
   {
     "id": "01",
@@ -230,7 +233,7 @@
     "id": "3",
     "title": "Pulp Fiction",
     "duration": 154,
-    "summary": "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+    "summary": "The lives of two mob hitmen, a boxer, a gangster\u0027s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
     "genres": [
       "Crime",
       "Drama"
@@ -291,65 +294,13 @@
   },
   {
     "id": "12",
-    "title": "The Matrix",
-    "duration": 136,
-    "summary": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+    "title": "Badman Ollo 2",
+    "duration": 200,
+    "summary": "information about the amzing movie badman ollo 2",
     "genres": [
-      "Action",
-      "Sci-Fi"
+      "Action"
     ],
     "releasedate": "03/31/1999",
     "showtime": "19:30 03/31/1999"
-  },
-  {
-    "id": "13",
-    "title": "Goodfellas",
-    "duration": 146,
-    "summary": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners Jimmy Conway and Tommy DeVito in the Italian-American crime syndicate.",
-    "genres": [
-      "Biography",
-      "Crime",
-      "Drama"
-    ],
-    "releasedate": "09/19/1990",
-    "showtime": "21:30 09/19/1990"
-  },
-  {
-    "id": "14",
-    "title": "Saving Private Ryan",
-    "duration": 169,
-    "summary": "Following the Normandy Landings, a group of U.S. soldiers go behind enemy lines to retrieve a paratrooper whose brothers have been killed in action.",
-    "genres": [
-      "Drama",
-      "War"
-    ],
-    "releasedate": "07/24/1998",
-    "showtime": "18:00 07/24/1998"
-  },
-  {
-    "id": "15",
-    "title": "The Usual Suspects",
-    "duration": 106,
-    "summary": "A sole survivor tells of the twisty events leading up to a horrific gun battle on a boat, which began when five criminals met at a seemingly random police lineup.",
-    "genres": [
-      "Crime",
-      "Mystery",
-      "Thriller"
-    ],
-    "releasedate": "09/15/1995",
-    "showtime": "19:00 09/15/1995"
-  },
-  {
-    "id": "16",
-    "title": "The Green Mile",
-    "duration": 189,
-    "summary": "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.",
-    "genres": [
-      "Crime",
-      "Drama",
-      "Fantasy"
-    ],
-    "releasedate": "12/10/1999",
-    "showtime": "20:00 12/10/1999"
   }
 ]

@@ -173,4 +173,18 @@ public static class Helpers
             }
         }
     }
+
+    public static bool HasIndexInList<T>(int index, List<T> list , bool allowZero = true){
+        
+        if(allowZero == false && index == 0){
+            return false;
+        }
+        
+        if (index > list.Count || index < 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
