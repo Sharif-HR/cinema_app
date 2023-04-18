@@ -9,28 +9,6 @@ public static class Helpers
     }
 
     public static bool GoBack(string action)
-    public static string GoBack(string action)
-    {
-        while (true)
-        {
-            Helpers.WarningMessage($"Enter 0 to go back or press Enter to continue {action}.");
-            string uInput = Console.ReadLine();
-            if (uInput == "0")
-            {
-                return "back";
-            }
-            if (uInput == "")
-            {
-                return "continue";
-            }
-            else
-            {
-                Helpers.WarningMessage("Invalid input.");
-            }
-        }
-    }
-
-    public static bool GoBack2(string action)
     {
         while (true)
         {

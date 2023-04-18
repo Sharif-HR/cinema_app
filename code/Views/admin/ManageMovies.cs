@@ -182,7 +182,7 @@ Director: {movies[movieId].Director}");
 
         while (true)
         {
-            if (Helpers.GoBack2("deleting a movie") == true) { return; }
+            if (Helpers.GoBack("deleting a movie") == true) { return; }
             
             ShowMoviesTable();
             movies = _movieLogic.GetMovies();
