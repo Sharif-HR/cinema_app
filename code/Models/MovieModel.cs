@@ -11,15 +11,15 @@ public class MovieModel
     // Duration in minutes
     [JsonPropertyName("duration")]
     public int Duration { get; set; }
-    
+
     [JsonPropertyName("summary")]
     public string Summary { get; set; }
-    
+
     [JsonPropertyName("genres")]
-    public List<string> Genres { get; set;}
-    
+    public List<string> Genres { get; set; }
+
     [JsonPropertyName("releasedate")]
-    public string ReleaseDate {get;set;}
+    public string ReleaseDate { get; set; }
 
     [JsonPropertyName("showtime")]
     public string ShowTime {get;set;}
@@ -49,7 +49,8 @@ public class MovieModel
         PropertyInfo[] propertyInfos = this.GetType().GetProperties();
         foreach (PropertyInfo propertyInfo in propertyInfos)
         {
-            if(propertyInfo.Name != "Id"){
+            if (propertyInfo.Name != "Id")
+            {
                 attributes.Add(propertyInfo.Name);
             }
         }

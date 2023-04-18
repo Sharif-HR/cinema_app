@@ -28,6 +28,27 @@ public static class Helpers
             }
         }
     }
+
+    public static bool GoBack2(string action)
+    {
+        while (true)
+        {
+            Console.WriteLine($"Enter 0 to go back or press Enter to continue {action}.");
+            string uInput = Console.ReadLine();
+            if (uInput == "0")
+            {
+                return true;
+            }
+            else if(uInput == "")
+            {
+                return false;
+            }
+            else
+            {
+                Helpers.WarningMessage("Invalid input.");
+            }
+        }
+    }
     public static void Divider(bool hasEnter = true)
     {
         if (hasEnter)
@@ -172,5 +193,19 @@ public static class Helpers
                 Console.WriteLine(item);
             }
         }
+    }
+
+    public static bool HasIndexInList<T>(int index, List<T> list , bool allowZero = true){
+        
+        if(allowZero == false && index == 0){
+            return false;
+        }
+        
+        if (index > list.Count || index < 0)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -15,7 +15,21 @@ public class MovieLogic : LogicTemplate
     {
         _movieList.Add(movie);
         _movieAccess.WriteAll(_movieList);
-        Console.WriteLine("Movie Added!");
+    }
+
+    public void EditMovie(int index, string propertyName, object updatedValue)
+    {
+        // case example:  _movieList[0].Duration = 120;
+        var property = _movieList[index].GetType().GetProperty(propertyName);
+
+        property.SetValue(_movieList[index], updatedValue);
+        _movieAccess.WriteAll(_movieList);        
+    }
+
+
+    public void DeleteMovie(int id){
+        _movieList.RemoveAt(id);
+        _movieAccess.WriteAll(_movieList);
     }
 
     public void SaveMovies(List<MovieModel> movieList = null)

@@ -11,11 +11,11 @@ public abstract class ViewTemplate
     }
     public virtual void Render()
     {
-            Console.Clear();
-            this.CinemaLogo();
-            Helpers.Divider(false);
-            Console.WriteLine(this.Title);
-            Helpers.Divider(false);
+        Console.Clear();
+        this.CinemaLogo();
+        Helpers.Divider(false);
+        Console.WriteLine(this.Title);
+        Helpers.Divider(false);
     }
 
     public string InputField(string label)
@@ -107,7 +107,8 @@ public abstract class ViewTemplate
                         return input;
                     }
                 }
-                if (!containsSC || hasError){
+                if (!containsSC || hasError)
+                {
                     Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
                 }
             }
@@ -259,22 +260,16 @@ public abstract class ViewTemplate
             {
                 Console.WriteLine("Enter date in this format (DD-MM-YYYY)");
                 Console.WriteLine(label);
-                string userInput = Console.ReadLine();
-                if (DateOnly.TryParse(userInput, out DateOnly result))
-                {
-                    if (isDateOnly)
-                    {
-                        return result;
-                    }
-                    else
-                    {
-                        return result.ToString();
-                    }
-                }
-                else
-                {
-                    Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY) -> (20-10-2020).");
+                string enteredDate = Console.ReadLine();
+                
+                DateOnly dateObject = DateOnly.ParseExact(enteredDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
+                if(isDateOnly == true){
+                    return dateObject;
+                }
+                
+                if(isDateOnly == false){
+                    return dateObject.ToString("dd-MM-yyyy");
                 }
             }
             catch
@@ -284,308 +279,101 @@ public abstract class ViewTemplate
         }
     }
 
-    public List<ReturnValue> InputDropdownMenu<ReturnValue>(string label, List<ReturnValue> choices) {
-        List<ReturnValue> availableChoices = choices;
-        List<ReturnValue> chosenValues = new(){};
-        int index = 0;
-
-        while(true) {
-            Console.WriteLine("Select a option");
-            Helpers.PrintListContent<ReturnValue>(choices, true);
-            string userInput = this.InputField("");
-
-            //convert string to int in order to add & remove the value based of an index
-            try {
-                index = Convert.ToInt32(userInput);
-            } catch (FormatException) {
-                Helpers.WarningMessage("You can only enter the numbers");
-            }
-
-            try {
-                chosenValues.Add(availableChoices[index]);
-                availableChoices.RemoveAt(index);
-            } catch (ArgumentOutOfRangeException) {
-                Helpers.WarningMessage("You can only select the options that are shown.");
-            }
-
-            if(availableChoices.Count == 0) break;
-        }
-
-        return chosenValues;
-    }
-
-    private int SelectFromModelList<T>(List<T> modelList){
-        string modelName = typeof(T).Name.ToLower();
-        modelName = modelName.Substring(0, modelName.Length - 5);
-
-        while(true){
-            int modelIndex = InputNumber($"Enter {modelName} ID:");
-
-            if (modelIndex == 0)
-            {
-                modelIndex++;
-            }
-            else
-            {
-                modelIndex--;
-            }
-
-            if (modelList.Count < modelIndex || modelIndex < 0)
-            {
-                Helpers.WarningMessage("Enter a correct ID");
-                continue;
-            }
-
-
-            return modelIndex;
-        }
-    }
-
-    // TODO exit this function option
-    public object InputShowTime(string label, bool isDateOnly = true)
+    public object InputDateTime(string label, bool isDateOnly = true)
     {
         while (true)
         {
             try
             {
-                Console.WriteLine("Enter date and time in this format (DD-MM-YYYY HH:mm)");
+                Console.WriteLine("Enter date and time in this format (HH:mm DD-MM-YYYY)");
                 Console.WriteLine(label);
-                string userInput = Console.ReadLine();
-                if (DateTime.TryParse(userInput, out DateTime result))
-                {
-                    if (isDateOnly)
-                    {
-                        return result;
-                    }
-                    else
-                    {
-                        return result.ToString("dd-MM-yyyy HH:mm");
-                    }
-                }
-                else
-                {
-                    Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY HH:mm) -> (20-10-2020 17:30).");
 
+                string enterDateTime = Console.ReadLine();
+                DateTime dateObject = DateTime.ParseExact(enterDateTime, "HH:mm dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+                if(isDateOnly == true){
+                    return dateObject;
                 }
+
+                if(isDateOnly == false){
+                    return dateObject.ToString("HH:mm dd/MM/yyyy");
+                }
+
             }
             catch
             {
-                Helpers.WarningMessage("Invalid Date input. Date format must be (DD-MM-YYYY HH:mm) -> (20-10-2020 17:30).");
+                Helpers.WarningMessage("Invalid Date input. Date format must be (HH:mm DD-MM-YYYY) -> (17:30 20-10-2020).");
             }
         }
     }
 
-    public virtual List<T> EditModelFromList<T>(List<T> modelList)
+    public List<ReturnValue> InputDropdownMenu<ReturnValue>(string label, List<ReturnValue> choices)
     {
-        int selectedIndex = this.SelectFromModelList<T>(modelList);
-        List<string> modelProperties = Helpers.GetProperties<T>();
+        List<ReturnValue> availableChoices = choices;
+        List<ReturnValue> chosenValues = new() { };
+        int index = 0;
 
-        Console.WriteLine("Choose what you want to edit:");
-        Helpers.PrintListContent(modelProperties, true);
-
-
-        Helpers.Continue();
-        return null;
-
-        bool loop = true;
-        while (loop)
+        while (true)
         {
-            int modelIndex = InputNumber("Enter movie ID:");
-            if (modelIndex == 0)
+            Console.WriteLine("Select a option");
+            Helpers.PrintListContent<ReturnValue>(choices, true);
+            string userInput = this.InputField("");
+
+            //convert string to int in order to add & remove the value based of an index
+            try
             {
-                modelIndex++;
+                index = Convert.ToInt32(userInput);
             }
-            else
+            catch (FormatException)
             {
-                modelIndex--;
+                Helpers.WarningMessage("You can only enter the numbers");
             }
 
-            if (modelList.Count < modelIndex || modelIndex < 0)
+            try
             {
-                Helpers.WarningMessage("Enter a correct ID");
+                chosenValues.Add(availableChoices[index]);
+                availableChoices.RemoveAt(index);
             }
-            else
+            catch (ArgumentOutOfRangeException)
             {
-
-                Dictionary<string, Type> properties = new Dictionary<string, Type>();
-                foreach (var prop in typeof(T).GetProperties())
-                {
-                    properties[prop.Name] = prop.PropertyType;
-                }
-
-                Console.WriteLine("Choose what you want to edit:");
-                foreach (var attr in properties)
-                {
-                    if (attr.Key != "Id")
-                    {
-                        Console.WriteLine(attr.Key);
-                    }
-                }
-
-
-                string userInput;
-                while (true)
-                {
-                    userInput = InputField("");
-                    if (!properties.ContainsKey(userInput))
-                    {
-                        Helpers.WarningMessage("Incorrect input.");
-                        continue;
-                    }
-                    break;
-                }
-
-
-                string editInput = InputField($"Edit {userInput}:");
-
-                // TODO 4 parameters meegeven aan TemplateLogic: index,chosenAttribute,updatedValue,<model>
-                Type chosenProperty = properties[userInput];
-                object toUpdatedValue;
-                switch (chosenProperty)
-                {
-                    case var t when t == typeof(int):
-                        toUpdatedValue = Int32.Parse(editInput);
-                        break;
-
-                    case var t when t == typeof(string):
-                        break;
-                }
-
-                PropertyInfo propertyInfo = typeof(T).GetProperty("Title");
-                propertyInfo.SetValue(modelList[modelIndex], userInput);
-                loop = false;
+                Helpers.WarningMessage("You can only select the options that are shown.");
             }
+
+            if (availableChoices.Count == 0) break;
         }
-        Helpers.SuccessMessage("Movie updated!");
-        return modelList;
+
+        return chosenValues;
     }
 
-    public virtual List<MovieModel> EditMovie(List<MovieModel> movieList) {
-        if (movieList.Count == 0)
-        {
-            return movieList;
-        }
-
-        bool loop = true;
-        while (loop)
-        {
-            int modelIndex = InputNumber("Enter movie ID:");
-            if (modelIndex == 0)
-            {
-                modelIndex++;
-            }
-            else
-            {
-                modelIndex--;
-            }
-
-            if (movieList.Count < modelIndex || modelIndex < 0)
-            {
-                Helpers.WarningMessage("Enter a correct ID");
-            }
-            else
-            {
-
-                Dictionary<string, Type> properties = new Dictionary<string, Type>();
-                foreach (var prop in typeof(MovieModel).GetProperties())
-                {
-                    properties[prop.Name] = prop.PropertyType;
-                }
-
-                Console.WriteLine("Choose what you want to edit:");
-                foreach (var attr in properties)
-                {
-                    if (attr.Key != "Id")
-                    {
-                        Console.WriteLine(attr.Key);
-                    }
-                }
-
-
-                string userInput;
-                while (true)
-                {
-                    userInput = InputField("");
-                    if (!properties.ContainsKey(userInput))
-                    {
-                        Helpers.WarningMessage("Incorrect input.");
-                        continue;
-                    }
-                    break;
-                }
-                string editInput;
-                object toUpdatedValue;
-                toUpdatedValue = "";
-
-                while(true) {
-                    editInput = InputField($"Edit {userInput}:");
-
-                    Type chosenProperty = properties[userInput];
-                    switch (chosenProperty)
-                    {
-                        case var t when t == typeof(int):
-                            try {
-                                toUpdatedValue = Int32.Parse(editInput);
-                            }
-                            catch (Exception e){
-                                Helpers.WarningMessage(e.Message);
-                                continue;
-                            }
-                            break;
-
-                        case var t when t == typeof(string):
-                            toUpdatedValue = editInput;
-                            break;
-                    }
-                    break;
-                }
-
-                PropertyInfo propertyInfo = typeof(MovieModel).GetProperty(userInput);
-                propertyInfo.SetValue(movieList[modelIndex], toUpdatedValue);
-                loop = false;
-            }
-        }
-        return movieList;
-    }
-    public virtual List<T> DeleteModelFromList<T>(List<T> modelList)
+    protected int SelectFromModelList<T>(List<T> modelList, bool substractOne = false, string customName = null)
     {
-        if (modelList.Count == 0)
-        {
-            return modelList;
+        string modelName = customName;
+        
+        if(customName == null){
+            modelName = typeof(T).Name.ToLower();
+            modelName = modelName.Substring(0, modelName.Length - 5);
         }
-        bool loop = true;
-        while (loop)
+
+        while (true)
         {
-            int modelIndex = InputNumber("Enter movie ID:");
+            int modelIndex = InputNumber($"Enter {modelName} ID:");
 
-            if (modelList.Count < modelIndex || modelIndex < 0)
+            if (Helpers.HasIndexInList<T>(modelIndex, modelList, false) == false)
             {
-                Helpers.WarningMessage("Enter a correct ID");
+                Helpers.WarningMessage("Please enter a valid ID.");
+                continue;
             }
-            else
-            {
 
-                if (modelIndex == 0)
-                {
-                    modelIndex++;
-                }
-                else
-                {
-                    modelIndex--;
-                }
-
-                modelList.RemoveAt(modelIndex);
-                loop = false;
+            if(substractOne){
+                return modelIndex-1;
             }
+
+            return modelIndex;
         }
-        Helpers.SuccessMessage("Movie Deleted!");
-        return modelList;
     }
-    public virtual List<T> AddModel<T>(List<T> modelList, T model)
-    {
-        modelList.Add(model);
-        return modelList;
-    }
+    // TODO exit this function option
+
+
     private void CinemaLogo()
     {
         Console.ForegroundColor = ConsoleColor.Red;
