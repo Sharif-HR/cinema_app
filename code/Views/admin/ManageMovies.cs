@@ -116,7 +116,7 @@ Director: {movies[movieId].Director}");
         {
             Console.WriteLine($"{i + 1}. {movieProperties[i]}");
         }
-        
+
         int propertyIndex;
         string chosenProperty;
 
@@ -161,6 +161,13 @@ Director: {movies[movieId].Director}");
                 updatedValue = InputDateTime("Enter showtime:", false);
                 break;
 
+            case "director":
+                updatedValue = InputField("Enter director:");
+                break;
+
+            case "exit":
+                return;
+
             default:
                 break;
         }
@@ -173,17 +180,17 @@ Director: {movies[movieId].Director}");
 
     public void DeleteForm()
     {
-        var movies = _movieLogic.GetMovies();
-        // TODO make method out of this
-        if (movies.Count == 0)
-        {
-            Helpers.WarningMessage("You have no movies to delete.");
-        }
-
         while (true)
         {
+            var movies = _movieLogic.GetMovies();
+            if (movies.Count == 0)
+            {
+                Helpers.WarningMessage("You have no movies to delete.");
+                Helpers.Continue();
+                return;
+            }
             if (Helpers.GoBack("deleting a movie") == true) { return; }
-            
+
             ShowMoviesTable();
             movies = _movieLogic.GetMovies();
             int movieId = base.SelectFromModelList<MovieModel>(movies, true);
