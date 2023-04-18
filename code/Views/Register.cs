@@ -12,31 +12,25 @@ public class Register : ViewTemplate
         while (true)
         {
             base.Render();
-            string GoBack = Helpers.GoBack("registering");
-            if (GoBack == "back")
-            {
-                return;
-            }
-            if (GoBack == "continue")
-            {
-                string? username = base.InputField("Enter your username");
-                string? firstName = base.InputField("Enter your first name:");
-                string? lastName = base.InputField("Enter your last name:");
-                string? email = EmailInput();
-                string? phoneNumber = base.InputPhoneNumber("Enter your phonenumber:", true);
-                string? password = base.InputPassword("Enter you password:", true);
-                bool isStudent = base.CheckboxInput("Are you a student? (Press 'y' for Yes or 'n' for No)");
+            if (Helpers.GoBack("updating a movie") == true) { return; }
 
-                AccountModel acc = new(username, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
-                _accountsLogic.AddAccount(acc);
+            string? username = base.InputField("Enter your username");
+            string? firstName = base.InputField("Enter your first name:");
+            string? lastName = base.InputField("Enter your last name:");
+            string? email = EmailInput();
+            string? phoneNumber = base.InputPhoneNumber("Enter your phonenumber:", true);
+            string? password = base.InputPassword("Enter you password:", true);
+            bool isStudent = base.CheckboxInput("Are you a student? (Press 'y' for Yes or 'n' for No)");
 
-                Helpers.Divider();
-                Helpers.SuccessMessage("Registration complete.");
-                Helpers.Continue();
+            AccountModel acc = new(username, password, email, phoneNumber, firstName, lastName, isStudent, "customer");
+            _accountsLogic.AddAccount(acc);
 
-                customerDashboardPage.Render();
-                return;
-            }
+            Helpers.Divider();
+            Helpers.SuccessMessage("Registration complete.");
+            Helpers.Continue();
+
+            customerDashboardPage.Render();
+            return;
         }
     }
 

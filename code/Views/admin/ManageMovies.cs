@@ -60,7 +60,7 @@ public class ManageMovies : ViewTemplate, IManage
         {
             base.Render();
 
-            if (Helpers.GoBack2("adding a movie") == true) { return; }
+            if (Helpers.GoBack("adding a movie") == true) { return; }
 
             string title = base.InputField("Movie title:");
             int duration = base.InputNumber("Movie duration (in minutes):");
@@ -75,7 +75,6 @@ public class ManageMovies : ViewTemplate, IManage
             _movieLogic.AddMovie(NewMovie);
             Helpers.SuccessMessage("Movie added!");
             Helpers.Continue();
-
         }
     }
 
@@ -91,7 +90,7 @@ public class ManageMovies : ViewTemplate, IManage
             return;
         }
 
-        if (Helpers.GoBack2("updating a movie") == true) { return; }
+        if (Helpers.GoBack("editing a movie") == true) { return; }
 
         ShowMoviesTable();
         Helpers.WarningMessage($"In order to select a movie to edit enter a number between 1 and {movies.Count}");
@@ -104,20 +103,20 @@ public class ManageMovies : ViewTemplate, IManage
 Duration: {movies[movieId].Duration}
 Summary: {movies[movieId].Summary}
 Genres: {Helpers.ListToString(movies[movieId].Genres)}
+Director: {movies[movieId].Director}
 Release date: {movies[movieId].ReleaseDate}
 Show time: {movies[movieId].ShowTime}
 Director: {movies[movieId].Director}");
         Helpers.Divider();
 
+        movieProperties.Add("Exit");
         Helpers.WarningMessage($"Enter a number between 1 and {movieProperties.Count} to update a property of this movie:");
-
-
         // Print property of model
         for (int i = 0; i < movieProperties.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {movieProperties[i]}");
         }
-
+        
         int propertyIndex;
         string chosenProperty;
 
@@ -134,7 +133,6 @@ Director: {movies[movieId].Director}");
             chosenProperty = movieProperties[propertyIndex];
             break;
         }
-
 
         object updatedValue = null;
         switch (chosenProperty.ToLower())
@@ -163,10 +161,6 @@ Director: {movies[movieId].Director}");
                 updatedValue = InputDateTime("Enter showtime:", false);
                 break;
 
-            case "director":
-                updatedValue = InputField("Enter director name:");
-                break;
-
             default:
                 break;
         }
@@ -184,20 +178,37 @@ Director: {movies[movieId].Director}");
         if (movies.Count == 0)
         {
             Helpers.WarningMessage("You have no movies to delete.");
-            return;
         }
 
         while (true)
         {
-            if (Helpers.GoBack2("deleting a movie") == true) { return; }
-            
-            ShowMoviesTable();
-            movies = _movieLogic.GetMovies();
-            int movieId = base.SelectFromModelList<MovieModel>(movies, true);
+            while (true)
+            {
+                ShowMoviesTable();
+                string GoBack = Helpers.GoBack("deleting a movie");
+                if (GoBack == "back")
+                {
+                    return;
+                }
+                if (GoBack == "continue")
+                {
+                    while (true)
+                    {
+                        movies = _movieLogic.GetMovies();
+                        int movieId = InputNumber("Enter movie ID: ");
 
-            _movieLogic.DeleteMovie(movieId);
-            Helpers.SuccessMessage("Movie Deleted!");
-            Helpers.Continue();
+                        if (Helpers.HasIndexInList<MovieModel>(movieId, movies, false) == false)
+                        {
+                            Helpers.WarningMessage("Please enter a valid ID.");
+                            continue;
+                        }
+                        _movieLogic.DeleteMovie(movieId--);
+                        Helpers.SuccessMessage("Movie Deleted!");
+                        Helpers.Continue();
+                        break;
+                    }
+                }
+            }
         }
     }
 
