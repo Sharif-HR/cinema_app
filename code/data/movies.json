@@ -11,7 +11,8 @@
       "Crime"
     ],
     "releasedate": "12/10/2020",
-    "showtime": "19:00 13-04-2023"
+    "showtime": "19:00 13-04-2023",
+    "director": "John Doe"
   },
   {
     "id": "01",
@@ -23,7 +24,8 @@
       "Thriller"
     ],
     "releasedate": "05/01/2023",
-    "showtime": "18:00 05/01/2023"
+    "showtime": "18:00 05/01/2023",
+    "director": "Jane Smith"
   },
   {
     "id": "02",
@@ -35,7 +37,8 @@
       "Adventure"
     ],
     "releasedate": "05/03/2023",
-    "showtime": "15:30 05/03/2023"
+    "showtime": "15:30 05/03/2023",
+    "director": "Michael Johnson"
   },
   {
     "id": "03",
@@ -47,7 +50,8 @@
       "Thriller"
     ],
     "releasedate": "06/10/2023",
-    "showtime": "20:00 06/10/2023"
+    "showtime": "20:00 06/10/2023",
+    "director": "Sarah Brown"
   },
   {
     "id": "04",
@@ -59,7 +63,8 @@
       "Sci-Fi"
     ],
     "releasedate": "07/07/2023",
-    "showtime": "14:00 07/07/2023"
+    "showtime": "14:00 07/07/2023",
+    "director": "David Jones"
   },
   {
     "id": "05",
@@ -71,7 +76,8 @@
       "Crime"
     ],
     "releasedate": "08/01/2023",
-    "showtime": "19:30 08/01/2023"
+    "showtime": "19:30 08/01/2023",
+    "director": "Olivia Smith"
   },
   {
     "id": "06",
@@ -83,224 +89,351 @@
       "Western"
     ],
     "releasedate": "09/05/2023",
-    "showtime": "16:30 09/05/2023"
-  },
-  {
+    "showtime": "16:30 09/05/2023",
+    "director": "Daniel Johnson"
+  },{
     "id": "07",
     "title": "The Hacker",
     "duration": 110,
-    "summary": "A computer expert hacks into a top-secret government system.",
+    "summary": "A computer expert turned hacker uncovers a massive conspiracy.",
     "genres": [
-      "Action",
-      "Thriller"
+        "Action",
+        "Thriller"
     ],
-    "releasedate": "10/20/2023",
-    "showtime": "21:00 10/20/2023"
-  },
-  {
+    "releasedate": "10/15/2023",
+    "showtime": "21:00 10/15/2023",
+    "director": "Christopher Chen"
+},
+{
     "id": "08",
-    "title": "The Art of the Steal",
-    "duration": 105,
-    "summary": "A con artist tries to steal a valuable painting.",
+    "title": "The Enchanted Forest",
+    "duration": 95,
+    "summary": "A young girl embarks on a magical journey to save her kingdom from an evil sorcerer.",
     "genres": [
-      "Action",
-      "Comedy"
+        "Fantasy",
+        "Adventure",
+        "Family"
     ],
-    "releasedate": "11/15/2023",
-    "showtime": "18:00 11/15/2023"
-  },
-  {
+    "releasedate": "11/20/2023",
+    "showtime": "14:30 11/20/2023",
+    "director": "Emily Wong"
+},
+{
+    "id": "09",
+    "title": "The Haunting",
+    "duration": 120,
+    "summary": "A group of paranormal investigators uncover a dark secret in an abandoned mansion.",
+    "genres": [
+        "Horror",
+        "Mystery",
+        "Thriller"
+    ],
+    "releasedate": "12/01/2023",
+    "showtime": "22:00 12/01/2023",
+    "director": "James Johnson"
+},
+{
     "id": "10",
-    "title": "The Escape Plan",
-    "duration": 115,
-    "summary": "A prisoner tries to break out of a maximum security prison.",
+    "title": "The Road Trip",
+    "duration": 95,
+    "summary": "Four friends embark on a cross-country road trip filled with adventures and misadventures.",
     "genres": [
-      "Action",
-      "Thriller"
+        "Comedy",
+        "Adventure"
     ],
-    "releasedate": "12/05/2023",
-    "showtime": "19:30 12/05/2023"
-  },
-  {
+    "releasedate": "01/05/2024",
+    "showtime": "17:30 01/05/2024",
+    "director": "Alexandra Thompson"
+},
+{
     "id": "11",
-    "title": "The Perfect Target",
-    "duration": 120,
-    "summary": "A hitman takes on his toughest assignment yet.",
-    "genres": [
-      "Action",
-      "Thriller"
-    ],
-    "releasedate": "01/10/2024",
-    "showtime": "20:00 01/10/2024"
-  },
-  {
-    "id": "12",
-    "title": "The Secret Agent",
-    "duration": 110,
-    "summary": "A spy must stop a terrorist plot to destroy a city.",
-    "genres": [
-      "Action",
-      "Thriller"
-    ],
-    "releasedate": "02/14/2024",
-    "showtime": "17:00 02/14/2024"
-  },
-  {
-    "id": "13",
-    "title": "The Ultimate Fight",
-    "duration": 125,
-    "summary": "Two martial artists battle for the championship.",
-    "genres": [
-      "Action",
-      "Sports"
-    ],
-    "releasedate": "03/20/2024",
-    "showtime": "19:00 03/20/2024"
-  },
-  {
-    "id": "14",
     "title": "The Treasure Hunt",
-    "duration": 100,
-    "summary": "A group of adventurers search for lost treasure.",
-    "genres": [
-      "Action",
-      "Adventure"
-    ],
-    "releasedate": "04/15/2024",
-    "showtime": "16:30 04/15/2024"
-  },
-  {
-    "id": "15",
-    "title": "The Time Traveler",
     "duration": 120,
-    "summary": "A scientist travels back in time to stop a catastrophic event.",
+    "summary": "A group of explorers set out on a perilous journey to uncover a hidden treasure.",
     "genres": [
-      "Action",
-      "Sci-Fi"
+        "Adventure",
+        "Action"
     ],
-    "releasedate": "05/10/2024",
-    "showtime": "20:30 05/10/2024"
-  },
-  {
-    "id": "16",
-    "title": "The Secret Society",
-    "duration": 110,
-    "summary": "A journalist uncovers a hidden organization that controls the world.",
-    "genres": [
-      "Action",
-      "Thriller"
-    ],
-    "releasedate": "06/20/2024",
-    "showtime": "18:00 06/20/2024"
-  },
-  {
-    "id": "17",
-    "title": "The Perfect Crime",
-    "duration": 105,
-    "summary": "A criminal mastermind pulls off the heist of the century.",
-    "genres": [
-      "Action",
-      "Crime"
-    ],
-    "releasedate": "07/05/2024",
-    "showtime": "21:00 07/05/2024"
-  },
-  {
-    "id": "1",
-    "title": "The Shawshank Redemption",
-    "duration": 142,
-    "summary": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-    "genres": [
-      "Drama"
-    ],
-    "releasedate": "09/10/1994",
-    "showtime": "20:00 09/10/1994"
-  },
-  {
-    "id": "2",
-    "title": "The Dark Knight",
-    "duration": 152,
-    "summary": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
-    "genres": [
-      "Action",
-      "Crime",
-      "Drama"
-    ],
-    "releasedate": "07/18/2008",
-    "showtime": "21:00 07/18/2008"
-  },
-  {
-    "id": "3",
-    "title": "Pulp Fiction",
-    "duration": 154,
-    "summary": "The lives of two mob hitmen, a boxer, a gangster\u0027s wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
-    "genres": [
-      "Crime",
-      "Drama"
-    ],
-    "releasedate": "10/14/1994",
-    "showtime": "20:30 10/14/1994"
-  },
-  {
-    "id": "4",
-    "title": "The Silence of the Lambs",
-    "duration": 118,
-    "summary": "A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.",
-    "genres": [
-      "Crime",
-      "Drama",
-      "Thriller"
-    ],
-    "releasedate": "02/14/1991",
-    "showtime": "18:30 02/14/1991"
-  },
-  {
-    "id": "5",
-    "title": "Forrest Gump",
-    "duration": 142,
-    "summary": "The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75.",
-    "genres": [
-      "Drama",
-      "Romance"
-    ],
-    "releasedate": "07/06/1994",
-    "showtime": "19:00 07/06/1994"
-  },
-  {
-    "id": "6",
-    "title": "The Lord of the Rings: The Fellowship of the Ring",
-    "duration": 178,
-    "summary": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
-    "genres": [
-      "Action",
-      "Adventure",
-      "Drama"
-    ],
-    "releasedate": "12/19/2001",
-    "showtime": "20:30 12/19/2001"
-  },
-  {
-    "id": "11",
-    "title": "Inception",
-    "duration": 148,
-    "summary": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
-    "genres": [
-      "Action",
-      "Adventure",
-      "Sci-Fi"
-    ],
-    "releasedate": "07/16/2010",
-    "showtime": "22:00 07/16/2010"
-  },
-  {
+    "releasedate": "02/10/2024",
+    "showtime": "19:45 02/10/2024",
+    "director": "Michael Anderson"
+},
+{
     "id": "12",
-    "title": "Badman Ollo 2",
-    "duration": 200,
-    "summary": "information about the amzing movie badman ollo 2",
+    "title": "The Love Triangle",
+    "duration": 100,
+    "summary": "A romantic comedy about a complicated love triangle involving three best friends.",
     "genres": [
-      "Action"
+        "Romance",
+        "Comedy",
+        "Drama"
     ],
-    "releasedate": "03/31/1999",
-    "showtime": "19:30 03/31/1999"
-  }
+    "releasedate": "03/15/2024",
+    "showtime": "20:00 03/15/2024",
+    "director": "Sarah Johnson"
+},
+{
+    "id": "13",
+    "title": "The Space Odyssey",
+    "duration": 150,
+    "summary": "A thrilling space adventure following a group of astronauts on a mission to explore a distant planet.",
+    "genres": [
+        "Science Fiction",
+        "Adventure"
+    ],
+    "releasedate": "04/20/2024",
+    "showtime": "18:30 04/20/2024",
+    "director": "David Chen"
+},
+{
+    "id": "14",
+    "title": "The Secret Garden",
+    "duration": 105,
+    "summary": "A young girl discovers a hidden magical garden that changes her life forever.",
+    "genres": [
+        "Fantasy",
+        "Drama",
+        "Family"
+    ],
+    "releasedate": "05/25/2024",
+    "showtime": "15:15 05/25/2024",
+    "director": "Olivia Lee"
+},{
+    "id": "15",
+    "title": "The Time Traveler's Dilemma",
+    "duration": 110,
+    "summary": "A brilliant scientist discovers a way to travel through time, but faces unexpected consequences.",
+    "genres": [
+        "Science Fiction",
+        "Thriller",
+        "Drama"
+    ],
+    "releasedate": "06/30/2024",
+    "showtime": "21:00 06/30/2024",
+    "director": "Christopher Reynolds"
+},
+{
+    "id": "16",
+    "title": "The Art of Forgiveness",
+    "duration": 95,
+    "summary": "A heartwarming story of a troubled artist finding redemption through forgiveness.",
+    "genres": [
+        "Drama",
+        "Family"
+    ],
+    "releasedate": "07/15/2024",
+    "showtime": "17:45 07/15/2024",
+    "director": "Emily Johnson"
+},
+{
+    "id": "17",
+    "title": "The Haunted Mansion",
+    "duration": 120,
+    "summary": "A group of people spend a night in a haunted mansion and uncover its dark secrets.",
+    "genres": [
+        "Horror",
+        "Mystery",
+        "Thriller"
+    ],
+    "releasedate": "08/20/2024",
+    "showtime": "22:30 08/20/2024",
+    "director": "James Thompson"
+},
+{
+    "id": "18",
+    "title": "The Last Frontier",
+    "duration": 140,
+    "summary": "A gripping tale of survival and courage as a group of explorers face the harsh wilderness.",
+    "genres": [
+        "Adventure",
+        "Drama"
+    ],
+    "releasedate": "09/25/2024",
+    "showtime": "19:15 09/25/2024",
+    "director": "Robert Mitchell"
+},
+{
+    "id": "19",
+    "title": "The Music of Love",
+    "duration": 115,
+    "summary": "A heartwarming story of love and passion set in the world of classical music.",
+    "genres": [
+        "Romance",
+        "Drama"
+    ],
+    "releasedate": "10/10/2024",
+    "showtime": "20:45 10/10/2024",
+    "director": "Sophia Kim"
+},
+{
+    "id": "20",
+    "title": "The Lost Treasure",
+    "duration": 125,
+    "summary": "A thrilling adventure of a group of treasure hunters searching for a long-lost ancient artifact.",
+    "genres": [
+        "Adventure",
+        "Action"
+    ],
+    "releasedate": "11/05/2024",
+    "showtime": "16:00 11/05/2024",
+    "director": "David Chang"
+},
+{
+    "id": "21",
+    "title": "The Enchanted Forest",
+    "duration": 100,
+    "summary": "A magical journey of a young girl who discovers a secret world hidden in a forest.",
+    "genres": [
+        "Fantasy",
+        "Adventure",
+        "Family"
+    ],
+    "releasedate": "12/10/2024",
+    "showtime": "14:30 12/10/2024",
+    "director": "Sarah Thompson"
+},
+{
+    "id": "22",
+    "title": "The Guardian's Quest",
+    "duration": 135,
+    "summary": "A thrilling quest to save the world from an ancient evil that threatens to destroy everything.",
+    "genres": [
+        "Fantasy",
+        "Action",
+        "Adventure"
+    ],
+    "releasedate": "01/20/2025",
+    "showtime": "20:15 01/20/2025",
+    "director": "Michael Chen"
+},
+{
+    "id": "23",
+    "title": "The Healing Touch",
+    "duration": 120,
+    "summary": "A heartwarming story of a nurse's dedication and compassion in caring for her patients.",
+    "genres": [
+        "Drama",
+        "Romance"
+    ],
+    "releasedate": "02/25/2025",
+    "showtime": "19:30 02/25/2025",
+    "director": "Olivia Lee"
+},
+{
+    "id": "24",
+    "title": "The Sky's the Limit",
+    "duration": 105,
+    "summary": "A heartwarming tale of a young girl's dream to become a pilot against all odds.",
+    "genres": [
+        "Drama",
+        "Family"
+    ],
+    "releasedate": "03/15/2025",
+    "showtime": "17:45 03/15/2025",
+    "director": "Jennifer Chen"
+},
+{
+    "id": "25",
+    "title": "The Art of Forgiveness",
+    "duration": 115,
+    "summary": "A poignant story of a family torn apart by secrets and their journey towards forgiveness and reconciliation.",
+    "genres": [
+        "Drama"
+    ],
+    "releasedate": "04/20/2025",
+    "showtime": "20:00 04/20/2025",
+    "director": "Jason Kim"
+},
+{
+    "id": "26",
+    "title": "The Final Showdown",
+    "duration": 140,
+    "summary": "An epic battle between good and evil that will determine the fate of the world.",
+    "genres": [
+        "Fantasy",
+        "Action"
+    ],
+    "releasedate": "05/30/2025",
+    "showtime": "21:15 05/30/2025",
+    "director": "Ryan Johnson"
+},
+{
+    "id": "27",
+    "title": "The Last Voyage",
+    "duration": 125,
+    "summary": "A gripping tale of a group of astronauts on a perilous journey to save humanity from an imminent catastrophe.",
+    "genres": [
+        "Sci-Fi",
+        "Adventure"
+    ],
+    "releasedate": "06/25/2025",
+    "showtime": "18:30 06/25/2025",
+    "director": "Alex Wong"
+},
+{
+    "id": "28",
+    "title": "The Enchanted Forest",
+    "duration": 110,
+    "summary": "A magical adventure of a young girl who discovers a hidden world within an enchanted forest.",
+    "genres": [
+        "Fantasy",
+        "Adventure",
+        "Family"
+    ],
+    "releasedate": "07/12/2025",
+    "showtime": "16:45 07/12/2025",
+    "director": "Emma Thompson"
+},
+{
+    "id": "29",
+    "title": "The Lost Treasure",
+    "duration": 100,
+    "summary": "A thrilling quest to find a long-lost treasure that is rumored to hold unimaginable riches.",
+    "genres": [
+        "Adventure",
+        "Action"
+    ],
+    "releasedate": "08/20/2025",
+    "showtime": "19:30 08/20/2025",
+    "director": "Michael Johnson"
+},
+{
+    "id": "30",
+    "title": "The Healing Garden",
+    "duration": 95,
+    "summary": "A heartwarming story of a community coming together to create a healing garden for those in need.",
+    "genres": [
+        "Drama",
+        "Family"
+    ],
+    "releasedate": "09/18/2025",
+    "showtime": "18:00 09/18/2025",
+    "director": "Sophia Chen"
+},
+{
+    "id": "31",
+    "title": "The Journey Home",
+    "duration": 120,
+    "summary": "A touching story of a young boy's journey to find his way back home after being separated from his family.",
+    "genres": [
+        "Drama",
+        "Adventure"
+    ],
+    "releasedate": "10/25/2025",
+    "showtime": "17:15 10/25/2025",
+    "director": "David Kim"
+},
+{
+    "id": "32",
+    "title": "The Winter's Tale",
+    "duration": 130,
+    "summary": "A heartwarming story of love, family, and forgiveness set against the backdrop of a snowy winter.",
+    "genres": [
+        "Drama",
+        "Romance"
+    ],
+    "releasedate": "11/15/2025",
+    "showtime": "20:30 11/15/2025",
+    "director": "Oliver Thompson"
+}
 ]
