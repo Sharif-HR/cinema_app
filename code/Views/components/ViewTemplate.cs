@@ -296,7 +296,7 @@ public abstract class ViewTemplate
                 }
 
                 if(isDateOnly == false){
-                    return dateObject.ToString("HH:mm dd/MM/yyyy");
+                    return dateObject.ToString("HH:mm dd-MM-yyyy");
                 }
 
             }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class ManageMovies : ViewTemplate, IManage
 {
     private MovieLogic _movieLogic = new();
-    public ManageMovies() : base("Manage Movies"){}
+    public ManageMovies() : base("Manage Movies") { }
 
     public override void Render()
     {
@@ -101,11 +101,12 @@ public class ManageMovies : ViewTemplate, IManage
         base.Render();
         Helpers.WarningMessage("Selected movie:");
         Console.WriteLine($@"Title: {movies[movieId].Title}
-Duration: {movies[movieId].Title}
+Duration: {movies[movieId].Duration}
 Summary: {movies[movieId].Summary}
 Genres: {Helpers.ListToString(movies[movieId].Genres)}
 Release date: {movies[movieId].ReleaseDate}
-Show time: {movies[movieId].ShowTime}");
+Show time: {movies[movieId].ShowTime}
+Director: {movies[movieId].Director}");
         Helpers.Divider();
 
         Helpers.WarningMessage($"Enter a number between 1 and {movieProperties.Count} to update a property of this movie:");
@@ -162,6 +163,10 @@ Show time: {movies[movieId].ShowTime}");
                 updatedValue = InputDateTime("Enter showtime:", false);
                 break;
 
+            case "director":
+                updatedValue = InputField("Enter director name:");
+                break;
+
             default:
                 break;
         }
@@ -179,36 +184,20 @@ Show time: {movies[movieId].ShowTime}");
         if (movies.Count == 0)
         {
             Helpers.WarningMessage("You have no movies to delete.");
+            return;
         }
-        else
-        {
-            while (true)
-            {
-                ShowMoviesTable();
-                string GoBack = Helpers.GoBack("deleting a movie");
-                if (GoBack == "back")
-                {
-                    return;
-                }
-                if (GoBack == "continue")
-                {
-                    while (true)
-                    {
-                        movies = _movieLogic.GetMovies();
-                        int movieId = InputNumber("Enter movie ID: ");
 
-                        if (Helpers.HasIndexInList<MovieModel>(movieId, movies, false) == false)
-                        {
-                            Helpers.WarningMessage("Please enter a valid ID.");
-                            continue;
-                        }
-                        _movieLogic.DeleteMovie(movieId--);
-                        Helpers.SuccessMessage("Movie Deleted!");
-                        Helpers.Continue();
-                        break;
-                    }
-                }
-            }
+        while (true)
+        {
+            if (Helpers.GoBack2("deleting a movie") == true) { return; }
+            
+            ShowMoviesTable();
+            movies = _movieLogic.GetMovies();
+            int movieId = base.SelectFromModelList<MovieModel>(movies, true);
+
+            _movieLogic.DeleteMovie(movieId);
+            Helpers.SuccessMessage("Movie Deleted!");
+            Helpers.Continue();
         }
     }
 

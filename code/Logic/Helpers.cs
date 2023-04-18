@@ -12,7 +12,7 @@ public static class Helpers
     {
         while (true)
         {
-            Console.WriteLine($"Enter 0 to go back or press Enter to continue {action}.");
+            Helpers.WarningMessage($"Enter 0 to go back or press Enter to continue {action}.");
             string uInput = Console.ReadLine();
             if (uInput == "0")
             {
