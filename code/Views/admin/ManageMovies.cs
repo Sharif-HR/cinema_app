@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class ManageMovies : ViewTemplate, IManage
 {
     private MovieLogic _movieLogic = new();
-    public ManageMovies() : base("Manage Movies"){}
+    public ManageMovies() : base("Manage Movies") { }
 
     public override void Render()
     {
@@ -60,7 +60,7 @@ public class ManageMovies : ViewTemplate, IManage
         {
             base.Render();
 
-            if (Helpers.GoBack2("adding a movie") == true) { return; }
+            if (Helpers.GoBack("adding a movie") == true) { return; }
 
             string title = base.InputField("Movie title:");
             int duration = base.InputNumber("Movie duration (in minutes):");
@@ -75,7 +75,6 @@ public class ManageMovies : ViewTemplate, IManage
             _movieLogic.AddMovie(NewMovie);
             Helpers.SuccessMessage("Movie added!");
             Helpers.Continue();
-
         }
     }
 
@@ -91,124 +90,118 @@ public class ManageMovies : ViewTemplate, IManage
             return;
         }
 
-        if (Helpers.GoBack2("updating a movie") == true) { return; }
-
-        ShowMoviesTable();
-        Helpers.WarningMessage($"In order to select a movie to edit enter a number between 1 and {movies.Count}");
-        int movieId = SelectFromModelList<MovieModel>(movies, true);
-        var movieProperties = MovieProperties();
-
-        base.Render();
-        Helpers.WarningMessage("Selected movie:");
-        Console.WriteLine($@"Title: {movies[movieId].Title}
-Duration: {movies[movieId].Title}
-Summary: {movies[movieId].Summary}
-Genres: {Helpers.ListToString(movies[movieId].Genres)}
-Release date: {movies[movieId].ReleaseDate}
-Show time: {movies[movieId].ShowTime}");
-        Helpers.Divider();
-
-        Helpers.WarningMessage($"Enter a number between 1 and {movieProperties.Count} to update a property of this movie:");
-
-
-        // Print property of model
-        for (int i = 0; i < movieProperties.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {movieProperties[i]}");
-        }
-
-        int propertyIndex;
-        string chosenProperty;
-
         while (true)
         {
-            propertyIndex = InputNumber("Enter a number to select a property:");
-            if (Helpers.HasIndexInList<string>(propertyIndex, movieProperties, false) == false)
+            ShowMoviesTable();
+            if (Helpers.GoBack("editing a movie") == true) { return; }
+            Helpers.WarningMessage($"In order to select a movie to edit enter a number between 1 and {movies.Count}");
+            int movieId = SelectFromModelList<MovieModel>(movies, true);
+            var movieProperties = MovieProperties();
+            movieProperties.Add("Exit");
+
+            bool loopSelectedMovie = true;
+            while (loopSelectedMovie)
             {
-                Helpers.WarningMessage("please enter a valid property.");
-                continue;
+                movies = _movieLogic.GetMovies();
+
+                base.Render();
+                Helpers.WarningMessage("Selected movie:");
+                Console.WriteLine($@"Title: {movies[movieId].Title}
+Duration: {movies[movieId].Duration}
+Summary: {movies[movieId].Summary}
+Genres: {Helpers.ListToString(movies[movieId].Genres)}
+Director: {movies[movieId].Director}
+Release date: {movies[movieId].ReleaseDate}
+Show time: {movies[movieId].ShowTime}");
+                Helpers.Divider(false);
+
+
+                Helpers.WarningMessage($"Enter a number between 1 and {movieProperties.Count} to update a property of this movie or to exit:");
+                // Print property of model
+                for (int i = 0; i < movieProperties.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {movieProperties[i]}");
+                }
+
+                int propertyIndex;
+                string chosenProperty;
+
+                propertyIndex = base.SelectFromModelList<string>(movieProperties, true, "property id");
+
+                chosenProperty = movieProperties[propertyIndex];
+
+                object updatedValue = null;
+                switch (chosenProperty.ToLower())
+                {
+                    case "title":
+                        updatedValue = InputField("Enter title:");
+                        break;
+
+                    case "duration":
+                        updatedValue = InputNumber("Enter duration (in minutes):");
+                        break;
+
+                    case "summary":
+                        updatedValue = InputField("Enter movie description:");
+                        break;
+
+                    case "genres":
+                        updatedValue = InputGenre();
+                        break;
+
+                    case "releasedate":
+                        updatedValue = InputDate("Enter release date:", false);
+                        break;
+
+                    case "showtime":
+                        updatedValue = InputDateTime("Enter showtime:", false);
+                        break;
+
+                    case "director":
+                        updatedValue = InputField("Enter director:");
+                        break;
+
+                    case "exit":
+                        loopSelectedMovie = false;
+                        break;
+
+                    default:
+                        break;
+                }
+
+
+                if (loopSelectedMovie)
+                {
+                    // ID-movie, property-name, updated-value
+                    _movieLogic.EditMovie(movieId, chosenProperty, updatedValue);
+                    Helpers.SuccessMessage("Movie updated!");
+                    Helpers.Continue();
+                }
+
             }
-
-            propertyIndex--;
-            chosenProperty = movieProperties[propertyIndex];
-            break;
         }
-
-
-        object updatedValue = null;
-        switch (chosenProperty.ToLower())
-        {
-            case "title":
-                updatedValue = InputField("Enter title:");
-                break;
-
-            case "duration":
-                updatedValue = InputNumber("Enter duration (in minutes):");
-                break;
-
-            case "summary":
-                updatedValue = InputField("Enter movie description:");
-                break;
-
-            case "genres":
-                updatedValue = InputGenre();
-                break;
-
-            case "releasedate":
-                updatedValue = InputDate("Enter release date:", false);
-                break;
-
-            case "showtime":
-                updatedValue = InputDateTime("Enter showtime:", false);
-                break;
-
-            default:
-                break;
-        }
-
-        // ID-movie, property-name, updated-value
-        _movieLogic.EditMovie(movieId, chosenProperty, updatedValue);
-        Helpers.SuccessMessage("Movie updated!");
-        Helpers.Continue();
     }
 
     public void DeleteForm()
     {
-        var movies = _movieLogic.GetMovies();
-        // TODO make method out of this
-        if (movies.Count == 0)
+        while (true)
         {
-            Helpers.WarningMessage("You have no movies to delete.");
-        }
-        else
-        {
-            while (true)
+            var movies = _movieLogic.GetMovies();
+            if (movies.Count == 0)
             {
-                ShowMoviesTable();
-                string GoBack = Helpers.GoBack("deleting a movie");
-                if (GoBack == "back")
-                {
-                    return;
-                }
-                if (GoBack == "continue")
-                {
-                    while (true)
-                    {
-                        movies = _movieLogic.GetMovies();
-                        int movieId = InputNumber("Enter movie ID: ");
-
-                        if (Helpers.HasIndexInList<MovieModel>(movieId, movies, false) == false)
-                        {
-                            Helpers.WarningMessage("Please enter a valid ID.");
-                            continue;
-                        }
-                        _movieLogic.DeleteMovie(movieId--);
-                        Helpers.SuccessMessage("Movie Deleted!");
-                        Helpers.Continue();
-                        break;
-                    }
-                }
+                Helpers.WarningMessage("You have no movies to delete.");
+                Helpers.Continue();
+                return;
             }
+            if (Helpers.GoBack("deleting a movie") == true) { return; }
+
+            ShowMoviesTable();
+            movies = _movieLogic.GetMovies();
+            int movieId = base.SelectFromModelList<MovieModel>(movies, true);
+
+            _movieLogic.DeleteMovie(movieId);
+            Helpers.SuccessMessage("Movie Deleted!");
+            Helpers.Continue();
         }
     }
 
@@ -270,16 +263,23 @@ Show time: {movies[movieId].ShowTime}");
             if (selectedGeneres.Contains(currentGenre))
             {
                 Helpers.WarningMessage("You already selected this genre please enter another one.");
+                Helpers.Continue();
+                base.Render();
+
                 continue;
             }
 
             selectedGeneres.Add(currentGenre);
             bool extraGenre = CheckboxInput("Would you like to select another genre? Press 'y' for Yes or 'n' for No");
-            base.Render();
 
             if (extraGenre == false)
             {
                 return selectedGeneres;
+            }
+            else
+            {
+                base.Render();
+
             }
         }
     }
