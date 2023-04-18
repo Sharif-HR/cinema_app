@@ -182,33 +182,15 @@ Director: {movies[movieId].Director}");
 
         while (true)
         {
-            while (true)
-            {
-                ShowMoviesTable();
-                string GoBack = Helpers.GoBack("deleting a movie");
-                if (GoBack == "back")
-                {
-                    return;
-                }
-                if (GoBack == "continue")
-                {
-                    while (true)
-                    {
-                        movies = _movieLogic.GetMovies();
-                        int movieId = InputNumber("Enter movie ID: ");
+            if (Helpers.GoBack2("deleting a movie") == true) { return; }
+            
+            ShowMoviesTable();
+            movies = _movieLogic.GetMovies();
+            int movieId = base.SelectFromModelList<MovieModel>(movies, true);
 
-                        if (Helpers.HasIndexInList<MovieModel>(movieId, movies, false) == false)
-                        {
-                            Helpers.WarningMessage("Please enter a valid ID.");
-                            continue;
-                        }
-                        _movieLogic.DeleteMovie(movieId--);
-                        Helpers.SuccessMessage("Movie Deleted!");
-                        Helpers.Continue();
-                        break;
-                    }
-                }
-            }
+            _movieLogic.DeleteMovie(movieId);
+            Helpers.SuccessMessage("Movie Deleted!");
+            Helpers.Continue();
         }
     }
 
