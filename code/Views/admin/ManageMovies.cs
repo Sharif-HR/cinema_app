@@ -233,7 +233,7 @@ Show time: {movies[movieId].ShowTime}");
     private List<string> Genres()
     {
         List<string> genres = new();
-        genres.AddRange(new string[] { "Action", "Comedy", "Drama", "Horror", "Romance", "Thriller", "Sci-Fi", "Adventure", "Crime", "Fantasy" });
+        genres.AddRange(new string[] { "Action", "Comedy", "Drama", "Horror", "Romance", "Thriller", "Sci-Fi", "Adventure", "Crime", "Fantasy", "Mystery" });
         return genres;
     }
 
