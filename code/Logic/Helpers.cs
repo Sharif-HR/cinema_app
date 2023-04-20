@@ -67,7 +67,7 @@ public static class Helpers
         }
 
         if(!HasDot){
-            WarningMessage("Please enter a valid email.");
+            WarningMessage("Please enter a email with a '@' and a '.' after the @.");
             return false;
         }
 
