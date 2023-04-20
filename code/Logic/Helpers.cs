@@ -18,7 +18,7 @@ public static class Helpers
             {
                 return true;
             }
-            else if(uInput == "")
+            else if (uInput == "")
             {
                 return false;
             }
@@ -56,17 +56,21 @@ public static class Helpers
 
         bool atBeforeDot = false;
         bool HasDot = false;
-        foreach(char c in email){
-            if(c == '@'){
+        foreach (char c in email)
+        {
+            if (c == '@')
+            {
                 atBeforeDot = true;
             }
 
-            if(c == '.' && atBeforeDot){
+            if (c == '.' && atBeforeDot)
+            {
                 HasDot = true;
             }
         }
 
-        if(!HasDot){
+        if (!HasDot)
+        {
             WarningMessage("Please enter a valid email.");
             return false;
         }
@@ -95,7 +99,7 @@ public static class Helpers
         return true;
     }
 
-    public static  bool ContainsLetters(string str)
+    public static bool ContainsLetters(string str)
     {
         return System.Text.RegularExpressions.Regex.IsMatch(str, @"[a-zA-Z]");
     }
@@ -145,11 +149,13 @@ public static class Helpers
         }
     }
 
-    public static bool IsEmptyList<T>(List<T> list){
+    public static bool IsEmptyList<T>(List<T> list)
+    {
         return (list.Count == 0);
     }
 
-    public static List<string> GetProperties<Type>(){
+    public static List<string> GetProperties<Type>()
+    {
         List<string> list = new();
         foreach (var prop in typeof(Type).GetProperties())
         {
@@ -159,14 +165,18 @@ public static class Helpers
         return list;
     }
 
-    public static void PrintListContent<ReturnValue>(List<ReturnValue> list, bool isNumberd=false){
+    public static void PrintListContent<ReturnValue>(List<ReturnValue> list, bool isNumberd = false)
+    {
 
-        if(isNumberd){
-            for(int i=0; i < list.Count; i++){
+        if (isNumberd)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
                 Console.WriteLine($"{i}. {list[i]}");
             }
         }
-        else{
+        else
+        {
             foreach (var item in list)
             {
                 Console.WriteLine(item);
@@ -174,17 +184,25 @@ public static class Helpers
         }
     }
 
-    public static bool HasIndexInList<T>(int index, List<T> list , bool allowZero = true){
-        
-        if(allowZero == false && index == 0){
+    public static bool HasIndexInList<T>(int index, List<T> list, bool allowZero = true)
+    {
+
+        if (allowZero == false && index == 0)
+        {
             return false;
         }
-        
+
         if (index > list.Count || index < 0)
         {
             return false;
         }
 
         return true;
+    }
+
+    public static bool CaseInsensitiveContains(this string text, string value,
+        StringComparison stringComparison = StringComparison.CurrentCultureIgnoreCase)
+    {
+        return text.IndexOf(value, stringComparison) >= 0;
     }
 }

@@ -1,5 +1,7 @@
 namespace Views;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 public class ManageMovies : ViewTemplate, IManage
 {
@@ -207,13 +209,37 @@ Show time: {movies[movieId].ShowTime}");
 
 
 
-    private void ShowMoviesTable(bool pressContinue = false)
+    private void ShowMoviesTable(bool showmenu = false)
     {
         base.Render();
         var movies = _movieLogic.GetMovies();
         Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(movies));
 
-        if (pressContinue) Helpers.Continue();
+        //if (showmenu == true)
+        SearchSortFilterMenu();
+        string UserInput = Console.ReadLine();
+        switch (UserInput)
+        {
+            case "1":
+                SearchMovie();
+                break;
+
+            case "2":
+                SortMovies();
+                break;
+
+            case "3":
+                FilterMovies();
+                break;
+
+            case "4":
+                return;
+
+            default:
+                Helpers.WarningMessage("Invalid input.");
+                Helpers.Continue();
+                break;
+        }
     }
 
     public List<string> MovieProperties()
@@ -289,8 +315,236 @@ Show time: {movies[movieId].ShowTime}");
         Console.Write(@"1. Add a movie
 2. Edit Movie
 3. Delete Movie
-4. Show movies.
-5. Back to dashboard.
+4. Show movies
+5. Back to dashboard
 > ");
+    }
+    private void SearchSortFilterMenu()
+    {
+        Console.Write(@"Please select an option:
+1. Search for a movie
+2. Sort movie list
+3. Filter movie list
+4. Exit
+> ");
+    }
+
+    private void SearchMovie()
+    {
+        var movies = _movieLogic.GetMovies();
+        base.Render();
+        Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(movies));
+
+        Helpers.Divider();
+        Console.WriteLine("Search movies by title");
+        Helpers.Divider();
+
+        Console.WriteLine("Enter the title of the movie:");
+        Console.Write("> ");
+        string InputTitle = Console.ReadLine();
+
+        IEnumerable<MovieModel> FoundMovie =
+            from movie in movies
+            where Helpers.CaseInsensitiveContains(movie.Title, InputTitle)
+            select movie;
+
+        List<MovieModel> FoundMovies = new();
+        foreach (MovieModel movie in FoundMovie)
+        {
+            FoundMovies.Add(movie);
+        }
+
+        base.Render();
+        if (FoundMovies.Count == 0)
+        {
+            Helpers.WarningMessage("No movie(s) found with that name.");
+            Helpers.Continue();
+            ShowMoviesTable();
+        }
+        else
+        {
+            Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(FoundMovies));
+            Helpers.Continue();
+            ShowMoviesTable();
+        }
+    }
+
+    private void SortMovies()
+    {
+        var movies = _movieLogic.GetMovies();
+        base.Render();
+        Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(movies));
+
+        Helpers.Divider();
+        Console.WriteLine("Sort movies");
+        Helpers.Divider();
+
+        var movieProperties = MovieProperties();
+        movieProperties.Add("Exit");
+
+        Helpers.WarningMessage($"Enter a number between 1 and {movieProperties.Count} to sort or to exit:");
+
+        for (int i = 0; i < movieProperties.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {movieProperties[i]}");
+        }
+
+        int propertyIndex;
+        string chosenProperty;
+
+        propertyIndex = base.SelectFromModelList<string>(movieProperties, true, "property id");
+        chosenProperty = movieProperties[propertyIndex];
+
+        List<MovieModel> FoundMovies = new();
+        switch (chosenProperty.ToLower())
+        {
+            case "title":
+                var OrderByTitle = from m in movies
+                                   orderby m.Title
+                                   select m;
+
+                foreach (MovieModel movie in OrderByTitle)
+                {
+                    FoundMovies.Add(movie);
+                }
+                break;
+
+            case "duration":
+                var OrderByDuration = from m in movies
+                                      orderby m.Duration
+                                      select m;
+
+                foreach (MovieModel movie in OrderByDuration)
+                {
+                    FoundMovies.Add(movie);
+                }
+                break;
+
+            case "summary":
+                var OrderBySummary = from m in movies
+                                     orderby m.Summary
+                                     select m;
+
+                foreach (MovieModel movie in OrderBySummary)
+                {
+                    FoundMovies.Add(movie);
+                }
+                break;
+
+            case "genres":
+                var OrderByGenres = from m in movies
+                                    orderby m.Genres.Count
+                                    select m;
+
+                foreach (MovieModel movie in OrderByGenres)
+                {
+                    FoundMovies.Add(movie);
+                }
+                break;
+
+            case "director":
+                var OrderByDirector = from m in movies
+                                      orderby m.Director
+                                      select m;
+
+                foreach (MovieModel movie in OrderByDirector)
+                {
+                    FoundMovies.Add(movie);
+                }
+                break;
+
+            case "releasedate":
+                var OrderByReleaseDate = from m in movies
+                                         orderby DateOnly.Parse(m.ReleaseDate)
+                                         select m;
+
+                foreach (MovieModel movie in OrderByReleaseDate)
+                {
+                    FoundMovies.Add(movie);
+                }
+                break;
+
+            case "showtime":
+                var OrderByShowtime = from m in movies
+                                      orderby DateTime.ParseExact(m.ShowTime, "HH:mm dd-MM-yyyy", new CultureInfo("nl-NL"))
+                                      select m;
+                foreach (MovieModel film in OrderByShowtime)
+                {
+                    FoundMovies.Add(film);
+                }
+                break;
+
+            case "exit":
+                ShowMoviesTable();
+                break;
+
+            default:
+                return;
+
+        }
+
+        base.Render();
+        if (FoundMovies.Count == 0)
+        {
+            Helpers.WarningMessage("No movie(s) found with that name.");
+            Helpers.Continue();
+            ShowMoviesTable();
+        }
+        else
+        {
+            Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(FoundMovies));
+            Helpers.Continue();
+            ShowMoviesTable();
+        }
+    }
+
+    private void FilterMovies()
+    {
+        var movies = _movieLogic.GetMovies();
+        base.Render();
+        Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(movies));
+
+        Helpers.Divider();
+        Console.WriteLine("Filter movies by genre");
+        Helpers.Divider();
+
+        var genreList = Genres();
+
+        Helpers.WarningMessage($"Enter a number between 1 and {genreList.Count} to select a genre from the list below.");
+        Console.WriteLine("Movie genre(s):");
+
+        Helpers.Divider();
+        for (int i = 0; i < genreList.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {genreList[i]}");
+        }
+
+        int genresIndex = SelectFromModelList<string>(genreList, true, "genre");
+        string selectedGenere = genreList[genresIndex];
+
+        IEnumerable<MovieModel> FoundMovie =
+            from movie in movies
+            where movie.Genres.Contains(selectedGenere)
+            select movie;
+
+        List<MovieModel> FoundMovies = new();
+        foreach (MovieModel movie in FoundMovie)
+        {
+            FoundMovies.Add(movie);
+        }
+
+        base.Render();
+        if (FoundMovies.Count == 0)
+        {
+            Helpers.WarningMessage("No movie(s) found with that genre.");
+            Helpers.Continue();
+            ShowMoviesTable();
+        }
+        else
+        {
+            Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(FoundMovies));
+            Helpers.Continue();
+            ShowMoviesTable();
+        }
     }
 }
