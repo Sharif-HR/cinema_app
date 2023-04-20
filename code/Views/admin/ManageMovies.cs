@@ -39,7 +39,7 @@ public class ManageMovies : ViewTemplate, IManage
 
 
                 case "4":
-                    ShowMoviesTable(true);
+                    ShowMoviesTable("yes");
                     break;
 
                 case "5":
@@ -94,7 +94,7 @@ public class ManageMovies : ViewTemplate, IManage
 
         while (true)
         {
-            ShowMoviesTable();
+            ShowMoviesTable("null");
             if (Helpers.GoBack("editing a movie") == true) { return; }
             Helpers.WarningMessage($"In order to select a movie to edit enter a number between 1 and {movies.Count}");
             int movieId = SelectFromModelList<MovieModel>(movies, true);
@@ -197,7 +197,7 @@ Show time: {movies[movieId].ShowTime}");
             }
             if (Helpers.GoBack("deleting a movie") == true) { return; }
 
-            ShowMoviesTable();
+            ShowMoviesTable("null");
             movies = _movieLogic.GetMovies();
             int movieId = base.SelectFromModelList<MovieModel>(movies, true);
 
@@ -209,37 +209,45 @@ Show time: {movies[movieId].ShowTime}");
 
 
 
-    private void ShowMoviesTable(bool showmenu = false)
+    private void ShowMoviesTable(string showmenu)
     {
         base.Render();
         var movies = _movieLogic.GetMovies();
         Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(movies));
 
-        //if (showmenu == true)
-        SearchSortFilterMenu();
-        string UserInput = Console.ReadLine();
-        switch (UserInput)
+        if (showmenu == "yes")
         {
-            case "1":
-                SearchMovie();
-                break;
+            SearchSortFilterMenu();
+            string UserInput = Console.ReadLine();
+            switch (UserInput)
+            {
+                case "1":
+                    SearchMovie();
+                    break;
 
-            case "2":
-                SortMovies();
-                break;
+                case "2":
+                    SortMovies();
+                    break;
 
-            case "3":
-                FilterMovies();
-                break;
+                case "3":
+                    FilterMovies();
+                    break;
 
-            case "4":
-                return;
+                case "4":
+                    return;
 
-            default:
-                Helpers.WarningMessage("Invalid input.");
-                Helpers.Continue();
-                break;
+                default:
+                    Helpers.WarningMessage("Invalid input.");
+                    Helpers.Continue();
+                    break;
+            }
         }
+        if (showmenu == "continue")
+        {
+            Helpers.Continue();
+        }
+        if (showmenu == "null") { }
+
     }
 
     public List<string> MovieProperties()
@@ -359,13 +367,13 @@ Show time: {movies[movieId].ShowTime}");
         {
             Helpers.WarningMessage("No movie(s) found with that name.");
             Helpers.Continue();
-            ShowMoviesTable();
+            ShowMoviesTable("yes");
         }
         else
         {
             Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(FoundMovies));
             Helpers.Continue();
-            ShowMoviesTable();
+            ShowMoviesTable("yes");
         }
     }
 
@@ -396,105 +404,200 @@ Show time: {movies[movieId].ShowTime}");
         chosenProperty = movieProperties[propertyIndex];
 
         List<MovieModel> FoundMovies = new();
-        switch (chosenProperty.ToLower())
+
+        Console.Write(@"1. Ascending
+2. Descending");
+        int AscendingDescending = base.InputNumber("\nEnter 1 to sort in ascending order or 2 to sort in descending order.");
+
+
+        if (AscendingDescending == 1)
         {
-            case "title":
-                var OrderByTitle = from m in movies
-                                   orderby m.Title
-                                   select m;
+            switch (chosenProperty.ToLower())
+            {
+                case "title":
+                    var OrderByTitle = from m in movies
+                                       orderby m.Title
+                                       select m;
 
-                foreach (MovieModel movie in OrderByTitle)
-                {
-                    FoundMovies.Add(movie);
-                }
-                break;
+                    foreach (MovieModel movie in OrderByTitle)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
 
-            case "duration":
-                var OrderByDuration = from m in movies
-                                      orderby m.Duration
-                                      select m;
+                case "duration":
+                    var OrderByDuration = from m in movies
+                                          orderby m.Duration
+                                          select m;
 
-                foreach (MovieModel movie in OrderByDuration)
-                {
-                    FoundMovies.Add(movie);
-                }
-                break;
+                    foreach (MovieModel movie in OrderByDuration)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
 
-            case "summary":
-                var OrderBySummary = from m in movies
-                                     orderby m.Summary
-                                     select m;
-
-                foreach (MovieModel movie in OrderBySummary)
-                {
-                    FoundMovies.Add(movie);
-                }
-                break;
-
-            case "genres":
-                var OrderByGenres = from m in movies
-                                    orderby m.Genres.Count
-                                    select m;
-
-                foreach (MovieModel movie in OrderByGenres)
-                {
-                    FoundMovies.Add(movie);
-                }
-                break;
-
-            case "director":
-                var OrderByDirector = from m in movies
-                                      orderby m.Director
-                                      select m;
-
-                foreach (MovieModel movie in OrderByDirector)
-                {
-                    FoundMovies.Add(movie);
-                }
-                break;
-
-            case "releasedate":
-                var OrderByReleaseDate = from m in movies
-                                         orderby DateOnly.Parse(m.ReleaseDate)
+                case "summary":
+                    var OrderBySummary = from m in movies
+                                         orderby m.Summary
                                          select m;
 
-                foreach (MovieModel movie in OrderByReleaseDate)
-                {
-                    FoundMovies.Add(movie);
-                }
-                break;
+                    foreach (MovieModel movie in OrderBySummary)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
 
-            case "showtime":
-                var OrderByShowtime = from m in movies
-                                      orderby DateTime.ParseExact(m.ShowTime, "HH:mm dd-MM-yyyy", new CultureInfo("nl-NL"))
-                                      select m;
-                foreach (MovieModel film in OrderByShowtime)
-                {
-                    FoundMovies.Add(film);
-                }
-                break;
+                case "genres":
+                    var OrderByGenres = from m in movies
+                                        orderby m.Genres.Count
+                                        select m;
 
-            case "exit":
-                ShowMoviesTable();
-                break;
+                    foreach (MovieModel movie in OrderByGenres)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
 
-            default:
-                return;
+                case "director":
+                    var OrderByDirector = from m in movies
+                                          orderby m.Director
+                                          select m;
 
+                    foreach (MovieModel movie in OrderByDirector)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
+
+                case "releasedate":
+                    var OrderByReleaseDate = from m in movies
+                                             orderby DateOnly.Parse(m.ReleaseDate)
+                                             select m;
+
+                    foreach (MovieModel movie in OrderByReleaseDate)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
+
+                case "showtime":
+                    var OrderByShowtime = from m in movies
+                                          orderby DateTime.ParseExact(m.ShowTime, "HH:mm dd-MM-yyyy", new CultureInfo("nl-NL"))
+                                          select m;
+                    foreach (MovieModel film in OrderByShowtime)
+                    {
+                        FoundMovies.Add(film);
+                    }
+                    break;
+
+                case "exit":
+                    ShowMoviesTable("yes");
+                    break;
+
+                default:
+                    return;
+            }
         }
+        if (AscendingDescending == 2)
+        {
+            switch (chosenProperty.ToLower())
+            {
+                case "title":
+                    var OrderByTitle = from m in movies
+                                       orderby m.Title descending
+                                       select m;
 
+                    foreach (MovieModel movie in OrderByTitle)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
+
+                case "duration":
+                    var OrderByDuration = from m in movies
+                                          orderby m.Duration descending
+                                          select m;
+
+                    foreach (MovieModel movie in OrderByDuration)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
+
+                case "summary":
+                    var OrderBySummary = from m in movies
+                                         orderby m.Summary descending
+                                         select m;
+
+                    foreach (MovieModel movie in OrderBySummary)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
+
+                case "genres":
+                    var OrderByGenres = from m in movies
+                                        orderby m.Genres.Count descending
+                                        select m;
+
+                    foreach (MovieModel movie in OrderByGenres)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
+
+                case "director":
+                    var OrderByDirector = from m in movies
+                                          orderby m.Director descending
+                                          select m;
+
+                    foreach (MovieModel movie in OrderByDirector)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
+
+                case "releasedate":
+                    var OrderByReleaseDate = from m in movies
+                                             orderby DateOnly.Parse(m.ReleaseDate) descending
+                                             select m;
+
+                    foreach (MovieModel movie in OrderByReleaseDate)
+                    {
+                        FoundMovies.Add(movie);
+                    }
+                    break;
+
+                case "showtime":
+                    var OrderByShowtime = from m in movies
+                                          orderby DateTime.ParseExact(m.ShowTime, "HH:mm dd-MM-yyyy", new CultureInfo("nl-NL"))
+                                          select m;
+                    foreach (MovieModel film in OrderByShowtime)
+                    {
+                        FoundMovies.Add(film);
+                    }
+                    break;
+
+                case "exit":
+                    ShowMoviesTable("yes");
+                    break;
+
+                default:
+                    return;
+            }
+        }
         base.Render();
         if (FoundMovies.Count == 0)
         {
             Helpers.WarningMessage("No movie(s) found with that name.");
             Helpers.Continue();
-            ShowMoviesTable();
+            ShowMoviesTable("null");
         }
         else
         {
             Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(FoundMovies));
             Helpers.Continue();
-            ShowMoviesTable();
+            ShowMoviesTable("yes");
         }
     }
 
@@ -538,13 +641,13 @@ Show time: {movies[movieId].ShowTime}");
         {
             Helpers.WarningMessage("No movie(s) found with that genre.");
             Helpers.Continue();
-            ShowMoviesTable();
+            ShowMoviesTable("yes");
         }
         else
         {
             Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(FoundMovies));
             Helpers.Continue();
-            ShowMoviesTable();
+            ShowMoviesTable("yes");
         }
     }
 }
