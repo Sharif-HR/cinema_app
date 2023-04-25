@@ -14,8 +14,6 @@ namespace CinemaApp
 
             DotEnv.Load(dotenv);
 
-            Console.Write(Environment.GetEnvironmentVariable("APP_NAME"));
-            return;
             Console.Clear();
             Views.Menu MenuPage = new();
             MenuPage.Render();
