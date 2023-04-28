@@ -112,6 +112,13 @@ public static class Helpers
         Console.ResetColor();
     }
 
+    public static void ErrorMessage(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(message);
+        Console.ResetColor();
+    }
+
     public static void SuccessMessage(string message)
     {
         Console.ForegroundColor = ConsoleColor.Green;
