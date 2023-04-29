@@ -212,4 +212,8 @@ public static class Helpers
     {
         return text.IndexOf(value, stringComparison) >= 0;
     }
+
+    public static string DecapitalizeString(string str) {
+        return char.ToLower(str[0]) + str.Substring(1);
+    }
 }
