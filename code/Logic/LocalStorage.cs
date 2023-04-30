@@ -10,7 +10,6 @@ public static class LocalStorage {
 
     public static void setItem(string key, object value) => localStorage.Add(key, value);
 
-
     public static object? GetItem(string key) => LocalStorageKeyCheck(key) ? localStorage[key] : null;
 
     public static void WriteToStorage() {
