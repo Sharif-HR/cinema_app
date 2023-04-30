@@ -10,7 +10,7 @@ public static class Routes {
         return null;
     }
 
-    public static void RouteNameToView(string routeName, string dashboardRole = "admin") {
+    public static void RouteNameToView(string routeName) {
         switch (routeName)
         {
             case "ManageMoviesPageAdmin":
@@ -20,7 +20,7 @@ public static class Routes {
                 new MovieView().Render();
                 break;
             case "DashboardPage":
-                new Dashboard(dashboardRole).Render();
+                new Dashboard(LocalStorage.GetAuthenticatedUser().Role).Render();
                 break;
             case "LoginPage":
                 new Login().Render();
