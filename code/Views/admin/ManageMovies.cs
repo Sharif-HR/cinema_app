@@ -192,7 +192,7 @@ Show time: {movies[movieId].ShowTime}");
                 Helpers.Continue();
                 return;
             }
-            if (Helpers.GoBack("deleting a movie") == true) { return; }
+            RouteHandeler.LastView();
 
             ShowMoviesTable("null");
             movies = _movieLogic.GetMovies();

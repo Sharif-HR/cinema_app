@@ -12,7 +12,7 @@ public class Login : ViewTemplate
         {
 
             base.Render();
-            if (Helpers.GoBack("logging in") == true) { return; }
+            RouteHandeler.LastView();
 
             string Email = base.InputField("Enter your email: ");
             string Password = base.InputPassword("Enter password: ");
