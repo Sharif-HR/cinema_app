@@ -51,7 +51,7 @@ public class Dashboard : ViewTemplate
                     break;
 
                 case "2":
-                    ManageMoviesPage.Render();
+                    RouteHandeler.View("ManageMoviesPage");
                     break;
 
                 case "3":
@@ -86,7 +86,7 @@ public class Dashboard : ViewTemplate
                 case "1":
                     CustomerMoviePage.Render();
                     break;
-                
+
                 case "2":
                     Console.WriteLine("Coming soon");
                     Helpers.Continue();

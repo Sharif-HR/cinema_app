@@ -23,11 +23,11 @@ public class Menu : ViewTemplate
             string UserInput = InputField("Enter a number:");
             switch(UserInput){
                 case "1":
-                    LoginPage.Render();
+                    RouteHandeler.View("LoginPage");
                     break;
 
                 case "2":
-                    RegisterPage.Render();
+                    RouteHandeler.View("RegisterPage");
                     break;
 
                 case "3":

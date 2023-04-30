@@ -29,7 +29,7 @@ public class Register : ViewTemplate
             Helpers.SuccessMessage("Registration complete.");
             Helpers.Continue();
 
-            customerDashboardPage.Render();
+            RouteHandeler.View("DashboardPage");
             return;
         }
     }

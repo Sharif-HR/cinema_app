@@ -62,8 +62,6 @@ public class ManageMovies : ViewTemplate, IManage
         {
             base.Render();
 
-            if (Helpers.GoBack("adding a movie") == true) { return; }
-
             string title = base.InputField("Movie title:");
             int duration = base.InputNumber("Movie duration (in minutes):");
             string summary = base.InputField("Movie summary:");
@@ -95,7 +93,6 @@ public class ManageMovies : ViewTemplate, IManage
         while (true)
         {
             ShowMoviesTable("null");
-            if (Helpers.GoBack("editing a movie") == true) { return; }
             Helpers.WarningMessage($"In order to select a movie to edit enter a number between 1 and {movies.Count}");
             int movieId = SelectFromModelList<MovieModel>(movies, true);
             var movieProperties = MovieProperties();

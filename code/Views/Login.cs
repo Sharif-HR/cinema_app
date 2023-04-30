@@ -21,8 +21,7 @@ public class Login : ViewTemplate
 
             if (UserAccount != null)
             {
-                Dashboard DasboardPage = new(role: UserAccount.Role);
-                DasboardPage.Render();
+                RouteHandeler.View("DashboardPage");
                 return;
             }
             else

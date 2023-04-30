@@ -15,6 +15,7 @@ public abstract class ViewTemplate
         this.CinemaLogo();
         Helpers.Divider(false);
         Console.WriteLine(this.Title);
+        Console.WriteLine("Press the ESC button to go back at anytime");
         Helpers.Divider(false);
     }
 
@@ -261,13 +262,13 @@ public abstract class ViewTemplate
                 Console.WriteLine("Enter date in this format (DD-MM-YYYY)");
                 Console.WriteLine(label);
                 string enteredDate = Console.ReadLine();
-                
+
                 DateOnly dateObject = DateOnly.ParseExact(enteredDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
                 if(isDateOnly == true){
                     return dateObject;
                 }
-                
+
                 if(isDateOnly == false){
                     return dateObject.ToString("dd-MM-yyyy");
                 }
@@ -348,7 +349,7 @@ public abstract class ViewTemplate
     protected int SelectFromModelList<T>(List<T> modelList, bool substractOne = false, string customName = null)
     {
         string modelName = customName;
-        
+
         if(customName == null){
             modelName = typeof(T).Name.ToLower();
             modelName = modelName.Substring(0, modelName.Length - 5);
@@ -379,22 +380,22 @@ public abstract class ViewTemplate
         Console.ForegroundColor = ConsoleColor.White;
         Console.Write(@"
 
-  ______   _____  _____  ____   ____  ________  _______     
-.' ____ \ |_   _||_   _||_  _| |_  _||_   __  ||_   __ \    
-| (___ \_|  | |    | |    \ \   / /    | |_ \_|  | |__) |   
- _.____`.   | |    | |   _ \ \ / /     |  _| _   |  __ /    
-| \____) | _| |_  _| |__/ | \ ' /     _| |__/ | _| |  \ \_  
- \______.'|_____||________|  \_/     |________||____| |___|                                            
+  ______   _____  _____  ____   ____  ________  _______
+.' ____ \ |_   _||_   _||_  _| |_  _||_   __  ||_   __ \
+| (___ \_|  | |    | |    \ \   / /    | |_ \_|  | |__) |
+ _.____`.   | |    | |   _ \ \ / /     |  _| _   |  __ /
+| \____) | _| |_  _| |__/ | \ ' /     _| |__/ | _| |  \ \_
+ \______.'|_____||________|  \_/     |________||____| |___|
 ");
         Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write(@"  ______  _____  ____  _____  ________  ____    ____       _       
- .' ___  ||_   _||_   \|_   _||_   __  ||_   \  /   _|     / \      
-/ .'   \_|  | |    |   \ | |    | |_ \_|  |   \/   |      / _ \     
-| |         | |    | |\ \| |    |  _| _   | |\  /| |     / ___ \    
-\ `.___.'\ _| |_  _| |_\   |_  _| |__/ | _| |_\/_| |_  _/ /   \ \_  
- `.____ .'|_____||_____|\____||________||_____||_____||____| |____| 
-                                                                    
+        Console.Write(@"  ______  _____  ____  _____  ________  ____    ____       _
+ .' ___  ||_   _||_   \|_   _||_   __  ||_   \  /   _|     / \
+/ .'   \_|  | |    |   \ | |    | |_ \_|  |   \/   |      / _ \
+| |         | |    | |\ \| |    |  _| _   | |\  /| |     / ___ \
+\ `.___.'\ _| |_  _| |_\   |_  _| |__/ | _| |_\/_| |_  _/ /   \ \_
+ `.____ .'|_____||_____|\____||________||_____||_____||____| |____|
+
 ");
         Console.ResetColor();
 
