@@ -20,21 +20,7 @@ namespace CinemaApp
             // Load the local storage
             LocalStorage.LoadLocalStorage();
 
-            // start the go back function so that it is always listening for input
-            Thread backgroundThread = new Thread(new ThreadStart(GoBack));
-            backgroundThread.Start();
-
             Views.RouteHandeler.View("MenuPage");
-        }
-
-        static void GoBack() {
-            ConsoleKeyInfo Key = Console.ReadKey(true);
-
-            if(Key.Key == ConsoleKey.Escape) {
-                Console.WriteLine("Directing you back...");
-                Thread.Sleep(5000);
-                Views.RouteHandeler.LastView();
-            }
         }
     }
 }
