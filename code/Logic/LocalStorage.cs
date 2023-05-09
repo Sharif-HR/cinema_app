@@ -102,15 +102,36 @@ public static class LocalStorage {
         File.WriteAllLines("data/localStorage.json", data);
     }
 
-    public static void AddToHistory(string pageTitle) {
+    public static void AddToHistory(string viewName) {
         if(LocalStorageKeyCheck("history")) {
-            localStorage["history"].Add(pageTitle);
+            var options = new JsonSerializerOptions { WriteIndented = true };
+
+            localStorage["history"].Add(viewName);
             WriteToStorage();
         }
     }
 
     public static string? LastVisitedPage() {
         if(LocalStorageKeyCheck("history")) {
+            try
+            {
+                string viewName = localStorage["history"][localStorage["history"].Count - 2];
+                localStorage["history"].Remove(GetLastViewName());
+                WriteToStorage();
+                return viewName;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Helpers.ErrorMessage("Something went wrong when we wanted to redirect you back");
+            }
+        }
+
+        return null;
+    }
+
+    public static string? GetLastViewName() {
+        if (LocalStorageKeyCheck("history"))
+        {
             return localStorage["history"][localStorage["history"].Count - 1];
         }
 

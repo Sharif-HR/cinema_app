@@ -12,7 +12,7 @@ public class Register : ViewTemplate
         while (true)
         {
             base.Render();
-            RouteHandeler.LastView();
+            // RouteHandeler.LastView();
 
             string? username = base.InputField("Enter your username");
             string? firstName = base.InputField("Enter your first name:");

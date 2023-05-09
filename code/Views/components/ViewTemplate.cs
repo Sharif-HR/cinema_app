@@ -1,3 +1,4 @@
+namespace Views;
 using System.Globalization;
 using System.Reflection;
 
@@ -15,7 +16,11 @@ public abstract class ViewTemplate
         this.CinemaLogo();
         Helpers.Divider(false);
         Console.WriteLine(this.Title);
-        Console.WriteLine("Press the ESC button to go back at anytime");
+
+        if (LocalStorage.localStorage["history"].Count > 0) {
+            Console.WriteLine("Leave a field empty to go back to the previous page");
+        }
+
         Helpers.Divider(false);
     }
 
@@ -25,12 +30,14 @@ public abstract class ViewTemplate
         {
             Console.WriteLine(label);
             Console.Write("> ");
-            string userInput = Console.ReadLine();
+            string? userInput = Console.ReadLine() ?? null;
 
             if (!string.IsNullOrWhiteSpace(userInput))
             {
                 return userInput;
             }
+
+            RouteHandeler.LastView();
         }
     }
 
@@ -55,10 +62,10 @@ public abstract class ViewTemplate
                 pass += keyInfo.KeyChar;
             }
 
-            if (key == ConsoleKey.Enter && !string.IsNullOrWhiteSpace(pass))
+            if (key == ConsoleKey.Enter)
             {
-                Console.WriteLine();
-                return pass;
+                if(string.IsNullOrWhiteSpace(pass)) return pass;
+                RouteHandeler.LastView();
             }
         }
     }
@@ -73,6 +80,8 @@ public abstract class ViewTemplate
             Console.WriteLine(label);
             Console.Write("> ");
             input = this.PasswordToAstriks();
+
+            if(input == null || input == "") RouteHandeler.LastView();
 
             if (mustBeStrong)
             {
@@ -174,8 +183,10 @@ public abstract class ViewTemplate
         {
             Console.WriteLine(label);
             Console.Write("> ");
-            string userInput = Console.ReadLine();
+            string userInput = Console.ReadLine() ?? null;
             string warningMessage = "Invalid input. Please enter y or n.";
+
+            if(userInput == null || userInput == "") RouteHandeler.LastView();
 
             if (string.IsNullOrWhiteSpace(userInput) == true)
             {
@@ -212,7 +223,9 @@ public abstract class ViewTemplate
                 // enter moive duration in minutes
                 Console.WriteLine(label);
                 Console.Write("> ");
-                string numberStr = Console.ReadLine();
+                string numberStr = Console.ReadLine() ?? null;
+
+                if(numberStr == null || numberStr == "") RouteHandeler.LastView();
 
                 if (Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
                 {
@@ -239,7 +252,8 @@ public abstract class ViewTemplate
 
         if (userInput == null)
         {
-            userInput = Console.ReadLine();
+            userInput = Console.ReadLine() ?? null;
+            if(userInput == null || userInput == "") RouteHandeler.LastView();
         }
 
         List<string> values = new List<string>(userInput.Split(','));
@@ -261,7 +275,9 @@ public abstract class ViewTemplate
             {
                 Console.WriteLine("Enter date in this format (DD-MM-YYYY)");
                 Console.WriteLine(label);
-                string enteredDate = Console.ReadLine();
+                string enteredDate = Console.ReadLine() ?? null;
+
+                if(enteredDate == null || enteredDate == "") RouteHandeler.LastView();
 
                 DateOnly dateObject = DateOnly.ParseExact(enteredDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
@@ -289,7 +305,8 @@ public abstract class ViewTemplate
                 Console.WriteLine("Enter date and time in this format (HH:mm DD-MM-YYYY)");
                 Console.WriteLine(label);
 
-                string enterDateTime = Console.ReadLine();
+                string enterDateTime = Console.ReadLine() ?? null;
+                if(enterDateTime == null || enterDateTime == "") RouteHandeler.LastView();
                 DateTime dateObject = DateTime.ParseExact(enterDateTime, "HH:mm dd-MM-yyyy", CultureInfo.InvariantCulture);
 
                 if(isDateOnly == true){

@@ -51,7 +51,7 @@ public class Dashboard : ViewTemplate
                     break;
 
                 case "2":
-                    RouteHandeler.View("ManageMoviesPage");
+                    RouteHandeler.View("ManageMoviesPageAdmin");
                     break;
 
                 case "3":

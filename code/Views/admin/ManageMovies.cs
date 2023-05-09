@@ -192,7 +192,7 @@ Show time: {movies[movieId].ShowTime}");
                 Helpers.Continue();
                 return;
             }
-            RouteHandeler.LastView();
+            // RouteHandeler.LastView();
 
             ShowMoviesTable("null");
             movies = _movieLogic.GetMovies();
