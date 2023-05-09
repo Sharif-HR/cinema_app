@@ -8,6 +8,7 @@ public class Dashboard : ViewTemplate
     private const string CUSTOMERROLE = "customer";
     private string _userRole;
     private ManageMovies ManageMoviesPage = new();
+    private ManageRefreshments ManageRefreshmentsPage = new();
     private MovieView CustomerMoviePage = new();
     public Dashboard(string role) : base($"{Helpers.CapitalizeFirstLetter(role)} - Dashboard")
     {
@@ -55,8 +56,7 @@ public class Dashboard : ViewTemplate
                     break;
 
                 case "3":
-                    Helpers.WarningMessage("Coming soon!");
-                    Helpers.Continue();
+                    ManageRefreshmentsPage.Render();
                     break;
                 case "4":
                     LogOutMsg();

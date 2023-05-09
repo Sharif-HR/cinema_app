@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Popcorn",
+    "isDrink": false,
+    "price": 3.2
+  },
+  {
+    "id": "2",
+    "name": "Candy",
+    "isDrink": false,
+    "price": 12.1
+  },
+  {
+    "id": "3",
+    "name": "Nachos",
+    "isDrink": false,
+    "price": 6.99
+  },
+  {
+    "id": "4",
+    "name": "Hot Dog",
+    "isDrink": false,
+    "price": 4.99
+  },
+  {
+    "id": "5",
+    "name": "Soda",
+    "isDrink": true,
+    "price": 2.99
+  },
+  {
+    "id": "6",
+    "name": "Water",
+    "isDrink": true,
+    "price": 1.99
+  },
+  {
+    "id": "7",
+    "name": "Juice",
+    "isDrink": true,
+    "price": 3.49
+  },
+  {
+    "id": "2caee307-f9b0-411e-9d70-d29d39d520d4",
+    "name": "Coca Cola 33cl",
+    "isDrink": true,
+    "price": 3.8
+  }
+]

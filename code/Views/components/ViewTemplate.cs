@@ -229,6 +229,55 @@ public abstract class ViewTemplate
         }
     }
 
+    public double InputDecimalNumber(string label)
+    {
+        while (true)
+        {
+            try
+            {
+                Console.WriteLine(label);
+                Console.Write("> ");
+                string numberStr = Console.ReadLine();
+
+                if (Helpers.IsDigitsOrDotOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
+                {
+                    return Convert.ToDouble(numberStr);
+                }
+                else
+                {
+                    Helpers.WarningMessage("This field accepts numbers only.");
+                }
+            }
+            catch
+            {
+                Helpers.WarningMessage("Number is to long enter a smaller number");
+            }
+        }
+    }
+
+
+    public bool InputBool(string label)
+    {
+        while (true)
+        {
+            Console.WriteLine(label);
+            Console.Write("> ");
+            string isbool = Console.ReadLine();
+
+            if (isbool == "false")
+            {
+                return false;
+            }
+            else if(isbool == "true")
+            {
+                return true;
+            }
+            else
+            {
+                Helpers.WarningMessage("This field accepts only true or false.");
+            }
+        }
+    }
 
     public List<string> InputMultiple(string label, string userInput = null)
     {

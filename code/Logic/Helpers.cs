@@ -99,6 +99,16 @@ public static class Helpers
         return true;
     }
 
+    public static bool IsDigitsOrDotOnly(string str)
+    {
+        foreach (char c in str)
+        {
+            if ((c < '0' || c > '9') && c != ',')
+                return false;
+        }
+
+        return true;
+    }
     public static bool ContainsLetters(string str)
     {
         return System.Text.RegularExpressions.Regex.IsMatch(str, @"[a-zA-Z]");
