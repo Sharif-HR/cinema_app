@@ -214,7 +214,7 @@ public abstract class ViewTemplate
 
     }
 
-    public int InputNumber(string label)
+    public int InputNumber(string label, bool allowZero = true)
     {
         while (true)
         {
@@ -227,9 +227,52 @@ public abstract class ViewTemplate
 
                 if(numberStr == null || numberStr == "") RouteHandeler.LastView();
 
+                if (!Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
+                {
+                    Helpers.WarningMessage("This field accepts numbers only.");
+                    continue;
+
+                }
+
+                if (string.IsNullOrWhiteSpace(numberStr))
+                {
+                    Helpers.WarningMessage("This field cannot be empty.");
+                    continue;
+
+                }
+
+                if (allowZero == false && Helpers.IsDigitsOnly(numberStr) && numberStr == "0")
+                {
+                    Helpers.WarningMessage("This field does not accept 0.");
+                    continue;
+
+                }
+
                 if (Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
                 {
                     return int.Parse(numberStr);
+                }
+            }
+            catch
+            {
+                Helpers.WarningMessage("Number is to long enter a smaller number");
+            }
+        }
+    }
+
+    public double InputDecimalNumber(string label)
+    {
+        while (true)
+        {
+            try
+            {
+                Console.WriteLine(label);
+                Console.Write("> ");
+                string numberStr = Console.ReadLine();
+
+                if (Helpers.IsDigitsOrDotOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
+                {
+                    return Convert.ToDouble(numberStr);
                 }
                 else
                 {
@@ -243,6 +286,29 @@ public abstract class ViewTemplate
         }
     }
 
+
+    public bool InputBool(string label)
+    {
+        while (true)
+        {
+            Console.WriteLine(label);
+            Console.Write("> ");
+            string isbool = Console.ReadLine();
+
+            if (isbool == "false")
+            {
+                return false;
+            }
+            else if (isbool == "true")
+            {
+                return true;
+            }
+            else
+            {
+                Helpers.WarningMessage("This field accepts only true or false.");
+            }
+        }
+    }
 
     public List<string> InputMultiple(string label, string userInput = null)
     {
@@ -275,17 +341,21 @@ public abstract class ViewTemplate
             {
                 Console.WriteLine("Enter date in this format (DD-MM-YYYY)");
                 Console.WriteLine(label);
+              
                 string enteredDate = Console.ReadLine() ?? null;
 
                 if(enteredDate == null || enteredDate == "") RouteHandeler.LastView();
 
                 DateOnly dateObject = DateOnly.ParseExact(enteredDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
-                if(isDateOnly == true){
+                if (isDateOnly == true)
+                {
                     return dateObject;
                 }
 
-                if(isDateOnly == false){
+                if (isDateOnly == false)
+                {
+
                     return dateObject.ToString("dd-MM-yyyy");
                 }
             }
@@ -309,11 +379,13 @@ public abstract class ViewTemplate
                 if(enterDateTime == null || enterDateTime == "") RouteHandeler.LastView();
                 DateTime dateObject = DateTime.ParseExact(enterDateTime, "HH:mm dd-MM-yyyy", CultureInfo.InvariantCulture);
 
-                if(isDateOnly == true){
+                if (isDateOnly == true)
+                {
                     return dateObject;
                 }
 
-                if(isDateOnly == false){
+                if (isDateOnly == false)
+                {
                     return dateObject.ToString("HH:mm dd-MM-yyyy");
                 }
 
@@ -367,7 +439,8 @@ public abstract class ViewTemplate
     {
         string modelName = customName;
 
-        if(customName == null){
+        if (customName == null)
+        {
             modelName = typeof(T).Name.ToLower();
             modelName = modelName.Substring(0, modelName.Length - 5);
         }
@@ -382,8 +455,9 @@ public abstract class ViewTemplate
                 continue;
             }
 
-            if(substractOne){
-                return modelIndex-1;
+            if (substractOne)
+            {
+                return modelIndex - 1;
             }
 
             return modelIndex;
