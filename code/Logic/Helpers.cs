@@ -2,9 +2,10 @@ using System.Reflection;
 
 public static class Helpers
 {
-    public static void Continue()
+    public static void Continue(string message = "Press any key to continue")
     {
-        Console.WriteLine("Press any key to continue");
+        Console.WriteLine();
+        Helpers.WarningMessage(message);
         Console.ReadKey();
     }
 

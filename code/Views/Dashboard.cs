@@ -9,7 +9,7 @@ public class Dashboard : ViewTemplate
     private string _userRole;
     private ManageMovies ManageMoviesPage = new();
     private ManageRefreshments ManageRefreshmentsPage = new();
-    private MovieView CustomerMoviePage = new();
+    private MovieList CustomerMoviePage = new();
     public Dashboard(string role) : base($"{Helpers.CapitalizeFirstLetter(role)} - Dashboard")
     {
         this._userRole = role;
