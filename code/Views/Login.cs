@@ -14,10 +14,11 @@ public class Login : ViewTemplate
             base.Render();
             // RouteHandeler.LastView();
 
-            string Email = base.InputField("Enter your email: ");
-            string Password = base.InputPassword("Enter password: ");
+            // string Email = base.InputField("Enter your email: ");
+            // string Password = base.InputPassword("Enter password: ");
 
-            AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
+            // AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
+            AccountModel UserAccount = accountsLogic.CheckLogin("admin@admin.com", "password");
 
             if (UserAccount != null)
             {

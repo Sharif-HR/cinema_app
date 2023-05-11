@@ -16,7 +16,7 @@ public static class Routes {
             case "ManageMoviesPageAdmin":
                 new ManageMovies().Render();
                 break;
-            case "MovieViewCustomerPage":
+            case "MovieViewPageCustomer":
                 new MovieView().Render();
                 break;
             case "DashboardPage":

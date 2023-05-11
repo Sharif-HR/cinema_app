@@ -64,7 +64,7 @@ public abstract class ViewTemplate
 
             if (key == ConsoleKey.Enter)
             {
-                if(string.IsNullOrWhiteSpace(pass)) return pass;
+                if(!string.IsNullOrWhiteSpace(pass)) return pass;
                 RouteHandeler.LastView();
             }
         }
@@ -389,6 +389,65 @@ public abstract class ViewTemplate
             return modelIndex;
         }
     }
+
+    public void MenuList(List<string> routesList, ViewTemplate page) {
+        Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
+        (int left, int top) = Console.GetCursorPosition();
+        var option = 1;
+        var decorator = "\u001b[32m";
+        ConsoleKeyInfo key;
+        bool isSelected = false;
+
+        // Insert the go back option
+        routesList.Insert(0, "Go Back");
+
+        while (!isSelected)
+        {
+            Console.Clear();
+            // render screen cant use the this.render due to an infinite while loop
+            this.CinemaLogo();
+            Helpers.Divider(false);
+            Console.WriteLine(page.Title);
+            Helpers.Divider(false);
+
+            Console.SetCursorPosition(left, top);
+
+            // Log all the options in the terminal
+            for(int i = 0; i < routesList.Count; i++) {
+                Console.WriteLine($"{i + 1}. {(option == (i + 1) ? decorator : "")}{routesList[i]}\u001b[0m");
+            }
+
+            key = Console.ReadKey(false);
+
+            switch (key.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    option = option == 1 ? routesList.Count : option - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    option = option == routesList.Count ? 1 : option + 1;
+                    break;
+                case ConsoleKey.Enter:
+                    isSelected = true;
+                    break;
+            }
+        }
+        if(routesList[option - 1] == "Go Back") {
+            RouteHandeler.LastView();
+        } else if (new[] {"Register", "Login", "Dashboard"}.Contains(routesList[option - 1]))
+        {
+            var routeName = routesList[option - 1];
+            RouteHandeler.View(routeName + "Page");
+        }
+        else {
+            var routeName = routesList[option - 1];
+
+            // return the view from the routehandler using the chosen option + page + the role of the admin
+            // if the role is null (not authenticated), no role will be added to the string
+            RouteHandeler.View(routeName.Replace(" ", "") + "Page" + Helpers.CapitalizeFirstLetter(LocalStorage.GetAuthenticatedUser().Role) ?? "");
+        }
+    }
+
     // TODO exit this function option
 
 
