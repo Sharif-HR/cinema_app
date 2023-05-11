@@ -24,6 +24,10 @@ public class MovieList : ViewTemplate
 
                 case "2":
                     return;
+
+                default:
+                    Helpers.WarningMessage("Invalid input");
+                    break;
             }
 
         }
@@ -49,6 +53,7 @@ public class MovieList : ViewTemplate
             if (!foundMovie)
             {
                 Helpers.WarningMessage("Movie not found.");
+                Helpers.Continue();
                 continue;
             }
 
