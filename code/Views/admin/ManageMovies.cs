@@ -344,16 +344,21 @@ Show time: {movies[movieId].ShowTime}");
         Console.WriteLine(_movieLogic.GenerateModelTable<MovieModel>(movies));
 
         Helpers.Divider();
-        Console.WriteLine("Search movies by title");
+        Console.WriteLine("Search movies");
         Helpers.Divider();
 
-        Console.WriteLine("Enter the title of the movie:");
+        Console.WriteLine("Enter a search term:");
         Console.Write("> ");
         string SearchKey = Console.ReadLine();
 
         IEnumerable<MovieModel> FoundMovie =
             from movie in movies
-            where Helpers.CaseInsensitiveContains(movie.Title, SearchKey)
+            where Helpers.CaseInsensitiveContains(movie.Title, SearchKey) || Helpers.CaseInsensitiveContains(movie.Summary, SearchKey) || Helpers.CaseInsensitiveContains(movie.ReleaseDate, SearchKey) || Helpers.CaseInsensitiveContains(movie.ShowTime, SearchKey) || Helpers.CaseInsensitiveContains(movie.Director, SearchKey) || Helpers.CaseInsensitiveContains(movie.Duration.ToString(), SearchKey)
+            select movie;
+
+        IEnumerable<MovieModel> FoundMovie2 =
+            from movie in movies
+            where movie.Genres.Contains(SearchKey) == true
             select movie;
 
         List<MovieModel> FoundMovies = new();
@@ -361,11 +366,15 @@ Show time: {movies[movieId].ShowTime}");
         {
             FoundMovies.Add(movie);
         }
+        foreach (MovieModel movie in FoundMovie2)
+        {
+            FoundMovies.Add(movie);
+        }
 
         base.Render();
         if (FoundMovies.Count == 0)
         {
-            Helpers.WarningMessage("No movie(s) found with that name.");
+            Helpers.WarningMessage("No movie(s) found.");
             Helpers.Continue();
             ShowMoviesTable("yes");
         }
