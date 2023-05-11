@@ -341,8 +341,8 @@ Price: {refreshments[refreshmentId].Price}
                         }
                         break;
 
-                    case "isDrink":
-                        FilterRefreshments();
+                    case "isdrink":
+                        FilterRefreshments(1);
                         break;
 
                     case "price":
@@ -378,8 +378,8 @@ Price: {refreshments[refreshmentId].Price}
                         }
                         break;
 
-                    case "isDrink":
-                        FilterRefreshments();
+                    case "isdrink":
+                        FilterRefreshments(2);
                         break;
 
                     case "price":
@@ -416,7 +416,7 @@ Price: {refreshments[refreshmentId].Price}
         }
     }
 
-    private void FilterRefreshments()
+    private void FilterRefreshments(int isAsc = 0)
     {
         var refreshments = _refreshmentLogic.GetRefreshments();
         base.Render();
@@ -429,21 +429,27 @@ Price: {refreshments[refreshmentId].Price}
         Console.WriteLine("1. Food");
         Console.WriteLine("2. Drinks");
 
-        bool o;
-        while(true){
-            string UserInput = Console.ReadLine();
-            if(UserInput == "1"){
-                o = false;
-                break;
-            }else if(UserInput == "2"){
-                o = true;
-                break;
+        bool o = true;
+        if(isAsc == 0){
+            while(true){
+                string UserInput = Console.ReadLine();
+                if(UserInput == "1"){
+                    o = false;
+                    break;
+                }else if(UserInput == "2"){
+                    o = true;
+                    break;
+                }
             }
+        }else if(isAsc == 1){
+            o = true;
+        }else if(isAsc == 2){
+            o = false;
         }
 
         IEnumerable<RefreshmentModel> FoundRefreshment =
             from refr in refreshments
-            where refr.IsDrink == true
+            where refr.IsDrink == o
             select refr;
 
         List<RefreshmentModel> FoundRefreshments = new List<RefreshmentModel>();
