@@ -27,6 +27,7 @@ public class MovieList : ViewTemplate
 
                 default:
                     Helpers.WarningMessage("Invalid input");
+                    Helpers.Continue();
                     break;
             }
 
