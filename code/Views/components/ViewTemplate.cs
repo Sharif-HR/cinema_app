@@ -1,3 +1,4 @@
+namespace Views;
 using System.Globalization;
 using System.Reflection;
 
@@ -15,6 +16,11 @@ public abstract class ViewTemplate
         this.CinemaLogo();
         Helpers.Divider(false);
         Console.WriteLine(this.Title);
+
+        if (LocalStorage.localStorage["history"].Count > 0) {
+            Console.WriteLine("Leave a field empty to go back to the previous page");
+        }
+
         Helpers.Divider(false);
     }
 
@@ -24,12 +30,14 @@ public abstract class ViewTemplate
         {
             Console.WriteLine(label);
             Console.Write("> ");
-            string userInput = Console.ReadLine();
+            string? userInput = Console.ReadLine() ?? null;
 
             if (!string.IsNullOrWhiteSpace(userInput))
             {
                 return userInput;
             }
+
+            RouteHandeler.LastView();
         }
     }
 
@@ -54,10 +62,10 @@ public abstract class ViewTemplate
                 pass += keyInfo.KeyChar;
             }
 
-            if (key == ConsoleKey.Enter && !string.IsNullOrWhiteSpace(pass))
+            if (key == ConsoleKey.Enter)
             {
-                Console.WriteLine();
-                return pass;
+                if(!string.IsNullOrWhiteSpace(pass)) return pass;
+                RouteHandeler.LastView();
             }
         }
     }
@@ -72,6 +80,8 @@ public abstract class ViewTemplate
             Console.WriteLine(label);
             Console.Write("> ");
             input = this.PasswordToAstriks();
+
+            if(input == null || input == "") RouteHandeler.LastView();
 
             if (mustBeStrong)
             {
@@ -173,8 +183,10 @@ public abstract class ViewTemplate
         {
             Console.WriteLine(label);
             Console.Write("> ");
-            string userInput = Console.ReadLine();
+            string userInput = Console.ReadLine() ?? null;
             string warningMessage = "Invalid input. Please enter y or n.";
+
+            if(userInput == null || userInput == "") RouteHandeler.LastView();
 
             if (string.IsNullOrWhiteSpace(userInput) == true)
             {
@@ -211,7 +223,9 @@ public abstract class ViewTemplate
                 // enter moive duration in minutes
                 Console.WriteLine(label);
                 Console.Write("> ");
-                string numberStr = Console.ReadLine();
+                string numberStr = Console.ReadLine() ?? null;
+
+                if(numberStr == null || numberStr == "") RouteHandeler.LastView();
 
                 if (!Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
                 {
@@ -304,7 +318,8 @@ public abstract class ViewTemplate
 
         if (userInput == null)
         {
-            userInput = Console.ReadLine();
+            userInput = Console.ReadLine() ?? null;
+            if(userInput == null || userInput == "") RouteHandeler.LastView();
         }
 
         List<string> values = new List<string>(userInput.Split(','));
@@ -326,7 +341,10 @@ public abstract class ViewTemplate
             {
                 Console.WriteLine("Enter date in this format (DD-MM-YYYY)");
                 Console.WriteLine(label);
-                string enteredDate = Console.ReadLine();
+              
+                string enteredDate = Console.ReadLine() ?? null;
+
+                if(enteredDate == null || enteredDate == "") RouteHandeler.LastView();
 
                 DateOnly dateObject = DateOnly.ParseExact(enteredDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
@@ -337,6 +355,7 @@ public abstract class ViewTemplate
 
                 if (isDateOnly == false)
                 {
+
                     return dateObject.ToString("dd-MM-yyyy");
                 }
             }
@@ -356,7 +375,8 @@ public abstract class ViewTemplate
                 Console.WriteLine("Enter date and time in this format (HH:mm DD-MM-YYYY)");
                 Console.WriteLine(label);
 
-                string enterDateTime = Console.ReadLine();
+                string enterDateTime = Console.ReadLine() ?? null;
+                if(enterDateTime == null || enterDateTime == "") RouteHandeler.LastView();
                 DateTime dateObject = DateTime.ParseExact(enterDateTime, "HH:mm dd-MM-yyyy", CultureInfo.InvariantCulture);
 
                 if (isDateOnly == true)
@@ -443,6 +463,65 @@ public abstract class ViewTemplate
             return modelIndex;
         }
     }
+
+    public void MenuList(List<string> routesList, ViewTemplate page) {
+        Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
+        (int left, int top) = Console.GetCursorPosition();
+        var option = 1;
+        var decorator = "\u001b[32m";
+        ConsoleKeyInfo key;
+        bool isSelected = false;
+
+        // Insert the go back option
+        routesList.Insert(0, "Go Back");
+
+        while (!isSelected)
+        {
+            Console.Clear();
+            // render screen cant use the this.render due to an infinite while loop
+            this.CinemaLogo();
+            Helpers.Divider(false);
+            Console.WriteLine(page.Title);
+            Helpers.Divider(false);
+
+            Console.SetCursorPosition(left, top);
+
+            // Log all the options in the terminal
+            for(int i = 0; i < routesList.Count; i++) {
+                Console.WriteLine($"{i + 1}. {(option == (i + 1) ? decorator : "")}{routesList[i]}\u001b[0m");
+            }
+
+            key = Console.ReadKey(false);
+
+            switch (key.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    option = option == 1 ? routesList.Count : option - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    option = option == routesList.Count ? 1 : option + 1;
+                    break;
+                case ConsoleKey.Enter:
+                    isSelected = true;
+                    break;
+            }
+        }
+        if(routesList[option - 1] == "Go Back") {
+            RouteHandeler.LastView();
+        } else if (new[] {"Register", "Login", "Dashboard"}.Contains(routesList[option - 1]))
+        {
+            var routeName = routesList[option - 1];
+            RouteHandeler.View(routeName + "Page");
+        }
+        else {
+            var routeName = routesList[option - 1];
+
+            // return the view from the routehandler using the chosen option + page + the role of the admin
+            // if the role is null (not authenticated), no role will be added to the string
+            RouteHandeler.View(routeName.Replace(" ", "") + "Page" + Helpers.CapitalizeFirstLetter(LocalStorage.GetAuthenticatedUser().Role) ?? "");
+        }
+    }
+
     // TODO exit this function option
 
 
@@ -451,22 +530,22 @@ public abstract class ViewTemplate
         Console.ForegroundColor = ConsoleColor.White;
         Console.Write(@"
 
-  ______   _____  _____  ____   ____  ________  _______     
-.' ____ \ |_   _||_   _||_  _| |_  _||_   __  ||_   __ \    
-| (___ \_|  | |    | |    \ \   / /    | |_ \_|  | |__) |   
- _.____`.   | |    | |   _ \ \ / /     |  _| _   |  __ /    
-| \____) | _| |_  _| |__/ | \ ' /     _| |__/ | _| |  \ \_  
- \______.'|_____||________|  \_/     |________||____| |___|                                            
+  ______   _____  _____  ____   ____  ________  _______
+.' ____ \ |_   _||_   _||_  _| |_  _||_   __  ||_   __ \
+| (___ \_|  | |    | |    \ \   / /    | |_ \_|  | |__) |
+ _.____`.   | |    | |   _ \ \ / /     |  _| _   |  __ /
+| \____) | _| |_  _| |__/ | \ ' /     _| |__/ | _| |  \ \_
+ \______.'|_____||________|  \_/     |________||____| |___|
 ");
         Console.ResetColor();
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write(@"  ______  _____  ____  _____  ________  ____    ____       _       
- .' ___  ||_   _||_   \|_   _||_   __  ||_   \  /   _|     / \      
-/ .'   \_|  | |    |   \ | |    | |_ \_|  |   \/   |      / _ \     
-| |         | |    | |\ \| |    |  _| _   | |\  /| |     / ___ \    
-\ `.___.'\ _| |_  _| |_\   |_  _| |__/ | _| |_\/_| |_  _/ /   \ \_  
- `.____ .'|_____||_____|\____||________||_____||_____||____| |____| 
-                                                                    
+        Console.Write(@"  ______  _____  ____  _____  ________  ____    ____       _
+ .' ___  ||_   _||_   \|_   _||_   __  ||_   \  /   _|     / \
+/ .'   \_|  | |    |   \ | |    | |_ \_|  |   \/   |      / _ \
+| |         | |    | |\ \| |    |  _| _   | |\  /| |     / ___ \
+\ `.___.'\ _| |_  _| |_\   |_  _| |__/ | _| |_\/_| |_  _/ /   \ \_
+ `.____ .'|_____||_____|\____||________||_____||_____||____| |____|
+
 ");
         Console.ResetColor();
 

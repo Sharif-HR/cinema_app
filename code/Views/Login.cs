@@ -12,17 +12,17 @@ public class Login : ViewTemplate
         {
 
             base.Render();
-            if (Helpers.GoBack("logging in") == true) { return; }
+            // RouteHandeler.LastView();
 
-            string Email = base.InputField("Enter your email: ");
-            string Password = base.InputPassword("Enter password: ");
+            // string Email = base.InputField("Enter your email: ");
+            // string Password = base.InputPassword("Enter password: ");
 
-            AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
+            // AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
+            AccountModel UserAccount = accountsLogic.CheckLogin("admin@admin.com", "password");
 
             if (UserAccount != null)
             {
-                Dashboard DasboardPage = new(role: UserAccount.Role);
-                DasboardPage.Render();
+                RouteHandeler.View("DashboardPage");
                 return;
             }
             else

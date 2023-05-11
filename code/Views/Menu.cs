@@ -11,34 +11,8 @@ public class Menu : ViewTemplate
     //You could edit this to show different menus depending on the user's role
     public override void Render()
     {
-        while(true) {
-            base.Render();
-
-            Console.Write(@"Please select an option:
-1. Login
-2. Register
-3. Exit (Temporary for Development)");
-
-            Helpers.Divider();
-            string UserInput = InputField("Enter a number:");
-            switch(UserInput){
-                case "1":
-                    LoginPage.Render();
-                    break;
-
-                case "2":
-                    RegisterPage.Render();
-                    break;
-
-                case "3":
-                    Console.WriteLine("Closing Cinema-app...");
-                    return;
-
-                default:
-                    Console.WriteLine("Invalid input");
-                    Helpers.Continue();
-                    break;
-            }
-        }
+        base.Render();
+        List<string> testList = new(){"Login", "Register"};
+        MenuList(testList, this);
     }
 }

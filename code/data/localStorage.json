@@ -1,0 +1,20 @@
+{
+  "authenticated": true,
+  "user": {
+    "id": "56ee0382-8fb2-4314-b708-6f76a048d23a",
+    "username": "test",
+    "password": "test123",
+    "emailAddress": "test@gmail.com",
+    "phoneNumber": "0612345678",
+    "firstName": "Jurian",
+    "lastName": "Andriessen",
+    "isStudent": false,
+    "role": "admin"
+  },
+  "history": [
+    "login",
+    "register",
+    "moviesPage",
+    "testPage"
+  ]
+}

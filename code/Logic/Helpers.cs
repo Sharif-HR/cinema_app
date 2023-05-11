@@ -123,6 +123,13 @@ public static class Helpers
         Console.ResetColor();
     }
 
+    public static void ErrorMessage(string message)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(message);
+        Console.ResetColor();
+    }
+
     public static void SuccessMessage(string message)
     {
         Console.ForegroundColor = ConsoleColor.Green;
@@ -215,5 +222,9 @@ public static class Helpers
         StringComparison stringComparison = StringComparison.CurrentCultureIgnoreCase)
     {
         return text.IndexOf(value, stringComparison) >= 0;
+    }
+
+    public static string DecapitalizeString(string str) {
+        return char.ToLower(str[0]) + str.Substring(1);
     }
 }

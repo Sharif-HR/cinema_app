@@ -12,7 +12,7 @@ public class Register : ViewTemplate
         while (true)
         {
             base.Render();
-            if (Helpers.GoBack("updating a movie") == true) { return; }
+            // RouteHandeler.LastView();
 
             string? username = base.InputField("Enter your username");
             string? firstName = base.InputField("Enter your first name:");
@@ -29,7 +29,7 @@ public class Register : ViewTemplate
             Helpers.SuccessMessage("Registration complete.");
             Helpers.Continue();
 
-            customerDashboardPage.Render();
+            RouteHandeler.View("DashboardPage");
             return;
         }
     }
