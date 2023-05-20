@@ -1,15 +1,31 @@
-public class ReservationModel {
-    public string ID;
-    public string MovieId;
-    public string Seats;
-    public double Costs;
-    public List<RefreshmentModel> Refreshments;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
-    public ReservationModel(string id, string movieID, string seats, double costs, List<RefreshmentModel> refreshments) {
+public class ReservationModel {
+    [JsonPropertyName("id")]
+    public string ID {get; set;}
+
+    [JsonPropertyName("seats")]
+    public string Seats {get; set;}
+
+    [JsonPropertyName("costs")]
+    public double Costs {get; set;}
+
+    [JsonPropertyName("refreshments")]
+    public List<RefreshmentModel> Refreshments {get; set;}
+
+    [JsonPropertyName("user")]
+    public AccountModel User {get; set;}
+
+    [JsonPropertyName("show")]
+    public ShowModel Show {get; set;}
+
+    public ReservationModel(string id, string seats, double costs, List<RefreshmentModel> refreshments, AccountModel user, ShowModel show) {
         this.ID = id;
-        this.MovieId = movieID;
         this.Seats = seats;
         this.Costs = costs;
         this.Refreshments = refreshments;
+        this.User = user;
+        this.Show = show;
     }
 }
