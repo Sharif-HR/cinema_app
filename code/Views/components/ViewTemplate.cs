@@ -341,7 +341,7 @@ public abstract class ViewTemplate
             {
                 Console.WriteLine("Enter date in this format (DD-MM-YYYY)");
                 Console.WriteLine(label);
-              
+
                 string enteredDate = Console.ReadLine() ?? null;
 
                 if(enteredDate == null || enteredDate == "") RouteHandeler.LastView();
@@ -521,6 +521,60 @@ public abstract class ViewTemplate
             RouteHandeler.View(routeName.Replace(" ", "") + "Page" + Helpers.CapitalizeFirstLetter(LocalStorage.GetAuthenticatedUser().Role) ?? "");
         }
     }
+
+    public void MenuList(Dictionary<string, ShowModel> routesDict, ViewTemplate page, ViewTemplate pageToGoWithID) {
+        Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
+        (int left, int top) = Console.GetCursorPosition();
+        var option = 1;
+        var decorator = "\u001b[32m";
+        ConsoleKeyInfo key;
+        bool isSelected = false;
+        List<string> routesList = routesDict.Keys.ToList();
+
+        // Insert the go back option
+        routesList.Insert(0, "Go Back");
+
+        while (!isSelected)
+        {
+            Console.Clear();
+            // render screen cant use the this.render due to an infinite while loop
+            this.CinemaLogo();
+            Helpers.Divider(false);
+            Console.WriteLine(page.Title);
+            Helpers.Divider(false);
+
+            Console.SetCursorPosition(left, top);
+
+            // Log all the options in the terminal
+            for(int i = 0; i < routesList.Count; i++) {
+                Console.WriteLine($"{i + 1}. {(option == (i + 1) ? decorator : "")}{routesList[i]}\u001b[0m");
+            }
+
+            key = Console.ReadKey(false);
+
+            switch (key.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    option = option == 1 ? routesList.Count : option - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    option = option == routesList.Count ? 1 : option + 1;
+                    break;
+                case ConsoleKey.Enter:
+                    isSelected = true;
+                    break;
+            }
+        }
+        //routing
+        string keyOfDict = routesList[option - 1];
+        var item = routesDict[keyOfDict];
+
+        if(Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "ReservationPage") {
+            new ReservationPage(item).Render();
+        }
+    }
+
+
 
     // TODO exit this function option
 

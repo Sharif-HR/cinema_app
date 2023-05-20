@@ -1,0 +1,54 @@
+[
+	{
+		"id": "af7c1fe6-d669-414e-b066-e9733f0de7a8",
+		"movieId": "08c71152-c552-42e7-b094-f510ff44e9cb",
+		"seats": "a1, a2, a3, a4",
+		"costs": 67.99,
+		"refreshments": [
+			{
+				"id": "1",
+				"name": "Popcorn",
+				"isDrink": false,
+				"price": 3.2
+			},
+			{
+				"id": "2",
+				"name": "Candy",
+				"isDrink": false,
+				"price": 12.1
+			},
+			{
+				"id": "3",
+				"name": "Nachos",
+				"isDrink": false,
+				"price": 6.99
+			}
+		]
+	},
+	{
+		"id": "af7c1fe6-d669-414e-b066-e9733f0de7a8",
+		"movieId": "08c71152-c552-42e7-b094-f510ff44e9cb",
+		"seats": "a1, a2, a3, a4",
+		"costs": 67.99,
+		"refreshments": [
+			{
+				"id": "1",
+				"name": "Popcorn",
+				"isDrink": false,
+				"price": 3.2
+			},
+			{
+				"id": "2",
+				"name": "Candy",
+				"isDrink": false,
+				"price": 12.1
+			},
+			{
+				"id": "3",
+				"name": "Nachos",
+				"isDrink": false,
+				"price": 6.99
+			}
+		]
+	}
+]

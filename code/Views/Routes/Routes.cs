@@ -17,7 +17,7 @@ public static class Routes {
                 new ManageMovies().Render();
                 break;
             case "MovieViewPageCustomer":
-                new MovieView().Render();
+                // new MovieView().Render();
                 break;
             case "DashboardPage":
                 new Dashboard(LocalStorage.GetAuthenticatedUser().Role).Render();
@@ -31,9 +31,28 @@ public static class Routes {
             case "MenuPage":
                 new Menu().Render();
                 break;
+            case "ReservationsAdminPage":
+                new ReservationsAdmin().Render();
+                break;
+            case "SeereservationsbycustomernamePageAdmin":
+                new ReservationOverview().Render();
+                break;
+            case "SeeallreservationsPageAdmin":
+                new ReservationsOverviewAdmin().Render();
+                break;
+            case "ShowOverview":
+                new ShowOverview().Render();
+                break;
+            case "ShowsbydatePageCustomer":
+                new ShowsByDate().Render();
+                break;
             default:
                 Console.WriteLine("Page doesn't exist");
                 break;
         }
     }
+
+    // public static void RouteNameToView(string name) {
+    //     Activator.CreateInstance(name);
+    // }
 }
