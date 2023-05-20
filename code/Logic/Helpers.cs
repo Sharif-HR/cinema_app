@@ -227,4 +227,18 @@ public static class Helpers
     public static string DecapitalizeString(string str) {
         return char.ToLower(str[0]) + str.Substring(1);
     }
+
+    public static int DateToUnixTimeStamp(string date) {
+        DateTime oDate = Convert.ToDateTime(date);
+        DateTimeOffset dateToConvert = new DateTimeOffset(oDate);
+
+        var timestamp = dateToConvert.ToUnixTimeSeconds();
+
+        // + 7200 seconds because of the GMT time difference
+        return Convert.ToInt32(timestamp.ToString()) + 7200;
+    }
+
+    public static string TimeStampToGMEFormat(int timestamp, string format = "dd-MM-yyyy") {
+        return DateTimeOffset.FromUnixTimeSeconds(timestamp + 7200).ToString(format);
+    }
 }
