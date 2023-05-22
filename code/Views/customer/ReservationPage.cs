@@ -43,5 +43,13 @@ public class ReservationPage : ViewTemplate{
         reservations.Add(reservation);
 
         _reservationAccess.WriteAll(reservations);
+
+        Helpers.SuccessMessage($"You have made a reservation for {reservation.Show.Movie.Title} {Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm")}");
+        Console.WriteLine("Creating your receipt...");
+        Thread.Sleep(2000);
+        _reservationAccess.PrintReceipt(reservation);
+
     }
+
+
 }
