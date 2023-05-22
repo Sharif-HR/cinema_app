@@ -574,6 +574,54 @@ public abstract class ViewTemplate
         }
     }
 
+    public RefreshmentModel RefreshmentsList(ViewTemplate page) {
+        Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
+        (int left, int top) = Console.GetCursorPosition();
+        var option = 1;
+        var decorator = "\u001b[32m";
+        ConsoleKeyInfo key;
+        bool isSelected = false;
+        // List<string> routesList = routesDict.Keys.ToList();
+        List<RefreshmentModel> refreshments = new RefreshmentAccess().LoadAll();
+
+        // Insert the go back option
+        // routesList.Insert(0, "Go Back");
+
+        while (!isSelected)
+        {
+            Console.Clear();
+            // render screen cant use the this.render due to an infinite while loop
+            this.CinemaLogo();
+            Helpers.Divider(false);
+            Console.WriteLine(page.Title);
+            Helpers.Divider(false);
+
+            Console.SetCursorPosition(left, top);
+
+            // Log all the options in the terminal
+            for(int i = 0; i < refreshments.Count; i++) {
+                Console.WriteLine($"{i + 1}. {(option == (i + 1) ? decorator : "")}{refreshments[i].Name} | {refreshments[i].Price}\u001b[0m");
+            }
+
+            key = Console.ReadKey(false);
+
+            switch (key.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    option = option == 1 ? refreshments.Count : option - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    option = option == refreshments.Count ? 1 : option + 1;
+                    break;
+                case ConsoleKey.Enter:
+                    isSelected = true;
+                    break;
+            }
+        }
+
+        return refreshments[option - 1];
+    }
+
 
 
     // TODO exit this function option
