@@ -14,7 +14,7 @@ public class ReservationsOverviewAdmin : ViewTemplate {
 
         while (true)
         {
-            string days = InputField("How many days do you want to look back? (Enter * to see everything)");
+            string days = InputField("How many days do you want to look back? (Enter * to see everything): ");
             int daysInSeconds;
             if(days == "*") {
                 foreach (ReservationModel reservation in reservations)
@@ -23,24 +23,25 @@ public class ReservationsOverviewAdmin : ViewTemplate {
                 }
                 break;
             } else {
-                try
-                {
-                    // Convert the given days into seconds (86400 seconds per day)
-                    daysInSeconds = Convert.ToInt32(days) * 86_400;
-                    // get the reservations based on the timestamp from today - the given days in seconds
-                    reservationsPastX = reservations.Where(e => (timestampNow - daysInSeconds) < e.Show.Timestamp).ToList();
+                // Convert the given days into seconds (86400 seconds per day)
+                int convertedDays;
+                bool validNumber = int.TryParse(days, out convertedDays);
 
-                    // misschien in een tabel maken
-                    foreach (ReservationModel reservation in reservationsPastX)
-                    {
-                        Console.WriteLine($"ID: {reservation.ID}, Show: {reservation.Show.Movie.Title}, Customer: {reservation.User.FirstName} {reservation.User.LastName}");
-                    }
-                    break;
+                if(!validNumber) {
+                    Helpers.WarningMessage("Days are invalid. Try again");
+                    Helpers.Continue();
+                    continue;
                 }
-                catch (OverflowException)
+                // get the reservations based on the timestamp from today - the given days in seconds
+                daysInSeconds = convertedDays * 86_400;
+                reservationsPastX = reservations.Where(e => (timestampNow - daysInSeconds) < e.Show.Timestamp).ToList();
+
+                // misschien in een tabel maken
+                foreach (ReservationModel reservation in reservationsPastX)
                 {
-                    Helpers.ErrorMessage("The number you have entered is to big. Try again with another, smaller number");
+                    Console.WriteLine($"ID: {reservation.ID}, Show: {reservation.Show.Movie.Title}, Customer: {reservation.User.FirstName} {reservation.User.LastName}");
                 }
+                break;
             }
         }
     }

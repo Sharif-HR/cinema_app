@@ -2,7 +2,7 @@ namespace Views;
 
 public class ReservationPage : ViewTemplate{
     public ShowModel? Show;
-    private ReservationAccess _reservationAccess = new();
+    private ReservationLogic _reservationLogic = new();
     public ReservationPage(ShowModel show = null) : base($"Make Reservation") { this.Show = show; }
 
     public override void Render()
@@ -12,7 +12,7 @@ public class ReservationPage : ViewTemplate{
         // List<string> seats = Auditorium.GetSeats();
 
         //test code
-        List<ReservationModel> reservations = _reservationAccess.LoadAll();
+        List<ReservationModel> reservations = _reservationLogic.GetReservations();
 
         List<string> seats = new(){"a1", "a2", "a3"};
 
@@ -42,12 +42,12 @@ public class ReservationPage : ViewTemplate{
 
         reservations.Add(reservation);
 
-        _reservationAccess.WriteAll(reservations);
+        _reservationLogic.UpdateReservations(reservations);
 
         Helpers.SuccessMessage($"You have made a reservation for {reservation.Show.Movie.Title} {Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm")}");
         Console.WriteLine("Creating your receipt...");
         Thread.Sleep(2000);
-        _reservationAccess.PrintReceipt(reservation);
+        _reservationLogic.PrintReceipt(reservation);
 
     }
 
