@@ -1,14 +1,14 @@
 namespace Views;
 
 public class ReservationByCustomerAdmin: ViewTemplate {
-    private ReservationAccess _reservationAccess = new();
+    private ReservationLogic _reservationLogic = new();
     public ReservationByCustomerAdmin() : base("Reservations") {}
 
     public override void Render()
     {
         base.Render();
         string customerEmail = InputField("Enter the customer's email: ");
-        List<ReservationModel> reservations = _reservationAccess.LoadAll();
+        List<ReservationModel> reservations = _reservationLogic.GetReservations();
         List<ReservationModel> customerReservations = new();
 
         customerReservations = reservations.Where(r => r.User.EmailAddress == customerEmail).ToList();

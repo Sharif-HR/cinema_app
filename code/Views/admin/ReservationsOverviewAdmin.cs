@@ -1,14 +1,14 @@
 namespace Views;
 
 public class ReservationsOverviewAdmin : ViewTemplate {
-    private ReservationAccess _reservationAccess = new();
+    private ReservationLogic _reservationLogic = new();
     public ReservationsOverviewAdmin() : base("All the reservations") {}
 
     public override void Render()
     {
         base.Render();
 
-        List<ReservationModel> reservations = _reservationAccess.LoadAll();
+        List<ReservationModel> reservations = _reservationLogic.GetReservations();
         List<ReservationModel> reservationsPastX = new();
         int timestampNow = Convert.ToInt32(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds());
 
