@@ -35,7 +35,7 @@ public static class Routes {
                 new ReservationsAdmin().Render();
                 break;
             case "SeereservationsbycustomernamePageAdmin":
-                new ReservationOverview().Render();
+                new ReservationByCustomerAdmin().Render();
                 break;
             case "SeeallreservationsPageAdmin":
                 new ReservationsOverviewAdmin().Render();
