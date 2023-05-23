@@ -522,7 +522,7 @@ public abstract class ViewTemplate
         }
     }
 
-    public void MenuList(Dictionary<string, ShowModel> routesDict, ViewTemplate page, ViewTemplate pageToGoWithID) {
+    public int MenuList(Dictionary<string, ShowModel> routesDict, ViewTemplate page, ViewTemplate pageToGoWithID) {
         Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
         (int left, int top) = Console.GetCursorPosition();
         var option = 1;
@@ -569,10 +569,17 @@ public abstract class ViewTemplate
         string keyOfDict = routesList[option - 1];
         var item = routesDict[keyOfDict];
 
+        // return the index of the chosen option
+        return option - 2;
+
         if(Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "ReservationPage") {
-            new ReservationPage(item).Render();
+
+        } else if(Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "SeeallreservationsPageAdmin") {
+
+        } else if(Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "SeereservationsbycustomernamePageAdmin") {
+            new ReservationsOverviewAdmin().Render();
         }
-    }
+     }
 
     public RefreshmentModel RefreshmentsList(ViewTemplate page) {
         Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");

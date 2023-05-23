@@ -17,7 +17,11 @@ public class ShowsByDate : ViewTemplate {
             showsDict[$"{show.Movie.Title} | Starts: {Helpers.TimeStampToGMEFormat(show.Timestamp, "HH:mm")}"] = show;
         }
 
-        MenuList(showsDict, this, new ReservationPage());
+        int index = MenuList(showsDict, this, new ReservationPage());
+        var element = showsDict.ElementAt(index);
+
+        // render the page with the ShowModel
+        new ReservationPage(element.Value).Render();
     }
 
     private List<ShowModel> GetShowModelsByDate(string date) {
