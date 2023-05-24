@@ -10,13 +10,11 @@ public class Login : ViewTemplate
     {
         while (true)
         {
-
             base.Render();
-            RouteHandeler.LastView();
 
-            if(Environment.GetEnvironmentVariable("ENVIRONMENT") == "development") {
-                RouteHandeler.View("DashboardPage");
-            }
+            // if(Environment.GetEnvironmentVariable("ENVIRONMENT") == "development") {
+            //     RouteHandeler.View("DashboardPage");
+            // }
 
             string Email = base.InputField("Enter your email: ");
             string Password = base.InputPassword("Enter password: ");
@@ -26,8 +24,8 @@ public class Login : ViewTemplate
 
             if (UserAccount != null)
             {
+                LocalStorage.WriteToStorage(UserAccount);
                 RouteHandeler.View("DashboardPage");
-                return;
             }
             else
             {

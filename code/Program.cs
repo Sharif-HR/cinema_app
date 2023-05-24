@@ -17,12 +17,17 @@ namespace CinemaApp
 
             // Load the env file
             DotEnv.Load(dotenv);
-            // initialize empty storage
-            LocalStorage.WriteToStorage();
             // Load the local storage
             LocalStorage.LoadLocalStorage();
+            // initialize empty storage
+            LocalStorage.WriteToStorage();
 
-            Views.RouteHandeler.View("MenuPage");
+            if (LocalStorage.GetAuthenticatedUser() != null)
+            {
+                Views.RouteHandeler.View(LocalStorage.GetLastViewName());
+            } else {
+                Views.RouteHandeler.View("MenuPage");
+            }
         }
     }
 }

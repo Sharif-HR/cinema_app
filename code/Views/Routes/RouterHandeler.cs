@@ -2,7 +2,9 @@ namespace Views;
 public abstract class RouteHandeler {
     public static void View(string viewNameString) {
         if(viewNameString != "MenuPage") {
-            LocalStorage.AddToHistory(viewNameString);
+            if(viewNameString != LocalStorage.GetLastViewName()) {
+                LocalStorage.AddToHistory(viewNameString);
+            }
         }
         Routes.RouteNameToView(viewNameString);
     }

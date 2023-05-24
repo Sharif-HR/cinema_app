@@ -93,7 +93,7 @@ public static class LocalStorage {
         }
     }
 
-    private static bool LocalStorageKeyCheck(string key) {
+    public static bool LocalStorageKeyCheck(string key) {
         return (localStorage.ContainsKey(key) && localStorage[key] != null);
     }
 
@@ -149,7 +149,7 @@ public static class LocalStorage {
     public static string? GetLastViewName() {
         if (LocalStorageKeyCheck("history"))
         {
-            return localStorage["history"][localStorage["history"].Count - 1];
+            if(localStorage["history"].Count != 0) return localStorage["history"][localStorage["history"].Count - 1];
         }
 
         return null;
