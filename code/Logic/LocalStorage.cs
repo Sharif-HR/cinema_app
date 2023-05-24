@@ -17,7 +17,7 @@ public static class LocalStorage {
         JsonNode mainJson = JsonNode.Parse("{}");
 
         // goed
-        mainJson["authenticated"] = true;
+        mainJson["authenticated"] = (user != null) ? true : false;
 
         JsonObject userJson = new();
 
