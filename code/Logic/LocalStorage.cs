@@ -12,8 +12,8 @@ public static class LocalStorage {
 
     public static object? GetItem(string key) => LocalStorageKeyCheck(key) ? localStorage[key] : null;
 
-    public static void WriteToStorage() {
-        AccountModel? user = GetAuthenticatedUser();
+    public static void WriteToStorage(AccountModel? loggedInUser = null) {
+        AccountModel? user = loggedInUser ?? GetAuthenticatedUser();
         JsonNode mainJson = JsonNode.Parse("{}");
 
         // goed
@@ -21,16 +21,20 @@ public static class LocalStorage {
 
         JsonObject userJson = new();
 
-        // create a list of the properties of the AccountModel class
-        PropertyInfo[] properties = user.GetType().GetProperties();
+        try {
+            // create a list of the properties of the AccountModel class
+            PropertyInfo[] properties = user.GetType().GetProperties();
 
-        // loop through the properties
-        foreach (PropertyInfo property in properties) {
-            // assign the property name as the json key with the value of the property as its value. Example: "firstName": "test"
-            userJson[Helpers.DecapitalizeString(property.Name)] = JsonNode.Parse(JsonSerializer.Serialize(property.GetValue(user)));
+            // loop through the properties
+            foreach (PropertyInfo property in properties) {
+                // assign the property name as the json key with the value of the property as its value. Example: "firstName": "test"
+                userJson[Helpers.DecapitalizeString(property.Name)] = JsonNode.Parse(JsonSerializer.Serialize(property.GetValue(user)));
+            }
+
+            mainJson["user"] = userJson;
+        } catch {
+            mainJson["user"] = null;
         }
-
-        mainJson["user"] = userJson;
         JsonArray historyArray = new JsonArray();
 
         foreach(var item in localStorage["history"]) {
