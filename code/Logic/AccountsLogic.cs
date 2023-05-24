@@ -64,6 +64,14 @@ public class AccountsLogic: LogicTemplate
         return foundAccount;
     }
 
+    public void Logout() {
+        Dictionary<string, dynamic> emptyStorage = new();
+        LocalStorage.localStorage = emptyStorage;
+
+        LocalStorage.WriteToStorage();
+        Views.RouteHandeler.View("MenuPage");
+    }
+
 }
 
 

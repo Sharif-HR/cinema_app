@@ -124,14 +124,14 @@ public class Dashboard : ViewTemplate
 
     private void ShowAdminMenu()
     {
-        List<string> options = new() {"Reservations", "Manage Movies", "ManageRefreshments", "Log out"};
+        List<string> options = new() {"Reservations", "Manage Movies", "ManageRefreshments", "Logout"};
         MenuList(options, this);
         Helpers.Divider(false);
     }
 
     private void ShowCustomerMenu()
     {
-        List<string> options = new() {"Show Movies", "Manage Movies", "ManageRefreshments", "Log out"};
+        List<string> options = new() {"Show Movies", "Manage Movies", "ManageRefreshments", "Logout"};
         MenuList(options, this);
     }
 }

@@ -31,7 +31,7 @@ public static class Routes {
             case "MenuPage":
                 new Menu().Render();
                 break;
-            case "ReservationsAdminPage":
+            case "ReservationsPageAdmin":
                 new ReservationsAdmin().Render();
                 break;
             case "SeereservationsbycustomernamePageAdmin":
@@ -45,6 +45,9 @@ public static class Routes {
                 break;
             case "ShowsbydatePageCustomer":
                 new ShowsByDate().Render();
+                break;
+            case "LogoutPage":
+                new AccountsLogic().Logout();
                 break;
             default:
                 Console.WriteLine("Page doesn't exist");

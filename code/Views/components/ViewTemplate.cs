@@ -508,7 +508,7 @@ public abstract class ViewTemplate
         }
         if(routesList[option - 1] == "Go Back") {
             RouteHandeler.LastView();
-        } else if (new[] {"Register", "Login", "Dashboard"}.Contains(routesList[option - 1]))
+        } else if (new[] {"Register", "Login", "Dashboard", "Logout"}.Contains(routesList[option - 1]))
         {
             var routeName = routesList[option - 1];
             RouteHandeler.View(routeName + "Page");
