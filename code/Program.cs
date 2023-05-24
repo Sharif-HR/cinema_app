@@ -17,6 +17,8 @@ namespace CinemaApp
 
             // Load the env file
             DotEnv.Load(dotenv);
+            // initialize empty storage
+            LocalStorage.WriteToStorage();
             // Load the local storage
             LocalStorage.LoadLocalStorage();
 

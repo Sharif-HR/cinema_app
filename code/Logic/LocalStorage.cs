@@ -58,6 +58,7 @@ public static class LocalStorage {
         var jsonString = JsonSerializer.Serialize(mainJson, options);
 
         using (StreamWriter sw = File.CreateText("data/localStorage.json")){ sw.WriteLine(jsonString); }
+        LoadLocalStorage();
     }
 
     public static void LoadLocalStorage() {
