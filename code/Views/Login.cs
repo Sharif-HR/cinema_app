@@ -12,13 +12,17 @@ public class Login : ViewTemplate
         {
 
             base.Render();
-            // RouteHandeler.LastView();
+            RouteHandeler.LastView();
 
-            // string Email = base.InputField("Enter your email: ");
-            // string Password = base.InputPassword("Enter password: ");
+            if(Environment.GetEnvironmentVariable("ENVIRONMENT") == "development") {
+                RouteHandeler.View("DashboardPage");
+            }
 
-            // AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
-            AccountModel UserAccount = accountsLogic.CheckLogin("admin@admin.com", "password");
+            string Email = base.InputField("Enter your email: ");
+            string Password = base.InputPassword("Enter password: ");
+
+            AccountModel UserAccount = accountsLogic.CheckLogin(Email, Password);
+
 
             if (UserAccount != null)
             {
