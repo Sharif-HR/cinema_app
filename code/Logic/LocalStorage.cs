@@ -35,13 +35,21 @@ public static class LocalStorage {
         } catch {
             mainJson["user"] = null;
         }
-        JsonArray historyArray = new JsonArray();
 
-        foreach(var item in localStorage["history"]) {
-            historyArray.Add(item);
+        try
+        {
+            JsonArray historyArray = new JsonArray();
+
+            foreach(var item in localStorage["history"]) {
+                historyArray.Add(item);
+            }
+
+            mainJson["history"] = historyArray;
         }
-
-        mainJson["history"] = historyArray;
+        catch (KeyNotFoundException)
+        {
+            mainJson["history"] = new JsonArray();
+        }
 
         var options = new JsonSerializerOptions {
             WriteIndented = true
