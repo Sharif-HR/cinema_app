@@ -58,7 +58,11 @@ public static class LocalStorage {
         foreach (var item in data)
         {
             if(item.Key == "user") {
-                localStorage[item.Key] = JsonSerializer.Deserialize<AccountModel>(item.Value.ToString());
+                if(item.Value == null) {
+                    localStorage[item.Key] = null;
+                } else {
+                    localStorage[item.Key] = JsonSerializer.Deserialize<AccountModel>(item.Value.ToString());
+                }
             } else if (item.Key == "history") {
                 JsonElement historyElement = (JsonElement)data["history"];
                 List<string> historyList = new List<string>();
