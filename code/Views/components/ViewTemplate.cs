@@ -64,7 +64,7 @@ public abstract class ViewTemplate
 
             if (key == ConsoleKey.Enter)
             {
-                if(!string.IsNullOrWhiteSpace(pass)) return pass;
+                if (!string.IsNullOrWhiteSpace(pass)) return pass;
                 RouteHandeler.LastView();
             }
         }
@@ -81,7 +81,7 @@ public abstract class ViewTemplate
             Console.Write("> ");
             input = this.PasswordToAstriks();
 
-            if(input == null || input == "") RouteHandeler.LastView();
+            if (input == null || input == "") RouteHandeler.LastView();
 
             if (mustBeStrong)
             {
@@ -186,7 +186,7 @@ public abstract class ViewTemplate
             string userInput = Console.ReadLine() ?? null;
             string warningMessage = "Invalid input. Please enter y or n.";
 
-            if(userInput == null || userInput == "") RouteHandeler.LastView();
+            if (userInput == null || userInput == "") RouteHandeler.LastView();
 
             if (string.IsNullOrWhiteSpace(userInput) == true)
             {
@@ -225,7 +225,7 @@ public abstract class ViewTemplate
                 Console.Write("> ");
                 string numberStr = Console.ReadLine() ?? null;
 
-                if(numberStr == null || numberStr == "") RouteHandeler.LastView();
+                if (numberStr == null || numberStr == "") RouteHandeler.LastView();
 
                 if (!Helpers.IsDigitsOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
                 {
@@ -292,20 +292,21 @@ public abstract class ViewTemplate
         while (true)
         {
             Console.WriteLine(label);
+            Helpers.WarningMessage("Enter yes or no");
             Console.Write("> ");
             string isbool = Console.ReadLine();
 
-            if (isbool == "false")
+            if (isbool.ToLower() == "n" || isbool.ToLower() == "no")
             {
                 return false;
             }
-            else if (isbool == "true")
+            else if (isbool.ToLower() == "y" || isbool.ToLower() == "yes")
             {
                 return true;
             }
             else
             {
-                Helpers.WarningMessage("This field accepts only true or false.");
+                Helpers.WarningMessage("This field accepts only yes, y, n or no.");
             }
         }
     }
@@ -319,7 +320,7 @@ public abstract class ViewTemplate
         if (userInput == null)
         {
             userInput = Console.ReadLine() ?? null;
-            if(userInput == null || userInput == "") RouteHandeler.LastView();
+            if (userInput == null || userInput == "") RouteHandeler.LastView();
         }
 
         List<string> values = new List<string>(userInput.Split(','));
@@ -344,7 +345,7 @@ public abstract class ViewTemplate
 
                 string enteredDate = Console.ReadLine() ?? null;
 
-                if(enteredDate == null || enteredDate == "") RouteHandeler.LastView();
+                if (enteredDate == null || enteredDate == "") RouteHandeler.LastView();
 
                 DateOnly dateObject = DateOnly.ParseExact(enteredDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
@@ -376,7 +377,7 @@ public abstract class ViewTemplate
                 Console.WriteLine(label);
 
                 string enterDateTime = Console.ReadLine() ?? null;
-                if(enterDateTime == null || enterDateTime == "") RouteHandeler.LastView();
+                if (enterDateTime == null || enterDateTime == "") RouteHandeler.LastView();
                 DateTime dateObject = DateTime.ParseExact(enterDateTime, "HH:mm dd-MM-yyyy", CultureInfo.InvariantCulture);
 
                 if (isDateOnly == true)
@@ -464,7 +465,8 @@ public abstract class ViewTemplate
         }
     }
 
-    public void MenuList(List<string> routesList, ViewTemplate page) {
+    public void MenuList(List<string> routesList, ViewTemplate page)
+    {
         Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
         (int left, int top) = Console.GetCursorPosition();
         var option = 1;
@@ -487,7 +489,8 @@ public abstract class ViewTemplate
             Console.SetCursorPosition(left, top);
 
             // Log all the options in the terminal
-            for(int i = 0; i < routesList.Count; i++) {
+            for (int i = 0; i < routesList.Count; i++)
+            {
                 Console.WriteLine($"{i + 1}. {(option == (i + 1) ? decorator : "")}{routesList[i]}\u001b[0m");
             }
 
@@ -506,14 +509,17 @@ public abstract class ViewTemplate
                     break;
             }
         }
-        if(routesList[option - 1] == "Go Back") {
+        if (routesList[option - 1] == "Go Back")
+        {
             RouteHandeler.LastView();
-        } else if (new[] {"Register", "Login", "Dashboard", "Logout"}.Contains(routesList[option - 1]))
+        }
+        else if (new[] { "Register", "Login", "Dashboard", "Logout" }.Contains(routesList[option - 1]))
         {
             var routeName = routesList[option - 1];
             RouteHandeler.View(routeName + "Page");
         }
-        else {
+        else
+        {
             var routeName = routesList[option - 1];
 
             // return the view from the routehandler using the chosen option + page + the role of the admin
@@ -522,7 +528,8 @@ public abstract class ViewTemplate
         }
     }
 
-    public int MenuList<T>(Dictionary<string, T> routesDict, ViewTemplate page, ViewTemplate pageToGoWithID) {
+    public int MenuList<T>(Dictionary<string, T> routesDict, ViewTemplate page, ViewTemplate pageToGoWithID)
+    {
         Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
         (int left, int top) = Console.GetCursorPosition();
         var option = 1;
@@ -546,7 +553,8 @@ public abstract class ViewTemplate
             Console.SetCursorPosition(left, top);
 
             // Log all the options in the terminal
-            for(int i = 0; i < routesList.Count; i++) {
+            for (int i = 0; i < routesList.Count; i++)
+            {
                 Console.WriteLine($"{i + 1}. {(option == (i + 1) ? decorator : "")}{routesList[i]}\u001b[0m");
             }
 
@@ -572,18 +580,24 @@ public abstract class ViewTemplate
         // return the index of the chosen option
         return option - 2;
 
-        if(Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "ReservationPage") {
+        if (Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "ReservationPage")
+        {
 
-        } else if(Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "SeeallreservationsPageAdmin") {
+        }
+        else if (Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "SeeallreservationsPageAdmin")
+        {
 
-        } else if(Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "SeereservationsbycustomernamePageAdmin") {
+        }
+        else if (Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "SeereservationsbycustomernamePageAdmin")
+        {
             new ReservationsOverviewAdmin().Render();
         }
-     }
+    }
 
 
 
-    public RefreshmentModel RefreshmentsList(ViewTemplate page) {
+    public RefreshmentModel RefreshmentsList(ViewTemplate page)
+    {
         Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
         (int left, int top) = Console.GetCursorPosition();
         var option = 1;
@@ -608,7 +622,8 @@ public abstract class ViewTemplate
             Console.SetCursorPosition(left, top);
 
             // Log all the options in the terminal
-            for(int i = 0; i < refreshments.Count; i++) {
+            for (int i = 0; i < refreshments.Count; i++)
+            {
                 Console.WriteLine($"{i + 1}. {(option == (i + 1) ? decorator : "")}{refreshments[i].Name} | {refreshments[i].Price}\u001b[0m");
             }
 
