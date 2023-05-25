@@ -33,9 +33,11 @@ public class ReservationPage : ViewTemplate{
             chosenRefreshments.Add(RefreshmentsList(this));
         }
 
-        for (int i = 0; i < chosenRefreshments.Count; i++)
-        {
-            costs += chosenRefreshments[i].Price;
+        if(chosenRefreshments.Count > 0) {
+            for (int i = 0; i < chosenRefreshments.Count; i++)
+            {
+                costs += chosenRefreshments[i].Price;
+            }
         }
 
         ReservationModel reservation = new(id, seatsString, costs, chosenRefreshments, (AccountModel)LocalStorage.GetAuthenticatedUser(), this.Show);
@@ -48,8 +50,5 @@ public class ReservationPage : ViewTemplate{
         Console.WriteLine("Creating your receipt...");
         Thread.Sleep(2000);
         _reservationLogic.PrintReceipt(reservation);
-
     }
-
-
 }

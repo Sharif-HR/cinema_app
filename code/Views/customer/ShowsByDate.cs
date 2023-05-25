@@ -8,8 +8,8 @@ public class ShowsByDate : ViewTemplate {
     {
         base.Render();
 
-        // var userInput = InputField("Enter the date of the movies you wish to see:");
-        var shows = GetShowModelsByDate("19-05-2023");
+        var userInput = InputField("Enter the date of the movies you wish to see:");
+        var shows = GetShowModelsByDate(userInput);
         Dictionary<string, ShowModel> showsDict = new();
 
         foreach (var show in shows)

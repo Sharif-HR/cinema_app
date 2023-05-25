@@ -100,20 +100,29 @@ public class ReservationLogic : LogicTemplate
 
     private string RefreshmentsReceipt(Dictionary<string, Dictionary<RefreshmentModel, int>> refreshmentDict)
     {
+        string lastItem;
         string endResult = "";
-        string lastItem = refreshmentDict.Last().Key;
-        foreach (var item in refreshmentDict)
+        try
         {
-            string key = item.Key;
-
-            foreach (var refreshment in refreshmentDict[key])
+            lastItem = refreshmentDict.Last().Key;
+            foreach (var item in refreshmentDict)
             {
-                RefreshmentModel rfm = refreshment.Key;
-                int occurrence = refreshment.Value;
-                endResult += CheckStringLengthForReceiptFormat($"{occurrence} x {rfm.Price}           {Math.Round(occurrence * rfm.Price, 2)}", rfm.Name);
-                if (lastItem != key) endResult += "\n";
+                string key = item.Key;
+
+                foreach (var refreshment in refreshmentDict[key])
+                {
+                    RefreshmentModel rfm = refreshment.Key;
+                    int occurrence = refreshment.Value;
+                    endResult += CheckStringLengthForReceiptFormat($"{occurrence} x {rfm.Price}           {Math.Round(occurrence * rfm.Price, 2)}", rfm.Name);
+                    if (lastItem != key) endResult += "\n";
+                }
             }
         }
+        catch (System.Exception)
+        {
+            return null;
+        }
+
 
         return endResult;
     }
