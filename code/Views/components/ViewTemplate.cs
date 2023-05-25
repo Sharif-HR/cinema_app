@@ -522,7 +522,7 @@ public abstract class ViewTemplate
         }
     }
 
-    public int MenuList(Dictionary<string, ShowModel> routesDict, ViewTemplate page, ViewTemplate pageToGoWithID) {
+    public int MenuList<T>(Dictionary<string, T> routesDict, ViewTemplate page, ViewTemplate pageToGoWithID) {
         Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
         (int left, int top) = Console.GetCursorPosition();
         var option = 1;
@@ -580,6 +580,8 @@ public abstract class ViewTemplate
             new ReservationsOverviewAdmin().Render();
         }
      }
+
+
 
     public RefreshmentModel RefreshmentsList(ViewTemplate page) {
         Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");

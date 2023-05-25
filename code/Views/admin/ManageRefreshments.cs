@@ -7,7 +7,7 @@ public class ManageRefreshments : ViewTemplate, IManage
 {
     private RefreshmentsLogic _refreshmentLogic = new();
     public ManageRefreshments() : base("Manage Refreshments") { }
-    
+
     public override void Render()
     {
         base.Render();
@@ -21,7 +21,15 @@ public class ManageRefreshments : ViewTemplate, IManage
         {
             base.Render();
             ShowMenu();
-            string UserInput = Console.ReadLine();
+
+            Dictionary<string, string> listDict = new() {
+                {"Add a refreshment.", ""},
+                {"Edit refreshments.", ""},
+                {"Delete refreshment.", ""},
+                {"Show refreshments.", ""},
+            };
+
+            string UserInput = Convert.ToString(MenuList(listDict, this, this) + 1);
 
             switch (UserInput)
             {
@@ -42,19 +50,13 @@ public class ManageRefreshments : ViewTemplate, IManage
                     ShowRefreshmentTable("yes");
                     break;
 
-                case "5":
-                    return;
-
                 default:
                     Helpers.WarningMessage("Invalid input.");
                     Helpers.Continue();
                     break;
             }
-
         }
-
     }
-
 
     public void AddForm(){
         while(true){
@@ -185,7 +187,15 @@ Price: {refreshments[refreshmentId].Price}
         if (showmenu == "yes")
         {
             SearchSortFilterMenu();
-            string UserInput = Console.ReadLine();
+
+            Dictionary<string, string> listDict = new() {
+                {"Search for a refreshment", ""},
+                {"Sort refreshments list", ""},
+                {"Filter refreshments list", ""},
+            };
+
+            string UserInput = Convert.ToString(MenuList(listDict, this, this) + 1);
+
             switch (UserInput)
             {
                 case "1":
@@ -215,7 +225,7 @@ Price: {refreshments[refreshmentId].Price}
         }
         if (showmenu == "null") { }
     }
-    
+
     public List<string> RefreshmentProperties()
     {
         List<string> refreshmentProperties = new();
