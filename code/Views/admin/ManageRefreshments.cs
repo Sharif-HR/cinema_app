@@ -187,7 +187,15 @@ Price: {refreshments[refreshmentId].Price}
         if (showmenu == "yes")
         {
             SearchSortFilterMenu();
-            string UserInput = Console.ReadLine();
+
+            Dictionary<string, string> listDict = new() {
+                {"Search for a refreshment", ""},
+                {"Sort refreshments list", ""},
+                {"Filter refreshments list", ""},
+            };
+
+            string UserInput = Convert.ToString(MenuList(listDict, this, this) + 1);
+
             switch (UserInput)
             {
                 case "1":

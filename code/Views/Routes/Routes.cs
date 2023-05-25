@@ -16,8 +16,8 @@ public static class Routes {
             case "ManageMoviesPageAdmin":
                 new ManageMovies().Render();
                 break;
-            case "MovieViewPageCustomer":
-                // new MovieView().Render();
+            case "MoviesOverviewPageCustomer":
+                new MovieList().Render();
                 break;
             case "DashboardPage":
                 new Dashboard(LocalStorage.GetAuthenticatedUser().Role).Render();
@@ -40,7 +40,7 @@ public static class Routes {
             case "SeeallreservationsPageAdmin":
                 new ReservationsOverviewAdmin().Render();
                 break;
-            case "ShowOverview":
+            case "MakeReservationPageCustomer":
                 new ShowOverview().Render();
                 break;
             case "ShowsbydatePageCustomer":
