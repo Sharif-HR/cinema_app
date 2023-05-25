@@ -49,6 +49,9 @@ public static class Routes {
             case "LogoutPage":
                 new AccountsLogic().Logout();
                 break;
+            case "ManageRefreshmentsPageAdmin":
+                new ManageRefreshments().Render();
+                break;
             default:
                 Console.WriteLine("Page doesn't exist");
                 break;
