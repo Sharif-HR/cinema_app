@@ -10,6 +10,7 @@ public class ReservationLogic : LogicTemplate
         string date = CheckStringLengthForReceiptFormat(Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "dd-MM-yyyy"), "📆 Date");
         string timeOfShow = CheckStringLengthForReceiptFormat(Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm"), "⌚️ Time");
         string totalCosts = CheckStringLengthForReceiptFormat(Math.Round(reservation.Costs, 3).ToString(), "TOTAL");
+        string ticketID = CheckStringLengthForReceiptFormat(reservation.ID, "Ticket ID");
 
         string tickets = CheckStringLengthForReceiptFormat(seats.Split(',').Count() + $" X 15        {seats.Split(',').Count() * 15}", "Tick costs");
         //refreshments
@@ -56,6 +57,7 @@ public class ReservationLogic : LogicTemplate
 {timeOfShow}
 |                                     |
 |  Ticket info 🎫                     |
+{ticketID}
 {tickets}
 {RefreshmentsReceipt(refreshmentDict)}
 |                                     |

@@ -69,7 +69,7 @@ public class ReservationPage : ViewTemplate{
                         select val;
 
         if(IDCheck.Count() != 0){
-                return GenRandId();
+            return GenRandId();
         }
         else{
             return ID;
