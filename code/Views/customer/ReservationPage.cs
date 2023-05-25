@@ -17,7 +17,7 @@ public class ReservationPage : ViewTemplate{
         List<string> seats = new(){"a1", "a2", "a3"};
 
         // create all the data
-        string id = Helpers.GenUid();
+        string id = GenRandId();
         string seatsString = string.Join(',', seats);
         double costs = 0.0;
         costs += 15 * seats.Count();
@@ -51,5 +51,27 @@ public class ReservationPage : ViewTemplate{
 
     }
 
+    private string GenRandId()
+    {
+        List<ReservationModel> vals = _reservationLogic.GetReservations();
+        Random random = new Random();
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const string nums = "0123456789";
+
+        string ID;
+        ID = new string(Enumerable.Repeat(chars, 3).Select(s => s[random.Next(s.Length)]).ToArray());
+        ID += new string(Enumerable.Repeat(nums, 3).Select(s => s[random.Next(s.Length)]).ToArray());
+        ID += new string(Enumerable.Repeat(chars, 1).Select(s => s[random.Next(s.Length)]).ToArray());
+
+        var IDCheck = from val in vals
+                        where val.ID == ID
+                        select val;
+
+        if(IDCheck != null){
+            return GenRandId();
+        }else{
+            return ID;
+        }
+    }
 
 }
