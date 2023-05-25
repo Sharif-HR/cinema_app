@@ -66,12 +66,13 @@ public class ReservationPage : ViewTemplate{
         var IDCheck = from val in vals
                         where val.ID == ID
                         select val;
-
-        if(IDCheck != null){
-            return GenRandId();
-        }else{
+       
+        if(IDCheck.Count() != 0){
+                return GenRandId();
+        }
+        else{
             return ID;
         }
+        return ID;
     }
-
 }
