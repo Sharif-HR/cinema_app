@@ -523,10 +523,10 @@ public abstract class ViewTemplate
         {
             RouteHandeler.LastView();
         }
-        else if (new[] { "Register", "Login", "Dashboard", "Logout" }.Contains(routesList[option - 1]))
+        else if (new[] { "Register", "Login", "Dashboard", "Logout", "About us" }.Contains(routesList[option - 1]))
         {
             var routeName = routesList[option - 1];
-            RouteHandeler.View(routeName + "Page");
+            RouteHandeler.View(routeName.Replace(" ", "") + "Page");
         }
         else
         {

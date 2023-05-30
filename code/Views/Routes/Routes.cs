@@ -1,7 +1,10 @@
+using Views;
 namespace Views;
-public static class Routes {
+public static class Routes
+{
     // protected static string[]? routes = GetAllRoutes();
-    public static string[]? GetAllRoutes() {
+    public static string[]? GetAllRoutes()
+    {
         string[] baseFiles = Directory.GetFiles("Views");
         string[] adminFiles = Directory.GetFiles("Views/admin");
         string[] customerFiles = Directory.GetFiles("Views/customer");
@@ -10,7 +13,8 @@ public static class Routes {
         return null;
     }
 
-    public static void RouteNameToView(string routeName) {
+    public static void RouteNameToView(string routeName)
+    {
         switch (routeName)
         {
             case "ManageMoviesPageAdmin":
@@ -51,6 +55,9 @@ public static class Routes {
                 break;
             case "ManageRefreshmentsPageAdmin":
                 new ManageRefreshments().Render();
+                break;
+            case "AboutusPage":
+                new AboutUs().Render();
                 break;
             case "CancelReservationPageCustomer":
                 new CancelReservationPage().Render();
