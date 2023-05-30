@@ -52,6 +52,9 @@ public static class Routes {
             case "ManageRefreshmentsPageAdmin":
                 new ManageRefreshments().Render();
                 break;
+            case "CancelReservationPageCustomer":
+                new CancelReservationPage().Render();
+                break;
             default:
                 Console.WriteLine("Page doesn't exist");
                 break;
