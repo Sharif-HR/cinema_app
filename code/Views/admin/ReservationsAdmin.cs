@@ -6,7 +6,7 @@ public class ReservationsAdmin: ViewTemplate {
     public override void Render()
     {
         base.Render();
-        List<string> menuOptions = new(){"See all reservations", "See reservations by customer name"};
+        List<string> menuOptions = new(){"See all reservations", "See reservations by customer name", "Cancel a reservation"};
         MenuList(menuOptions, this);
     }
 }

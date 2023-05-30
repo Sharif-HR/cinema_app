@@ -1,8 +1,8 @@
 namespace Views;
 
-public class CancelReservationPage : ViewTemplate{
+public class AdminCancelReservationPage : ViewTemplate{
     private ReservationLogic _reservationLogic = new();
-    public CancelReservationPage(ShowModel show = null) : base($"Cancel Reservation"){}
+    public AdminCancelReservationPage(ShowModel show = null) : base($"Cancel a reservation"){}
 
     public override void Render()
     {
@@ -30,13 +30,7 @@ public class CancelReservationPage : ViewTemplate{
 
             ReservationModel customerReservation = reservation.ElementAt(0);
 
-            if(customerReservation.User.Id != LocalStorage.GetAuthenticatedUser().Id){
-                Console.WriteLine("No reservation was found with this code...");
-                Thread.Sleep(5000);
-                continue;
-            }
-
-            if((DateTime.Parse(Helpers.TimeStampToGMEFormat(customerReservation.Show.Timestamp)) > DateTime.Now)){
+            if(DateTime.Parse(Helpers.TimeStampToGMEFormat(customerReservation.Show.Timestamp)) > DateTime.Now){
                 _reservationLogic.DeleteReservation(customerReservation, reservations);
                 Console.WriteLine("Reservation cancelled...");
                 Thread.Sleep(5000);

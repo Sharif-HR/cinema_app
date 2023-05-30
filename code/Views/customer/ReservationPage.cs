@@ -87,6 +87,10 @@ public class ReservationPage : ViewTemplate
             }
         }
 
+        if(LocalStorage.GetAuthenticatedUser().IsStudent){
+            costs *= 0.90;
+        }
+
         ReservationModel reservation = new(id, seatsString, costs, chosenRefreshments, (AccountModel)LocalStorage.GetAuthenticatedUser(), this.Show);
 
         reservations.Add(reservation);
