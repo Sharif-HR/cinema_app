@@ -146,6 +146,7 @@ public class ReservationPage : ViewTemplate
                 Console.WriteLine("Select a seat by entering the [ROW],[SEAT NUMBER].");
                 Console.WriteLine("To deselect a seat, simply enter the same seat location with the [ROW] and [SEAT NUMBER].");
                 Helpers.WarningMessage("For example: 2,4");
+
                 Console.Write("> ");
                 var index = Console.ReadLine();
                 var splitIndex = index.Split(",");
@@ -169,14 +170,14 @@ public class ReservationPage : ViewTemplate
 
                 if (selectedSeat.Reserved)
                 {
-                    Helpers.WarningMessage("Sorry this seat is reserved. Please choose another one.");
+                    Helpers.WarningMessage("Sorry this seat is already reserved. Please select another one.");
                     Helpers.Continue();
                     continue;
                 }
 
                 if (!selectedSeat.isSeat)
                 {
-                    Helpers.WarningMessage("Sorry there is not seat on this location. Please choose another one.");
+                    Helpers.WarningMessage("Sorry there is no seat on this location. Please select another one.");
                     Helpers.Continue();
                     continue;
                 }
@@ -225,8 +226,8 @@ public class ReservationPage : ViewTemplate
             }
             catch (Exception e)
             {
-                Helpers.WarningMessage("Something went wrong");
-                Helpers.WarningMessage(e.Message + e.StackTrace + e.GetBaseException());
+                Helpers.ErrorMessage("Enter a valid row number and seat number in order to select a seat.");
+                // Helpers.WarningMessage(e.Message + e.StackTrace + e.GetBaseException());
                 Helpers.Continue();
             }
         }
@@ -241,7 +242,50 @@ public class ReservationPage : ViewTemplate
         Content(hall);
         Screen();
 
+        Legenda();
+
         return hall;
+    }
+
+    public static void Legenda()
+    {
+        Helpers.Divider();
+        Console.WriteLine("SEAT PRICES");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write("■ ");
+        Console.ResetColor();
+        Console.WriteLine(": 7,50 euro");
+
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write("■ ");
+        Console.ResetColor();
+        Console.WriteLine(": 9,50 euro");
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("■ ");
+        Console.ResetColor();
+        Console.WriteLine(": 14,75 euro");
+
+        Console.WriteLine();
+        Console.WriteLine("SEAT STATUS");
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("■ ");
+        Console.ResetColor();
+        Console.WriteLine("Selected seat");
+
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write("■ ");
+        Console.ResetColor();
+        Console.WriteLine("Reserved seat");
+
+
+        Helpers.Divider(false);
+        Console.WriteLine();
+
+
+
+
     }
 
     private static void XLine()
@@ -373,8 +417,6 @@ public class ReservationPage : ViewTemplate
         Console.WriteLine(new string('_', 84));
 
         Console.WriteLine($"{margin}{sp}SCREEN{sp}");
-        Console.WriteLine();
-        Console.WriteLine();
     }
 
 }
