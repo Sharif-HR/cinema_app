@@ -100,6 +100,10 @@ public class ReservationPage : ViewTemplate
         // TODO update show model for takenseats;
         Thread.Sleep(2000);
         _reservationLogic.PrintReceipt(reservation);
+        Helpers.SuccessMessage("You can find the receipt at My reservations in the dashboard");
+        Helpers.Continue();
+
+        RouteHandeler.View("DashboardPage");
     }
 
     private string GenRandId()
