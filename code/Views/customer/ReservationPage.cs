@@ -144,7 +144,7 @@ public class ReservationPage : ViewTemplate
                 base.Render();
                 ShowHall(hall);
                 Console.WriteLine("Select a seat by entering the [ROW],[SEAT NUMBER].");
-                Console.WriteLine("You can also deselect a seat by entering the same location with [ROW],[SEAT NUMBER]");
+                Console.WriteLine("To deselect a seat, simply enter the same seat location with the [ROW] and [SEAT NUMBER].");
                 Helpers.WarningMessage("For example: 2,4");
                 Console.Write("> ");
                 var index = Console.ReadLine();
