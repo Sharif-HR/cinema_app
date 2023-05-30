@@ -47,42 +47,42 @@ public class HallLogic
 
 
 
-    private static SeatModel[][] SelectSeat(SeatModel[][] hall)
-    {
-        while (true)
-        {
+    // private static SeatModel[][] SelectSeat(SeatModel[][] hall)
+    // {
+    //     while (true)
+    //     {
 
-            Helpers.WarningMessage("Select a seat by entering the row and column number exmaple(2,4):");
-            var index = Console.ReadLine();
-            var splitIndex = index.Split(",");
+    //         Helpers.WarningMessage("Select a seat by entering the row and column number exmaple(2,4):");
+    //         var index = Console.ReadLine();
+    //         var splitIndex = index.Split(",");
 
-            var row = int.Parse(splitIndex[0]);
-            var column = int.Parse(splitIndex[1]);
+    //         var row = int.Parse(splitIndex[0]);
+    //         var column = int.Parse(splitIndex[1]);
 
-            try
-            {
-                var selectedSeat = hall[row][column];
+    //         try
+    //         {
+    //             var selectedSeat = hall[row][column];
 
-                if (selectedSeat.isSeat && !selectedSeat.Reserved)
-                {
-                    selectedSeat.Reserved = true;
-                    selectedSeat.Type = "x";
-                    return hall;
-                }
-                else
-                {
-                    Helpers.WarningMessage("Please select a valid seat.");
-                    continue;
-                }
-            }
-            catch (Exception)
-            {
-                Helpers.WarningMessage("Something went wrong");
+    //             if (selectedSeat.isSeat && !selectedSeat.Reserved)
+    //             {
+    //                 selectedSeat.Reserved = true;
+    //                 selectedSeat.Type = "x";
+    //                 return hall;
+    //             }
+    //             else
+    //             {
+    //                 Helpers.WarningMessage("Please select a valid seat.");
+    //                 continue;
+    //             }
+    //         }
+    //         catch (Exception)
+    //         {
+    //             Helpers.WarningMessage("Something went wrong");
 
-            }
-        }
+    //         }
+    //     }
 
-    }
+    // }
 
     // public void Flow()
     // {

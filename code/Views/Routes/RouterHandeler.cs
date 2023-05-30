@@ -1,17 +1,22 @@
 namespace Views;
-public abstract class RouteHandeler {
-    public static void View(string viewNameString) {
-        if(viewNameString != "MenuPage") {
-            if(viewNameString != LocalStorage.GetLastViewName()) {
+public abstract class RouteHandeler
+{
+    public static void View(string viewNameString)
+    {
+        if (viewNameString != "MenuPage")
+        {
+            if (viewNameString != LocalStorage.GetLastViewName())
+            {
                 LocalStorage.AddToHistory(viewNameString);
             }
         }
         Routes.RouteNameToView(viewNameString);
     }
 
-    public static void LastView() {
+    public static void LastView()
+    {
         Console.WriteLine("Directing you back...");
-        Thread.Sleep(5000);
+        Thread.Sleep(2000);
         Routes.RouteNameToView(LocalStorage.LastVisitedPage());
         return;
     }

@@ -17,9 +17,9 @@ public abstract class ViewTemplate
         Helpers.Divider(false);
         Console.WriteLine(this.Title);
 
-        if (LocalStorage.localStorage["history"].Count > 0) {
-            Console.WriteLine("Leave a field empty to go back to the previous page");
-        }
+        // if (LocalStorage.localStorage["history"].Count > 0) {
+        //     Console.WriteLine("Leave a field empty to go back to the previous page");
+        // }
 
         Helpers.Divider(false);
     }
