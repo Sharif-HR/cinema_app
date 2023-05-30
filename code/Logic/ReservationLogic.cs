@@ -136,4 +136,9 @@ public class ReservationLogic : LogicTemplate
     public List<ReservationModel> GetReservations() {
         return _reservationAccess.LoadAll();
     }
+
+    public void DeleteReservation(ReservationModel id, List<ReservationModel> _reservationList){
+        _reservationList.Remove(id);
+        _reservationAccess.WriteAll(_reservationList);
+    }
 }
