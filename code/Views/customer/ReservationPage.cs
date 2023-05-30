@@ -67,8 +67,6 @@ public class ReservationPage : ViewTemplate
 
         // create all the data
         string id = GenRandId();
-
-
         List<RefreshmentModel> chosenRefreshments = new();
         while (true)
         {
