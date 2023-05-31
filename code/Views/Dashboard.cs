@@ -124,7 +124,7 @@ public class Dashboard : ViewTemplate
 
     private void ShowAdminMenu()
     {
-        List<string> options = new() {"Reservations", "Manage Movies", "ManageRefreshments", "Logout"};
+        List<string> options = new() {"Reservations", "Manage Movies", "Manage Refreshments", "Show Overview", "Logout"};
         MenuList(options, this);
         Helpers.Divider(false);
     }

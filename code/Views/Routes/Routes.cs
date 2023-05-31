@@ -55,7 +55,7 @@ public static class Routes {
             case "CancelReservationPageCustomer":
                 new CancelReservationPage().Render();
                 break;
-            case "ShowOverviewAdminPage":
+            case "ShowOverviewPageAdmin":
                 new ShowOverviewAdmin().Render();
                 break;
             case "ShowEventHandeler":
