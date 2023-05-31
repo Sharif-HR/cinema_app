@@ -11,8 +11,11 @@ public class Menu : ViewTemplate
     //You could edit this to show different menus depending on the user's role
     public override void Render()
     {
-        base.Render();
-        List<string> testList = new(){"Login", "Register"};
-        MenuList(testList, this);
+        while (true)
+        {
+            base.Render();
+            List<string> testList = new() { "Login", "Register", "About us" };
+            MenuList(testList, this);
+        }
     }
 }

@@ -68,8 +68,6 @@ public class ReservationPage : ViewTemplate
 
         // create all the data
         string id = GenRandId();
-
-
         List<RefreshmentModel> chosenRefreshments = new();
         while (true)
         {
@@ -88,6 +86,10 @@ public class ReservationPage : ViewTemplate
             {
                 costs += chosenRefreshments[i].Price;
             }
+        }
+
+        if(LocalStorage.GetAuthenticatedUser().IsStudent){
+            costs *= 0.90;
         }
 
         ReservationModel reservation = new(id, seatsString, costs, chosenRefreshments, (AccountModel)LocalStorage.GetAuthenticatedUser(), this.Show);

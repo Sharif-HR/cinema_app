@@ -64,6 +64,8 @@ public abstract class ViewTemplate
 
             if (key == ConsoleKey.Enter)
             {
+                Console.WriteLine();
+
                 if (!string.IsNullOrWhiteSpace(pass)) return pass;
                 RouteHandeler.LastView();
             }
@@ -72,11 +74,17 @@ public abstract class ViewTemplate
 
     public string InputPassword(string label, bool mustBeStrong = false, int minLength = 8, int maxLength = 32)
     {
+        string passwordMsg = $"Password must be at least {minLength} characters and max {maxLength} characters long\n must contain at least one uppercase, one lowercase and one special character, can't contain a white space.";
         bool loop = true;
         string input = "";
 
         while (loop)
         {
+            if (mustBeStrong)
+            {
+                Helpers.WarningMessage(passwordMsg);
+
+            }
             Console.WriteLine(label);
             Console.Write("> ");
             input = this.PasswordToAstriks();
@@ -85,6 +93,7 @@ public abstract class ViewTemplate
 
             if (mustBeStrong)
             {
+
                 bool hasError = false;
                 bool containsSC = false;
                 if (input.Length < minLength || input.Length > maxLength)
@@ -119,7 +128,8 @@ public abstract class ViewTemplate
                 }
                 if (!containsSC || hasError)
                 {
-                    Console.WriteLine($"Password must be at least {minLength} characters and max {maxLength} characters long, must contain at least one uppercase, one lowercase and one special character, can't contain a white space.");
+                    Console.WriteLine();
+                    Helpers.ErrorMessage("Please try again with a password that meets the minimum safety requirements.");
                 }
             }
             else
@@ -513,10 +523,10 @@ public abstract class ViewTemplate
         {
             RouteHandeler.LastView();
         }
-        else if (new[] { "Register", "Login", "Dashboard", "Logout" }.Contains(routesList[option - 1]))
+        else if (new[] { "Register", "Login", "Dashboard", "Logout", "About us" }.Contains(routesList[option - 1]))
         {
             var routeName = routesList[option - 1];
-            RouteHandeler.View(routeName + "Page");
+            RouteHandeler.View(routeName.Replace(" ", "") + "Page");
         }
         else
         {
@@ -598,8 +608,6 @@ public abstract class ViewTemplate
 
     public RefreshmentModel RefreshmentsList(ViewTemplate page)
     {
-        Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
-        (int left, int top) = Console.GetCursorPosition();
         var option = 1;
         var decorator = "\u001b[32m";
         ConsoleKeyInfo key;
@@ -618,7 +626,8 @@ public abstract class ViewTemplate
             Helpers.Divider(false);
             Console.WriteLine(page.Title);
             Helpers.Divider(false);
-
+            Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
+            (int left, int top) = Console.GetCursorPosition();
             Console.SetCursorPosition(left, top);
 
             // Log all the options in the terminal
