@@ -55,6 +55,12 @@ public static class Routes {
             case "CancelReservationPageCustomer":
                 new CancelReservationPage().Render();
                 break;
+            case "ShowOverviewAdminPage":
+                new ShowOverviewAdmin().Render();
+                break;
+            case "ShowEventHandeler":
+                new ShowEventHandeler(LocalStorage.GetItem("SHOW_OPTION").ToString()).Render();
+                break;
             default:
                 Console.WriteLine("Page doesn't exist");
                 break;
