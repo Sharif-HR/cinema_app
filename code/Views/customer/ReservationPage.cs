@@ -8,6 +8,7 @@ public class ReservationPage : ViewTemplate
 
 
     private ReservationLogic _reservationLogic = new();
+    private ShowLogic _showLogic = new();
     public ReservationPage(ShowModel show = null) : base($"Make Reservation") { this.Show = show; }
 
     private void loadEmptyHall()
@@ -94,6 +95,7 @@ public class ReservationPage : ViewTemplate
         reservations.Add(reservation);
 
         _reservationLogic.UpdateReservations(reservations);
+        _showLogic.UpdateSeats(Show.showId, Show.TakenSeats);
 
         Helpers.SuccessMessage($"You have made a reservation for {reservation.Show.Movie.Title} {Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm")}");
         Console.WriteLine("Creating your receipt...");

@@ -66,4 +66,25 @@ public class ShowLogic : LogicTemplate {
         var shows = _showList.Where(s => (s.Timestamp - 900) <= timestamp && timestamp <= s.Timestamp + (s.Movie.Duration * 60));
         return shows.Count() > 0;
     }
+
+    public void UpdateSeats(string showId, List<string> newSeats) {
+        int indexShow = _showList.FindIndex(shows => shows.showId == showId);
+
+        try
+        {
+            ShowModel show = _showList[indexShow];
+            foreach (string seat in newSeats)
+            {
+                show.TakenSeats.Add(seat);
+            }
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+        finally {
+            _showAccess.WriteAll(_showList);
+        }
+    }
 }
