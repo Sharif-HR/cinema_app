@@ -90,7 +90,7 @@ public class ShowEventHandeler : ViewTemplate {
                     DateTime date = Convert.ToDateTime(userInput);
                     int timestamp = Helpers.DateToUnixTimeStamp(date.ToString());
 
-                    if(!_showLogic.CheckShowOverlapping(timestamp)) {
+                    if(_showLogic.CheckShowOverlapping(timestamp)) {
                         throw new ArgumentException();
                     }
 
@@ -157,6 +157,7 @@ public class ShowEventHandeler : ViewTemplate {
     }
 
     private void DeleteShow(ShowModel show) {
-
+        _showLogic.DeleteShow(show.showId);
+        _showList = _showLogic.GetShows();
     }
 }

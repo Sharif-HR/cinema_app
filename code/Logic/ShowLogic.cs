@@ -63,7 +63,7 @@ public class ShowLogic : LogicTemplate {
     }
 
     public bool CheckShowOverlapping(int timestamp) {
-        var shows = _showList.Where(s => (s.Timestamp - 900) >= timestamp && timestamp <= s.Timestamp + (s.Movie.Duration * 60));
+        var shows = _showList.Where(s => (s.Timestamp - 900) <= timestamp && timestamp <= s.Timestamp + (s.Movie.Duration * 60));
         return shows.Count() > 0;
     }
 }
