@@ -78,6 +78,14 @@ public class ReservationPage : ViewTemplate
             }
             // refreshment list
             chosenRefreshments.Add(RefreshmentsList(this));
+
+            var shoppingCart = from chosenRefreshment in chosenRefreshments
+                                group chosenRefreshment by chosenRefreshment.Name into refreshmentGroup
+                                select refreshmentGroup;
+
+            foreach(var item in shoppingCart){
+                Console.WriteLine($"{item.Key} X{item.Count()}");
+            }
         }
 
         if (chosenRefreshments.Count > 0)
