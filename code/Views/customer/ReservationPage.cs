@@ -54,10 +54,28 @@ public class ReservationPage : ViewTemplate
 
         //test code
         List<ReservationModel> reservations = _reservationLogic.GetReservations();
-        // List<string> takenseats = Show.TakenSeats;
+        List<string> takenseats = Show.TakenSeats;
         //TODO make if to check if aduitorium is empty;
+
         loadEmptyHall();
+
+        if (takenseats.Count > 0)
+        {
+            foreach (var seat in takenseats)
+            {
+                var coords = seat.Split("-");
+                int row = int.Parse(coords[0]);
+                int column = int.Parse(coords[1]);
+
+                SeatModel takenSeat = _emptyHall[row - 1][column - 1];
+                takenSeat.Type = "x";
+                takenSeat.Reserved = true;
+            }
+        }
+
         var hall = _emptyHall;
+
+
         List<SeatModel> selectedSeats = SelectSeat(hall);
         string seatsString = selectedSeatsList(selectedSeats);
         Show.TakenSeats = seatsString.Split(',').ToList();
@@ -80,10 +98,11 @@ public class ReservationPage : ViewTemplate
             chosenRefreshments.Add(RefreshmentsList(this));
 
             var shoppingCart = from chosenRefreshment in chosenRefreshments
-                                group chosenRefreshment by chosenRefreshment.Name into refreshmentGroup
-                                select refreshmentGroup;
+                               group chosenRefreshment by chosenRefreshment.Name into refreshmentGroup
+                               select refreshmentGroup;
 
-            foreach(var item in shoppingCart){
+            foreach (var item in shoppingCart)
+            {
                 Console.WriteLine($"{item.Key} X{item.Count()}");
             }
         }
@@ -96,7 +115,8 @@ public class ReservationPage : ViewTemplate
             }
         }
 
-        if(LocalStorage.GetAuthenticatedUser().IsStudent){
+        if (LocalStorage.GetAuthenticatedUser().IsStudent)
+        {
             costs *= 0.90;
         }
 
@@ -407,7 +427,7 @@ public class ReservationPage : ViewTemplate
                         break;
 
                     case ("x"):
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
                         Console.Write(visualSeat);
                         Console.ResetColor();
                         break;
