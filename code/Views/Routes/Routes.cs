@@ -71,6 +71,9 @@ public static class Routes
             case "CancelareservationPageAdmin":
                 new AdminCancelReservationPage().Render();
                 break;
+            case "MyReservationsPageCustomer":
+                new ReservationOverviewCustomer().Render();
+                break;
             default:
                 Console.WriteLine("Page doesn't exist");
                 break;

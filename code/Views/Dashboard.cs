@@ -131,7 +131,7 @@ public class Dashboard : ViewTemplate
 
     private void ShowCustomerMenu()
     {
-        List<string> options = new() {"Make Reservation", "Movies Overview", "Cancel Reservation", "Logout"};
+        List<string> options = new() {"Make Reservation", "Movies Overview", "My Reservations", "Cancel Reservation", "Logout"};
         MenuList(options, this);
     }
 }
