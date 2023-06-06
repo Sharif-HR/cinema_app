@@ -9,7 +9,7 @@ public class CancelReservationPage : ViewTemplate{
         base.Render();
 
         List<ReservationModel> reservations = _reservationLogic.GetReservations();
-        
+
         while(true){
             Console.WriteLine("Please enter your unique reservation code or leave blank to return:");
             string uniqueCode = Console.ReadLine();
@@ -21,7 +21,7 @@ public class CancelReservationPage : ViewTemplate{
             var reservation = from res in reservations
                             where (res.ID == uniqueCode)
                             select res;
-            
+
             if(reservation.Count() == 0){
                 Console.WriteLine("No reservation was found with this code...");
                 Thread.Sleep(5000);
@@ -36,7 +36,7 @@ public class CancelReservationPage : ViewTemplate{
                 continue;
             }
 
-            if((DateTime.Parse(Helpers.TimeStampToGMEFormat(customerReservation.Show.Timestamp)) > DateTime.Now)){
+            if((customerReservation.Show.Timestamp > Helpers.DateToUnixTimeStamp(DateTime.Now.ToString()))){
                 _reservationLogic.DeleteReservation(customerReservation, reservations);
                 Console.WriteLine("Reservation cancelled...");
                 Thread.Sleep(5000);
