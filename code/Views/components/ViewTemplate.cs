@@ -583,25 +583,15 @@ public abstract class ViewTemplate
                     break;
             }
         }
+        if(option == 1) {
+            RouteHandeler.LastView();
+        }
         //routing
         string keyOfDict = routesList[option - 1];
         var item = routesDict[keyOfDict];
 
         // return the index of the chosen option
         return option - 2;
-
-        if (Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "ReservationPage")
-        {
-
-        }
-        else if (Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "SeeallreservationsPageAdmin")
-        {
-
-        }
-        else if (Convert.ToString(pageToGoWithID.GetType()).Replace("Views.", "") == "SeereservationsbycustomernamePageAdmin")
-        {
-            new ReservationsOverviewAdmin().Render();
-        }
     }
 
 
