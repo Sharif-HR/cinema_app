@@ -27,11 +27,8 @@ Duration: {movies[movieId].Duration}
 Summary: {movies[movieId].Summary}
 Genres: {Helpers.ListToString(movies[movieId].Genres)}
 Director: {movies[movieId].Director}
-Release date: {movies[movieId].ReleaseDate}
-Show time: {movies[movieId].ShowTime}");
+Release date: {movies[movieId].ReleaseDate}");
 
-
-            
             Helpers.Continue("Press any key to return to the Movie selection menu.");
         }
     }

@@ -11,7 +11,6 @@
             "Crime"
         ],
         "releasedate": "12-10-2026",
-        "showtime": "19:00 13-04-2026",
         "director": "John Doe"
     },
     {
@@ -24,7 +23,6 @@
             "Thriller"
         ],
         "releasedate": "05-01-2025",
-        "showtime": "18:00 05-01-2025",
         "director": "Jane Smith"
     },
     {
@@ -37,7 +35,6 @@
             "Adventure"
         ],
         "releasedate": "05-03-2023",
-        "showtime": "15:30 05-03-2023",
         "director": "Michael Johnson"
     },
     {
@@ -50,7 +47,6 @@
             "Thriller"
         ],
         "releasedate": "06-10-2023",
-        "showtime": "20:00 06-10-2023",
         "director": "Sarah Brown"
     },
     {
@@ -63,7 +59,6 @@
             "Sci-Fi"
         ],
         "releasedate": "07-07-2023",
-        "showtime": "14:00 07-07-2023",
         "director": "David Jones"
     },
     {
@@ -76,7 +71,6 @@
             "Crime"
         ],
         "releasedate": "08-01-2019",
-        "showtime": "19:30 08-01-2019",
         "director": "Olivia Smith"
     },
     {
@@ -88,7 +82,6 @@
             "Action"
         ],
         "releasedate": "09-05-2023",
-        "showtime": "16:30 09-05-2023",
         "director": "Daniel Johnson"
     },
     {
@@ -101,7 +94,6 @@
             "Thriller"
         ],
         "releasedate": "10-03-2021",
-        "showtime": "21:00 10-03-2021",
         "director": "Alex Johnson"
     },
     {
@@ -115,7 +107,6 @@
             "Romance"
         ],
         "releasedate": "25-03-2023",
-        "showtime": "19:30 25-03-2023",
         "director": "Sandra Jones"
     },
     {
@@ -129,7 +120,6 @@
             "Thriller"
         ],
         "releasedate": "05-04-2024",
-        "showtime": "20:15 05-04-2024",
         "director": "Mark Anderson"
     },
     {
@@ -142,7 +132,6 @@
             "Western"
         ],
         "releasedate": "15-04-2023",
-        "showtime": "18:45 15-04-2023",
         "director": "John Smith"
     },
     {
@@ -154,7 +143,6 @@
             "Drama"
         ],
         "releasedate": "20-04-2027",
-        "showtime": "14:30 20-04-2027",
         "director": "Sarah Johnson"
     },
     {
@@ -168,7 +156,6 @@
             "Thriller"
         ],
         "releasedate": "25-04-2020",
-        "showtime": "21:00 25-04-2020",
         "director": "Michael Brown"
     },
     {
@@ -182,7 +169,6 @@
             "Thriller"
         ],
         "releasedate": "01-05-2022",
-        "showtime": "19:45 01-05-2022",
         "director": "David Thompson"
     },
     {
@@ -195,7 +181,6 @@
             "Thriller"
         ],
         "releasedate": "05-05-2023",
-        "showtime": "20:30 05-05-2023",
         "director": "Jennifer Lee"
     },
     {
@@ -208,7 +193,6 @@
             "Thriller"
         ],
         "releasedate": "10-05-2023",
-        "showtime": "18:15 10-05-2023",
         "director": "Christopher Smith"
     },
     {
@@ -221,7 +205,6 @@
             "Romance"
         ],
         "releasedate": "15-05-2023",
-        "showtime": "16:45 15-05-2023",
         "director": "Julie Thompson"
     },
     {
@@ -235,7 +218,6 @@
             "Thriller"
         ],
         "releasedate": "20-05-2023",
-        "showtime": "19:00 20-05-2023",
         "director": "Daniel Brown"
     },
     {
@@ -248,7 +230,6 @@
             "Sci-Fi"
         ],
         "releasedate": "25-05-2023",
-        "showtime": "21:30 25-05-2023",
         "director": "Oliver Jones"
     },
     {
@@ -262,7 +243,6 @@
             "Thriller"
         ],
         "releasedate": "01-06-2020",
-        "showtime": "20:00 01-06-2020",
         "director": "Emma Thompson"
     },
     {
@@ -276,7 +256,6 @@
             "Thriller"
         ],
         "releasedate": "05-06-2025",
-        "showtime": "20:00 05-06-2025",
         "director": "Michael Johnson"
     },
     {
@@ -290,7 +269,6 @@
             "Fantasy"
         ],
         "releasedate": "10-06-2022",
-        "showtime": "17:30 10-06-2022",
         "director": "David Mitchell"
     },
     {
@@ -304,7 +282,6 @@
             "Thriller"
         ],
         "releasedate": "15-06-2025",
-        "showtime": "19:45 15-06-2025",
         "director": "Sarah Thompson"
     },
     {
@@ -317,7 +294,6 @@
             "Adventure"
         ],
         "releasedate": "20-06-2023",
-        "showtime": "20:15 20-06-2023",
         "director": "James Wilson"
     },
     {
@@ -331,7 +307,6 @@
             "Thriller"
         ],
         "releasedate": "25-06-2023",
-        "showtime": "18:30 25-06-2023",
         "director": "Sophia Chen"
     },
     {
@@ -345,7 +320,6 @@
             "Thriller"
         ],
         "releasedate": "01-07-2023",
-        "showtime": "21:00 01-07-2023",
         "director": "Alex Nguyen"
     },
     {
@@ -358,7 +332,6 @@
             "Fantasy"
         ],
         "releasedate": "05-07-2023",
-        "showtime": "19:30 05-07-2023",
         "director": "Oliver Jacobs"
     },
     {
@@ -371,7 +344,6 @@
             "Thriller"
         ],
         "releasedate": "10-07-2023",
-        "showtime": "22:00 10-07-2023",
         "director": "Jennifer Lee"
     },
     {
@@ -384,7 +356,6 @@
             "Fantasy"
         ],
         "releasedate": "15-07-2023",
-        "showtime": "17:45 15-07-2023",
         "director": "Michael Thompson"
     },
     {
@@ -398,7 +369,6 @@
             "Thriller"
         ],
         "releasedate": "20-07-2023",
-        "showtime": "20:30 20-07-2023",
         "director": "John Johnson"
     },
     {
@@ -411,7 +381,6 @@
             "Fantasy"
         ],
         "releasedate": "25-07-2023",
-        "showtime": "18:15 25-07-2023",
         "director": "Sarah Williams"
     }
 ]

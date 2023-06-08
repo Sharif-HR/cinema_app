@@ -68,9 +68,8 @@ public class ManageMovies : ViewTemplate, IManage
             List<string> genreList = InputGenre();
             string director = base.InputField("Movie director:");
             string releaseDate = (string)base.InputDate("Movie release date:", false);
-            string showTime = (string)base.InputDateTime("Next Movie Showtime:", false);
 
-            MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate, director: director, showtime: showTime);
+            MovieModel NewMovie = new(title: title, duration: duration, summary: summary, genres: genreList, releasedate: releaseDate, director: director);
 
             _movieLogic.AddMovie(NewMovie);
             Helpers.SuccessMessage("Movie added!");
@@ -110,8 +109,7 @@ Duration: {movies[movieId].Duration}
 Summary: {movies[movieId].Summary}
 Genres: {Helpers.ListToString(movies[movieId].Genres)}
 Director: {movies[movieId].Director}
-Release date: {movies[movieId].ReleaseDate}
-Show time: {movies[movieId].ShowTime}");
+Release date: {movies[movieId].ReleaseDate}");
                 Helpers.Divider(false);
 
 
@@ -150,10 +148,6 @@ Show time: {movies[movieId].ShowTime}");
 
                     case "releasedate":
                         updatedValue = InputDate("Enter release date:", false);
-                        break;
-
-                    case "showtime":
-                        updatedValue = InputDateTime("Enter showtime:", false);
                         break;
 
                     case "director":
@@ -350,7 +344,7 @@ Show time: {movies[movieId].ShowTime}");
 
         IEnumerable<MovieModel> FoundMovie =
             from movie in movies
-            where Helpers.CaseInsensitiveContains(movie.Title, SearchKey) || Helpers.CaseInsensitiveContains(movie.Summary, SearchKey) || Helpers.CaseInsensitiveContains(movie.ReleaseDate, SearchKey) || Helpers.CaseInsensitiveContains(movie.ShowTime, SearchKey) || Helpers.CaseInsensitiveContains(movie.Director, SearchKey) || Helpers.CaseInsensitiveContains(movie.Duration.ToString(), SearchKey)
+            where Helpers.CaseInsensitiveContains(movie.Title, SearchKey) || Helpers.CaseInsensitiveContains(movie.Summary, SearchKey) || Helpers.CaseInsensitiveContains(movie.ReleaseDate, SearchKey) || Helpers.CaseInsensitiveContains(movie.Director, SearchKey) || Helpers.CaseInsensitiveContains(movie.Duration.ToString(), SearchKey)
             select movie;
 
         IEnumerable<MovieModel> FoundMovie2 =
@@ -411,7 +405,7 @@ Show time: {movies[movieId].ShowTime}");
 
         List<MovieModel> FoundMovies = new();
 
-        if (propertyIndex != 7)
+        if (propertyIndex != 6)
         {
             Console.Write(@"1. Ascending
 2. Descending");
@@ -488,20 +482,6 @@ Show time: {movies[movieId].ShowTime}");
                         }
                         break;
 
-                    case "showtime":
-                        var OrderByShowtime = from m in movies
-                                              orderby DateTime.ParseExact(m.ShowTime, "HH:mm dd-MM-yyyy", new CultureInfo("nl-NL"))
-                                              select m;
-                        foreach (MovieModel film in OrderByShowtime)
-                        {
-                            FoundMovies.Add(film);
-                        }
-                        break;
-
-                    case "exit":
-                        ShowMoviesTable("yes");
-                        break;
-
                     default:
                         return;
                 }
@@ -576,27 +556,12 @@ Show time: {movies[movieId].ShowTime}");
                         }
                         break;
 
-                    case "showtime":
-                        var OrderByShowtime = from m in movies
-                                              orderby DateTime.ParseExact(m.ShowTime, "HH:mm dd-MM-yyyy", new CultureInfo("nl-NL")) descending
-                                              select m;
-                        foreach (MovieModel film in OrderByShowtime)
-                        {
-                            FoundMovies.Add(film);
-                        }
-                        break;
-
-                    case "exit":
-                        ShowMoviesTable("yes");
-                        break;
-
                     default:
                         return;
                 }
             }
         }
 
-        else { return; }
         base.Render();
         if (FoundMovies.Count == 0)
         {
