@@ -179,7 +179,8 @@ public class ReservationPage : ViewTemplate
                 ShowHall(hall);
                 Console.WriteLine("Select a seat by entering the [ROW],[SEAT NUMBER].");
                 Console.WriteLine("To deselect a seat, simply enter the same seat location with the [ROW] and [SEAT NUMBER].");
-                Helpers.WarningMessage("For example: 2,4");
+                Helpers.WarningMessage("EXAMPLE: 6,5");
+                Helpers.SuccessMessage("NOTE: After selecting a seat, you will be prompted to select another seat.");
 
                 Console.Write("> ");
                 var index = Console.ReadLine();
