@@ -123,7 +123,7 @@ public class MovieList : ViewTemplate
 
         IEnumerable<MovieModel> FoundMovie =
             from movie in movies
-            where Helpers.CaseInsensitiveContains(movie.Title, SearchKey) || Helpers.CaseInsensitiveContains(movie.Summary, SearchKey) || Helpers.CaseInsensitiveContains(movie.ReleaseDate, SearchKey) || Helpers.CaseInsensitiveContains(movie.ShowTime, SearchKey) || Helpers.CaseInsensitiveContains(movie.Director, SearchKey) || Helpers.CaseInsensitiveContains(movie.Duration.ToString(), SearchKey)
+            where Helpers.CaseInsensitiveContains(movie.Title, SearchKey) || Helpers.CaseInsensitiveContains(movie.Summary, SearchKey) || Helpers.CaseInsensitiveContains(movie.ReleaseDate, SearchKey) || Helpers.CaseInsensitiveContains(movie.Director, SearchKey) || Helpers.CaseInsensitiveContains(movie.Duration.ToString(), SearchKey)
             select movie;
 
         IEnumerable<MovieModel> FoundMovie2 =
@@ -182,7 +182,7 @@ public class MovieList : ViewTemplate
 
         List<MovieModel> FoundMovies = new();
 
-        if (propertyIndex != 7)
+        if (propertyIndex != 6)
         {
             Console.Write(@"1. Ascending
 2. Descending");
@@ -259,19 +259,6 @@ public class MovieList : ViewTemplate
                         }
                         break;
 
-                    case "showtime":
-                        var OrderByShowtime = from m in movies
-                                              orderby DateTime.ParseExact(m.ShowTime, "HH:mm dd-MM-yyyy", new CultureInfo("nl-NL"))
-                                              select m;
-                        foreach (MovieModel film in OrderByShowtime)
-                        {
-                            FoundMovies.Add(film);
-                        }
-                        break;
-
-                    case "exit":
-                        break;
-
                     default:
                         return;
                 }
@@ -344,19 +331,6 @@ public class MovieList : ViewTemplate
                         {
                             FoundMovies.Add(movie);
                         }
-                        break;
-
-                    case "showtime":
-                        var OrderByShowtime = from m in movies
-                                              orderby DateTime.ParseExact(m.ShowTime, "HH:mm dd-MM-yyyy", new CultureInfo("nl-NL")) descending
-                                              select m;
-                        foreach (MovieModel film in OrderByShowtime)
-                        {
-                            FoundMovies.Add(film);
-                        }
-                        break;
-
-                    case "exit":
                         break;
 
                     default:

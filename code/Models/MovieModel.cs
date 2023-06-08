@@ -19,19 +19,16 @@ public class MovieModel
     public List<string> Genres { get; set; }
 
     [JsonPropertyName("director")]
-    public string Director {get;set;}
+    public string Director { get; set; }
 
     [JsonPropertyName("releasedate")]
     public string ReleaseDate { get; set; }
 
-    [JsonPropertyName("showtime")]
-    public string ShowTime {get;set;}
 
 
 
 
-
-    public MovieModel(string title, int duration, string summary, List<string> genres, string director, string releasedate, string showtime, string id = null)
+    public MovieModel(string title, int duration, string summary, List<string> genres, string director, string releasedate, string id = null)
     {
         Id = string.IsNullOrWhiteSpace(id) ? Helpers.GenUid() : id;
         Title = title;
@@ -40,7 +37,6 @@ public class MovieModel
         Genres = genres;
         Director = director;
         ReleaseDate = releasedate;
-        ShowTime = showtime;
     }
 
 
