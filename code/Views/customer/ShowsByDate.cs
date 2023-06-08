@@ -11,6 +11,7 @@ public class ShowsByDate : ViewTemplate
         base.Render();
         List<ShowModel> shows = new();
         shows = GetShowModelsByDate();
+        shows = shows.Where(s => s.Timestamp >= Helpers.DateToUnixTimeStamp(DateTime.Now.ToString())).ToList();
 
         Dictionary<string, ShowModel> showsDict = new();
 
