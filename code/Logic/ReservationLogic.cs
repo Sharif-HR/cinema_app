@@ -6,13 +6,13 @@ public class ReservationLogic : LogicTemplate
     public void PrintReceipt(ReservationModel reservation)
     {
         string movieName = CheckStringLengthForReceiptFormat(reservation.Show.Movie.Title, "🎥 Movie");
-        string seats = CheckStringLengthForReceiptFormat(reservation.Seats, "💺 Seats");
+        string seats = CheckStringLengthForReceiptFormat(reservation.Seats.Count().ToString(), "💺 Seats");
         string date = CheckStringLengthForReceiptFormat(Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "dd-MM-yyyy"), "📆 Date");
         string timeOfShow = CheckStringLengthForReceiptFormat(Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm"), "⌚️ Time");
         string totalCosts = CheckStringLengthForReceiptFormat(Math.Round(reservation.Costs, 3).ToString(), "TOTAL");
         string ticketID = CheckStringLengthForReceiptFormat(reservation.ID, "Ticket ID");
 
-        string tickets = CheckStringLengthForReceiptFormat(seats.Split(',').Count() + $" X 15        {seats.Split(',').Count() * 15}", "Tick costs");
+        // string tickets = CheckStringLengthForReceiptFormat(seats.Split(',').Count() + $" X 15        {seats.Split(',').Count() * 15}", "Tick costs");
         //refreshments
         List<string> refreshmentsNamesList = new();
 
@@ -39,6 +39,49 @@ public class ReservationLogic : LogicTemplate
                     refreshmentDict[refreshment.Name] = innerDict;
                 }
             }
+        }
+
+        List<SeatModel> orderedSeats = reservation.Seats.OrderBy(e => e.OriginalType).ToList();
+        Dictionary<string, int> seatCounts = new();
+
+        foreach(SeatModel seat in orderedSeats) {
+            // string tickets = CheckStringLengthForReceiptFormat(seats.Split(',').Count() + $" X 15        {seats.Split(',').Count() * 15}", "Tick costs");
+            if(!seatCounts.ContainsKey(seat.OriginalType)) {
+                seatCounts[seat.OriginalType] = 1;
+            } else {
+                seatCounts[seat.OriginalType]++;
+            }
+        }
+
+        Dictionary<string, double> seatPrices = new();
+
+        foreach(SeatModel seat in orderedSeats) {
+            if(!seatPrices.ContainsKey(seat.OriginalType)) {
+                seatPrices[seat.OriginalType] = (seatCounts[seat.OriginalType] * seat.Price);
+            }
+        }
+
+        string tickets = "";
+
+        foreach (var item in seatPrices)
+        {
+            double seatPrice;
+            switch (item.Key)
+            {
+                case "a":
+                    seatPrice = 7.50;
+                    break;
+                case "v":
+                    seatPrice = 9.50;
+                    break;
+                case "p":
+                    seatPrice = 14.75;
+                    break;
+                default:
+                    seatPrice = 0.0;
+                    continue;
+            }
+            tickets += CheckStringLengthForReceiptFormat(seatCounts[item.Key] + $" X {seatPrice}        {seatCounts[item.Key] * seatPrice}", $"Seat Type: {item.Key}") + "\n";
         }
 
         string receipt = $@"

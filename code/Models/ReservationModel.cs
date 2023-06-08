@@ -6,7 +6,7 @@ public class ReservationModel {
     public string ID {get; set;}
 
     [JsonPropertyName("seats")]
-    public string Seats {get; set;}
+    public List<SeatModel> Seats {get; set;}
 
     [JsonPropertyName("costs")]
     public double Costs {get; set;}
@@ -20,7 +20,7 @@ public class ReservationModel {
     [JsonPropertyName("show")]
     public ShowModel Show {get; set;}
 
-    public ReservationModel(string id, string seats, double costs, List<RefreshmentModel> refreshments, AccountModel user, ShowModel show) {
+    public ReservationModel(string id, List<SeatModel> seats, double costs, List<RefreshmentModel> refreshments, AccountModel user, ShowModel show) {
         this.ID = id;
         this.Seats = seats;
         this.Costs = costs;

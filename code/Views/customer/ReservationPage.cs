@@ -77,8 +77,6 @@ public class ReservationPage : ViewTemplate
 
 
         List<SeatModel> selectedSeats = SelectSeat(hall);
-        string seatsString = selectedSeatsList(selectedSeats);
-        Show.TakenSeats = seatsString.Split(',').ToList();
 
         double costs = totalAuditoriumPrice(selectedSeats);
 
@@ -120,7 +118,7 @@ public class ReservationPage : ViewTemplate
             costs *= 0.90;
         }
 
-        ReservationModel reservation = new(id, seatsString, costs, chosenRefreshments, (AccountModel)LocalStorage.GetAuthenticatedUser(), this.Show);
+        ReservationModel reservation = new(id, selectedSeats, costs, chosenRefreshments, (AccountModel)LocalStorage.GetAuthenticatedUser(), this.Show);
 
         reservations.Add(reservation);
 
