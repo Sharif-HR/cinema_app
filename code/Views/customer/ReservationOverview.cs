@@ -24,7 +24,12 @@ public class ReservationOverviewCustomer : ViewTemplate {
 
         foreach (ReservationModel reservation in availableReservations)
         {
-            menuDict[$"{reservation.Show.Movie.Title} | Starts: {Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm")} | Seats: {reservation.Seats}"] = reservation;
+            string seatString = "";
+            foreach (SeatModel seat in reservation.Seats)
+            {
+                seatString += $"[{seat.Column},{seat.Row}],";
+            }
+            menuDict[$"{reservation.Show.Movie.Title} | Starts: {Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm")} | Seats: {seatString}"] = reservation;
         }
 
         int index = MenuList<ReservationModel>(menuDict, this, this);
