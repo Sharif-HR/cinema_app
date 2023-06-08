@@ -27,19 +27,12 @@ public class ShowsByDate : ViewTemplate
 
     private List<ShowModel> GetShowModelsByDate()
     {
+        ShowWeekOverview showWeekOverview = new ShowWeekOverview();
         while (true)
         {
             try
             {
-                string date = InputField("Enter the date of the movies you wish to see:");
-
-                int timestampOfGivenDate = Helpers.DateToUnixTimeStamp(date);
-                int timestampNextDay = Helpers.DateToUnixTimeStamp(Convert.ToString(Convert.ToDateTime(date).AddDays(1.0)));
-
-                List<ShowModel> shows = _showAccess.LoadAll();
-                List<ShowModel> availableShows = shows.Where(s => s.Timestamp >= timestampOfGivenDate && s.Timestamp < timestampNextDay).ToList();
-
-                return availableShows;
+                return showWeekOverview.getWeekOverview();
             }
             catch (Exception)
             {
