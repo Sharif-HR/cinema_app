@@ -27,7 +27,21 @@ public class ReservationPage : ViewTemplate
         return total;
     }
 
-    private string selectedSeatsList(List<SeatModel> seats)
+    // private string selectedSeatsList(List<SeatModel> seats)
+    // {
+    //     List<string> seatLocations = new List<string>();
+    //     foreach (var seat in seats)
+    //     {
+    //         seatLocations.Add($"{seat.Row + 1}-{seat.Column + 1}");
+    //     }
+
+
+    //     return string.Join(",", seatLocations);
+
+    //     // return seatLocations;
+    // }
+
+    private List<string> selectedSeatList(List<SeatModel> seats)
     {
         List<string> seatLocations = new List<string>();
         foreach (var seat in seats)
@@ -35,13 +49,7 @@ public class ReservationPage : ViewTemplate
             seatLocations.Add($"{seat.Row + 1}-{seat.Column + 1}");
         }
 
-
-        // if (toString)
-        // {
-        return string.Join(",", seatLocations);
-        // }
-
-        // return seatLocations;
+        return seatLocations;
     }
 
 
@@ -121,7 +129,7 @@ public class ReservationPage : ViewTemplate
         ReservationModel reservation = new(id, selectedSeats, costs, chosenRefreshments, (AccountModel)LocalStorage.GetAuthenticatedUser(), this.Show);
 
         reservations.Add(reservation);
-
+        Show.TakenSeats = selectedSeatList(selectedSeats);
         _reservationLogic.UpdateReservations(reservations);
         _showLogic.UpdateSeats(Show.showId, Show.TakenSeats);
 
