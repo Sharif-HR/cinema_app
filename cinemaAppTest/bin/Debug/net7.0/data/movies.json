@@ -1,0 +1,38 @@
+[
+  {
+    "id": "a2e1a16d-ec54-4a92-9d2b-c682f349c892",
+    "title": "Movie 1",
+    "duration": 150,
+    "summary": "Summary 1",
+    "genres": [
+      "Genre 1",
+      "Genre 2"
+    ],
+    "director": "Director 1",
+    "releasedate": "2021-01-01"
+  },
+  {
+    "id": "2abb0bf1-5816-4335-b26e-227faba3c8f3",
+    "title": "New Movie",
+    "duration": 180,
+    "summary": "Summary",
+    "genres": [
+      "Genre 5",
+      "Genre 6"
+    ],
+    "director": "Director 4",
+    "releasedate": "2024-04-04"
+  },
+  {
+    "id": "0742fbf0-d84c-4e39-9ccd-c83797e0f572",
+    "title": "New Movie",
+    "duration": 180,
+    "summary": "Summary",
+    "genres": [
+      "Genre 5",
+      "Genre 6"
+    ],
+    "director": "Director 4",
+    "releasedate": "2024-04-04"
+  }
+]
