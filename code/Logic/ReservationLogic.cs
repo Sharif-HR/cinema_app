@@ -44,19 +44,25 @@ public class ReservationLogic : LogicTemplate
         List<SeatModel> orderedSeats = reservation.Seats.OrderBy(e => e.OriginalType).ToList();
         Dictionary<string, int> seatCounts = new();
 
-        foreach(SeatModel seat in orderedSeats) {
+        foreach (SeatModel seat in orderedSeats)
+        {
             // string tickets = CheckStringLengthForReceiptFormat(seats.Split(',').Count() + $" X 15        {seats.Split(',').Count() * 15}", "Tick costs");
-            if(!seatCounts.ContainsKey(seat.OriginalType)) {
+            if (!seatCounts.ContainsKey(seat.OriginalType))
+            {
                 seatCounts[seat.OriginalType] = 1;
-            } else {
+            }
+            else
+            {
                 seatCounts[seat.OriginalType]++;
             }
         }
 
         Dictionary<string, double> seatPrices = new();
 
-        foreach(SeatModel seat in orderedSeats) {
-            if(!seatPrices.ContainsKey(seat.OriginalType)) {
+        foreach (SeatModel seat in orderedSeats)
+        {
+            if (!seatPrices.ContainsKey(seat.OriginalType))
+            {
                 seatPrices[seat.OriginalType] = (seatCounts[seat.OriginalType] * seat.Price);
             }
         }
@@ -172,16 +178,28 @@ public class ReservationLogic : LogicTemplate
         return endResult;
     }
 
-    public void UpdateReservations(List<ReservationModel> reservations) {
+    public void UpdateReservations(List<ReservationModel> reservations)
+    {
         _reservationAccess.WriteAll(reservations);
     }
 
-    public List<ReservationModel> GetReservations() {
+    public List<ReservationModel> GetReservations()
+    {
         return _reservationAccess.LoadAll();
     }
 
-    public void DeleteReservation(ReservationModel id, List<ReservationModel> _reservationList){
+    public void DeleteReservation(ReservationModel id, List<ReservationModel> _reservationList)
+    {
         _reservationList.Remove(id);
         _reservationAccess.WriteAll(_reservationList);
+    }
+
+    public string CheckStringLengthForReceiptFormatPublic(string str, string label)
+    {
+        return CheckStringLengthForReceiptFormat(str, label);
+    }
+    public string RefreshmentsReceiptPublic(Dictionary<string, Dictionary<RefreshmentModel, int>> refreshmentDict)
+    {
+        return RefreshmentsReceipt(refreshmentDict);
     }
 }
