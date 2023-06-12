@@ -9,9 +9,7 @@ public class ShowLogic : LogicTemplate {
         this._showList = GetShows();
     }
 
-    public List<MovieModel> GetMovies() {
-        return _movieLogic.GetMovies();
-    }
+    public List<MovieModel> GetMovies() => _movieLogic.GetMovies();
 
     public List<ShowModel> GetShows() => _showAccess.LoadAll();
 
