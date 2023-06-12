@@ -19,7 +19,6 @@ public class ShowLogic : LogicTemplate {
             _showAccess.WriteAll(shows);
             Helpers.SuccessMessage("Show is added!");
             Helpers.Continue();
-            Console.WriteLine(Helpers.TimeStampToGMEFormat(shows[^1].Timestamp, "dd-MM-yyyy H:I"));
         }
         catch (System.Exception)
         {
