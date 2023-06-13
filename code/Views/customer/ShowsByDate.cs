@@ -17,7 +17,7 @@ public class ShowsByDate : ViewTemplate
 
         foreach (var show in shows)
         {
-            showsDict[$"{show.Movie.Title} | Starts: {Helpers.TimeStampToGMEFormat(show.Timestamp, "HH:mm dd-MM-yyyy")}"] = show;
+            showsDict[$"{show.Movie.Title} | Starts: {Helpers.TimeStampToGMEFormat(show.Timestamp, "HH:mm")}"] = show;
         }
 
         int index = MenuList(showsDict, this, new ReservationPage());

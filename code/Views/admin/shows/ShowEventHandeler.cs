@@ -53,20 +53,6 @@ public class ShowEventHandeler : ViewTemplate {
         LocalStorage.localStorage.Remove("SHOW_OPTION");
     }
 
-    // [JsonPropertyName("showId")]
-    // public string showId {get; set;}
-
-    // [JsonPropertyName("timestamp")]
-    // public int Timestamp {get; set;} // timestamp
-    // [JsonPropertyName("takenSeats")]
-    // public List<string> TakenSeats {get; set;}
-
-    // [JsonPropertyName("numberOfSeats")]
-    // public int NumberOfSeats {get; set;}
-
-    // [JsonPropertyName("movie")]
-    // public MovieModel Movie {get; set;}
-
     private void AddShow() {
         Dictionary<string, MovieModel> moviesDict = new();
 
