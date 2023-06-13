@@ -1,34 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/cinemaAppTest/cinemaAppTest.csproj": {}
+    "/Users/martinpiet/Documents/Workshop/cinema_app/cinemaAppTest/cinemaAppTest.csproj": {}
   },
   "projects": {
-    "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/cinemaAppTest/cinemaAppTest.csproj": {
+    "/Users/martinpiet/Documents/Workshop/cinema_app/cinemaAppTest/cinemaAppTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/cinemaAppTest/cinemaAppTest.csproj",
+        "projectUniqueName": "/Users/martinpiet/Documents/Workshop/cinema_app/cinemaAppTest/cinemaAppTest.csproj",
         "projectName": "cinemaAppTest",
-        "projectPath": "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/cinemaAppTest/cinemaAppTest.csproj",
-        "packagesPath": "/Users/jurian/.nuget/packages/",
-        "outputPath": "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/cinemaAppTest/obj/",
+        "projectPath": "/Users/martinpiet/Documents/Workshop/cinema_app/cinemaAppTest/cinemaAppTest.csproj",
+        "packagesPath": "/Users/martinpiet/.nuget/packages/",
+        "outputPath": "/Users/martinpiet/Documents/Workshop/cinema_app/cinemaAppTest/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/jurian/.nuget/NuGet/NuGet.Config"
+          "/Users/martinpiet/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/code/Project.csproj": {
-                "projectPath": "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/code/Project.csproj"
+              "/Users/martinpiet/Documents/Workshop/cinema_app/code/Project.csproj": {
+                "projectPath": "/Users/martinpiet/Documents/Workshop/cinema_app/code/Project.csproj"
               }
             }
           }
@@ -80,23 +79,22 @@
         }
       }
     },
-    "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/code/Project.csproj": {
+    "/Users/martinpiet/Documents/Workshop/cinema_app/code/Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/code/Project.csproj",
+        "projectUniqueName": "/Users/martinpiet/Documents/Workshop/cinema_app/code/Project.csproj",
         "projectName": "CinemaApp",
-        "projectPath": "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/code/Project.csproj",
-        "packagesPath": "/Users/jurian/.nuget/packages/",
-        "outputPath": "/Users/jurian/Desktop/workspace/hbo/jaar1/OODP/projectB/cinemaApp/cinema_app/code/obj/",
+        "projectPath": "/Users/martinpiet/Documents/Workshop/cinema_app/code/Project.csproj",
+        "packagesPath": "/Users/martinpiet/.nuget/packages/",
+        "outputPath": "/Users/martinpiet/Documents/Workshop/cinema_app/code/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/jurian/.nuget/NuGet/NuGet.Config"
+          "/Users/martinpiet/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

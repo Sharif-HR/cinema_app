@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": "id2",
+    "seats": [],
+    "costs": 0,
+    "refreshments": [],
+    "user": null,
+    "show": null
+  }
+]
