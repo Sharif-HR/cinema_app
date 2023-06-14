@@ -9,6 +9,18 @@ public static class Helpers
         Console.ReadKey();
     }
 
+    public static string[] AlphabetArray(){
+        string[] alphabetArray = new string[26];
+
+        for (int i = 0; i < 26; i++)
+        {
+            char letter = (char)('a' + i);
+            alphabetArray[i] = letter.ToString().ToUpper();
+        }
+
+        return alphabetArray;
+    }
+
     public static bool GoBack(string action)
     {
         while (true)
