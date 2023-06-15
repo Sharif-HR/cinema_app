@@ -10,6 +10,12 @@ public abstract class ViewTemplate
     {
         this.Title = title;
     }
+
+    public void GoBackMsg()
+    {
+        Helpers.SuccessMessage("To go back keep your input empty and PRESS enter");
+    }
+
     public virtual void Render()
     {
         Console.Clear();
@@ -141,34 +147,9 @@ public abstract class ViewTemplate
     }
 
 
-    public string InputPhoneNumber(string label, bool isOptional = false)
+    public string InputPhoneNumber(string label)
     {
-        Console.WriteLine(label);
-        Helpers.WarningMessage("optional: Press enter to skip this field.");
-        string? input;
-        while (true)
-        {
-            Console.Write("> ");
-            input = Console.ReadLine();
-
-            if (Helpers.ContainsLetters(input))
-            {
-                Helpers.WarningMessage("Letters are not allowed.");
-                continue;
-            }
-
-            if (isOptional)
-            {
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    return null;
-                }
-            }
-
-            break;
-        }
-
-        return input;
+        return this.InputField($"{label} (enter x to skip this field)");
     }
 
     public string OptionalInput(string label)
@@ -475,7 +456,7 @@ public abstract class ViewTemplate
         }
     }
 
-    public void MenuList(List<string> routesList, ViewTemplate page)
+    public void MenuList(List<string> routesList, ViewTemplate page, string viewName)
     {
         Console.WriteLine("Use ⬆️  and ⬇️  to navigate and press Enter to select:");
         (int left, int top) = Console.GetCursorPosition();
@@ -485,7 +466,16 @@ public abstract class ViewTemplate
         bool isSelected = false;
 
         // Insert the go back option
-        routesList.Insert(0, "Go Back");
+        List<string> pagesWithGoBack = new(){
+            "ManageShowsPageAdmin",
+            "ManageMoviesPageAdmin",
+            "ManageReservationsPageAdmin"
+        };
+
+        if (pagesWithGoBack.Contains(viewName))
+        {
+            routesList.Insert(0, "Go Back");
+        }
 
         while (!isSelected)
         {
@@ -583,7 +573,8 @@ public abstract class ViewTemplate
                     break;
             }
         }
-        if(option == 1) {
+        if (option == 1)
+        {
             RouteHandeler.LastView();
         }
         //routing

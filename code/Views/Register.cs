@@ -12,13 +12,14 @@ public class Register : ViewTemplate
         while (true)
         {
             base.Render();
+            base.GoBackMsg();
             // RouteHandeler.LastView();
 
             string? username = base.InputField("Enter your username");
             string? firstName = base.InputField("Enter your first name:");
             string? lastName = base.InputField("Enter your last name:");
             string? email = EmailInput();
-            string? phoneNumber = base.InputPhoneNumber("Enter your phonenumber:", true);
+            string? phoneNumber = base.InputPhoneNumber("Enter your phonenumber:");
             string? password = base.InputPassword("Enter you password:", true);
             bool isStudent = base.CheckboxInput("Are you a student? (Press 'y' for Yes or 'n' for No)");
 

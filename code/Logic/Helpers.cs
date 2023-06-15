@@ -9,7 +9,8 @@ public static class Helpers
         Console.ReadKey();
     }
 
-    public static string[] AlphabetArray(){
+    public static string[] AlphabetArray()
+    {
         string[] alphabetArray = new string[26];
 
         for (int i = 0; i < 26; i++)
@@ -21,26 +22,6 @@ public static class Helpers
         return alphabetArray;
     }
 
-    public static bool GoBack(string action)
-    {
-        while (true)
-        {
-            Helpers.WarningMessage($"Enter 0 to go back or press Enter to continue {action}.");
-            string uInput = Console.ReadLine();
-            if (uInput == "0")
-            {
-                return true;
-            }
-            else if (uInput == "")
-            {
-                return false;
-            }
-            else
-            {
-                Helpers.WarningMessage("Invalid input.");
-            }
-        }
-    }
     public static void Divider(bool hasEnter = true)
     {
         if (hasEnter)
@@ -236,21 +217,26 @@ public static class Helpers
         return text.IndexOf(value, stringComparison) >= 0;
     }
 
-    public static string DecapitalizeString(string str) {
+    public static string DecapitalizeString(string str)
+    {
         return char.ToLower(str[0]) + str.Substring(1);
     }
 
-    public static int DateToUnixTimeStamp(string date) {
+    public static int DateToUnixTimeStamp(string date)
+    {
         DateTime oDate = Convert.ToDateTime(date);
         DateTimeOffset dateToConvert = new DateTimeOffset(oDate);
 
         var timestamp = dateToConvert.ToUnixTimeSeconds();
 
-        // + 7200 seconds because of the GMT time difference
+        // Add two hours (7200 seconds) to the timestamp
+        timestamp += 7200;
+
         return Convert.ToInt32(timestamp.ToString());
     }
 
-    public static string TimeStampToGMEFormat(int timestamp, string format = "dd-MM-yyyy") {
+    public static string TimeStampToGMEFormat(int timestamp, string format = "dd-MM-yyyy")
+    {
         return DateTimeOffset.FromUnixTimeSeconds(timestamp).ToString(format);
     }
 }

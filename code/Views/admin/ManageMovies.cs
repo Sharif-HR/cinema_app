@@ -20,8 +20,15 @@ public class ManageMovies : ViewTemplate, IManage
         while (true)
         {
             base.Render();
-            ShowMenu();
-            string UserInput = Console.ReadLine();
+
+            Dictionary<string, string> listDict = new() {
+                {"Add a movie.", ""},
+                {"Edit a movie.", ""},
+                {"Delete a movie.", ""},
+                {"Show movie list.", ""},
+            };
+
+            string UserInput = Convert.ToString(MenuList(listDict, this, this) + 1);
 
             switch (UserInput)
             {
@@ -61,7 +68,7 @@ public class ManageMovies : ViewTemplate, IManage
         while (true)
         {
             base.Render();
-
+            base.GoBackMsg();
             string title = base.InputField("Movie title:");
             int duration = base.InputNumber("Movie duration (in minutes):");
             string summary = base.InputField("Movie summary:");
@@ -93,6 +100,7 @@ public class ManageMovies : ViewTemplate, IManage
         {
             ShowMoviesTable("null");
             Helpers.WarningMessage($"In order to select a movie to edit enter a number between 1 and {movies.Count}");
+            base.GoBackMsg();
             int movieId = SelectFromModelList<MovieModel>(movies, true);
             var movieProperties = MovieProperties();
             movieProperties.Add("Exit");
@@ -103,6 +111,7 @@ public class ManageMovies : ViewTemplate, IManage
                 movies = _movieLogic.GetMovies();
 
                 base.Render();
+                base.GoBackMsg();
                 Helpers.WarningMessage("Selected movie:");
                 Console.WriteLine($@"Title: {movies[movieId].Title}
 Duration: {movies[movieId].Duration}
@@ -190,6 +199,7 @@ Release date: {movies[movieId].ReleaseDate}");
 
             ShowMoviesTable("null");
             movies = _movieLogic.GetMovies();
+            base.GoBackMsg();
             int movieId = base.SelectFromModelList<MovieModel>(movies, true);
 
             _movieLogic.DeleteMovie(movieId);
@@ -309,15 +319,6 @@ Release date: {movies[movieId].ReleaseDate}");
         }
     }
 
-    private void ShowMenu()
-    {
-        Console.Write(@"1. Add a movie
-2. Edit Movie
-3. Delete Movie
-4. Show movies
-5. Back to dashboard
-> ");
-    }
     private void SearchSortFilterMenu()
     {
         Console.Write(@"Please select an option:

@@ -20,7 +20,6 @@ public class ManageRefreshments : ViewTemplate, IManage
         while (true)
         {
             base.Render();
-            ShowMenu();
 
             Dictionary<string, string> listDict = new() {
                 {"Add a refreshment.", ""},
@@ -58,10 +57,12 @@ public class ManageRefreshments : ViewTemplate, IManage
         }
     }
 
-    public void AddForm(){
-        while(true){
-
-            if (Helpers.GoBack("adding a refreshment") == true) { return; }
+    public void AddForm()
+    {
+        while (true)
+        {
+            base.Render();
+            base.GoBackMsg();
 
             string name = base.InputField("Refreshment name:");
             bool isDrink = base.InputBool("Is refreshment a drink(enter true or false):");
@@ -75,7 +76,8 @@ public class ManageRefreshments : ViewTemplate, IManage
         }
     }
 
-    public void EditForm(){
+    public void EditForm()
+    {
         var refreshments = _refreshmentLogic.GetRefreshments();
 
         if (refreshments.Count == 0)
@@ -88,8 +90,8 @@ public class ManageRefreshments : ViewTemplate, IManage
         while (true)
         {
             ShowRefreshmentTable("null");
-            if (Helpers.GoBack("editing a refreshment") == true) { return; }
             Helpers.WarningMessage($"In order to select a refreshment to edit enter a number between 1 and {refreshments.Count}");
+            base.GoBackMsg();
             int refreshmentId = SelectFromModelList<RefreshmentModel>(refreshments, true);
             var refreshmentProperties = RefreshmentProperties();
             refreshmentProperties.Add("Exit");
@@ -157,7 +159,8 @@ Price: {refreshments[refreshmentId].Price}
         }
     }
 
-    public void DeleteForm(){
+    public void DeleteForm()
+    {
         while (true)
         {
             var refreshments = _refreshmentLogic.GetRefreshments();
@@ -167,10 +170,10 @@ Price: {refreshments[refreshmentId].Price}
                 Helpers.Continue();
                 return;
             }
-            if (Helpers.GoBack("deleting a refreshment") == true) { return; }
 
             ShowRefreshmentTable("null");
             refreshments = _refreshmentLogic.GetRefreshments();
+            base.GoBackMsg();
             int refreshmentId = base.SelectFromModelList<RefreshmentModel>(refreshments, true);
 
             _refreshmentLogic.DeleteRefreshment(refreshmentId);
@@ -179,7 +182,8 @@ Price: {refreshments[refreshmentId].Price}
         }
     }
 
-    public void ShowRefreshmentTable(string showmenu){
+    public void ShowRefreshmentTable(string showmenu)
+    {
         base.Render();
         var refreshment = _refreshmentLogic.GetRefreshments();
         Console.WriteLine(_refreshmentLogic.GenerateModelTable<RefreshmentModel>(refreshment));
@@ -240,17 +244,6 @@ Price: {refreshments[refreshmentId].Price}
 
         return refreshmentProperties;
     }
-
-    private void ShowMenu()
-    {
-        Console.Write(@"1. Add a refreshment
-2. Edit refreshments
-3. Delete refreshment
-4. Show refreshments.
-5. Back to dashboard.
-> ");
-    }
-
     private void SearchSortFilterMenu()
     {
         Console.Write(@"Please select an option:
@@ -330,7 +323,7 @@ Price: {refreshments[refreshmentId].Price}
 
         List<RefreshmentModel> FoundRefreshments = new();
 
-        if(propertyIndex != 3)
+        if (propertyIndex != 3)
         {
             Console.Write(@"1. Ascending
 2. Descending");
@@ -343,8 +336,8 @@ Price: {refreshments[refreshmentId].Price}
                 {
                     case "name":
                         var OrderByName = from m in refreshments
-                                        orderby m.Name
-                                        select m;
+                                          orderby m.Name
+                                          select m;
 
                         foreach (RefreshmentModel refreshment in OrderByName)
                         {
@@ -358,8 +351,8 @@ Price: {refreshments[refreshmentId].Price}
 
                     case "price":
                         var OrderByPrice = from m in refreshments
-                                            orderby m.Price
-                                            select m;
+                                           orderby m.Price
+                                           select m;
 
                         foreach (RefreshmentModel refreshment in OrderByPrice)
                         {
@@ -380,8 +373,8 @@ Price: {refreshments[refreshmentId].Price}
                 {
                     case "name":
                         var OrderByName = from m in refreshments
-                                        orderby m.Name descending
-                                        select m;
+                                          orderby m.Name descending
+                                          select m;
 
                         foreach (RefreshmentModel refreshment in OrderByName)
                         {
@@ -395,8 +388,8 @@ Price: {refreshments[refreshmentId].Price}
 
                     case "price":
                         var OrderByPrice = from m in refreshments
-                                            orderby m.Price descending
-                                            select m;
+                                           orderby m.Price descending
+                                           select m;
 
                         foreach (RefreshmentModel refreshment in OrderByPrice)
                         {
@@ -441,20 +434,29 @@ Price: {refreshments[refreshmentId].Price}
         Console.WriteLine("2. Drinks");
 
         bool o = true;
-        if(isAsc == 0){
-            while(true){
+        if (isAsc == 0)
+        {
+            while (true)
+            {
                 string UserInput = Console.ReadLine();
-                if(UserInput == "1"){
+                if (UserInput == "1")
+                {
                     o = false;
                     break;
-                }else if(UserInput == "2"){
+                }
+                else if (UserInput == "2")
+                {
                     o = true;
                     break;
                 }
             }
-        }else if(isAsc == 1){
+        }
+        else if (isAsc == 1)
+        {
             o = true;
-        }else if(isAsc == 2){
+        }
+        else if (isAsc == 2)
+        {
             o = false;
         }
 

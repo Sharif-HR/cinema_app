@@ -15,7 +15,7 @@ public class Menu : ViewTemplate
         {
             base.Render();
             List<string> testList = new() { "Login", "Register", "About us" };
-            MenuList(testList, this);
+            MenuList(testList, this, "MenuPage");
         }
     }
 }

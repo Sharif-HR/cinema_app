@@ -1,18 +1,19 @@
 namespace Views;
 using System;
-public class ReservationOverviewCustomer : ViewTemplate {
+public class ReservationOverviewCustomer : ViewTemplate
+{
     private ReservationLogic _reservationLogic = new();
-    public ReservationOverviewCustomer() : base("My Reservations") {  }
+    public ReservationOverviewCustomer() : base("My Reservations") { }
 
     public override void Render()
     {
         base.Render();
 
+        List<ReservationModel> reservations = _reservationLogic.GetReservations();
+        //if (reservations != null)
         Console.WriteLine("Select the show you want to inspect");
 
-        Dictionary<string, ReservationModel> menuDict = new() {  };
-
-        List<ReservationModel> reservations = _reservationLogic.GetReservations();
+        Dictionary<string, ReservationModel> menuDict = new() { };
 
         AccountModel authUser = LocalStorage.GetAuthenticatedUser();
 
@@ -40,7 +41,8 @@ public class ReservationOverviewCustomer : ViewTemplate {
 
         bool choice = CheckboxInput("Do you want to copy the reservation ID?");
 
-        if(choice) {
+        if (choice)
+        {
             TextCopy.ClipboardService.SetText(element.ID);
             Helpers.SuccessMessage($"Copied {element.ID} to your clipboard!");
         }

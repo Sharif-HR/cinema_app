@@ -42,33 +42,6 @@ public class Dashboard : ViewTemplate
         {
             base.Render();
             ShowAdminMenu();
-
-            // string AdminInput = InputField("Enter a number:");
-            // switch (AdminInput)
-            // {
-            //     case "1":
-            //         Helpers.WarningMessage("Coming soon!");
-            //         Helpers.Continue();
-            //         break;
-
-            //     case "2":
-            //         RouteHandeler.View("ManageMoviesPageAdmin");
-            //         break;
-
-            //     case "3":
-            //         Helpers.WarningMessage("Coming soon!");
-            //         Helpers.Continue();
-            //         break;
-            //     case "4":
-            //         LogOutMsg();
-            //         return;
-
-            //     default:
-            //         Helpers.Divider();
-            //         Helpers.WarningMessage("Invalid input. Please enter one of the number shown above.");
-            //         Helpers.Continue();
-            //         break;
-            // }
         }
     }
 
@@ -80,29 +53,6 @@ public class Dashboard : ViewTemplate
         {
             base.Render();
             ShowCustomerMenu();
-
-            // string CustomerInput = InputField("Enter a number:");
-            // switch (CustomerInput)
-            // {
-            //     case "1":
-            //         CustomerMoviePage.Render();
-            //         break;
-
-            //     case "2":
-            //         Console.WriteLine("Coming soon");
-            //         Helpers.Continue();
-            //         break;
-
-            //     case "3":
-            //         LogOutMsg();
-            //         return;
-
-            //     default:
-            //         Helpers.Divider();
-            //         Helpers.WarningMessage("Invalid input. Please enter one of the numbers shown above.");
-            //         Helpers.Continue();
-            //         break;
-            // }
         }
 
     }
@@ -124,14 +74,14 @@ public class Dashboard : ViewTemplate
 
     private void ShowAdminMenu()
     {
-        List<string> options = new() {"Reservations", "Manage Movies", "Manage Refreshments", "Show Overview", "Logout"};
-        MenuList(options, this);
+        List<string> options = new() { "Manage Reservations", "Manage Movies", "Manage Refreshments", "Manage Shows", "Logout" };
+        MenuList(options, this, "DashboardPage");
         Helpers.Divider(false);
     }
 
     private void ShowCustomerMenu()
     {
-        List<string> options = new() {"Make Reservation", "Movies Overview", "My Reservations", "Cancel Reservation", "Logout"};
-        MenuList(options, this);
+        List<string> options = new() { "Make Reservation", "My Reservations", "Cancel Reservation", "Movies Overview", "Logout" };
+        MenuList(options, this, "DashboardPage");
     }
 }

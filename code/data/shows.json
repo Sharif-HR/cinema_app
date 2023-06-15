@@ -1,79 +1,43 @@
 [
-	{
-		"showId": "73ce4fa9-e72f-45f7-a4c6-30f18fac8e1b",
-		"movie": {
-			"id": "4e49993d-818c-48c7-ad93-81ad0653cf77",
-			"title": "Test 1",
-			"duration": 30,
-			"summary": "Test movie 1",
-			"genres": [
-				"Action",
-				"Fantasy",
-				"Sci-Fi",
-				"Crime"
-			],
-			"releasedate": "12-10-2026",
-			"showtime": "19:00 13-04-2026",
-			"director": "John Doe"
-		},
-		"timestamp": 1684262400,
-		"numberOfSeats": 150,
-		"takenSeats": []
-	},
-	{
-		"showId": "e5419bb2-fffe-4c53-aa94-7d78134a9188",
-		"movie": {
-			"id": "7ff29f7c-0abf-4e7c-8d8b-0f4b60954857",
-			"title": "Test 2",
-			"duration": 60,
-			"summary": "Test movie 2",
-			"genres": [
-				"Comedy",
-				"Drama"
-			],
-			"releasedate": "20-02-2025",
-			"showtime": "14:30 15-02-2025",
-			"director": "Jane Smith"
-		},
-		"timestamp": 1684348800,
-		"numberOfSeats": 200,
-		"takenSeats": []
-	},
-	{
-		"showId": "02e11f5a-33f0-4e0b-9c9e-29e91f77b02c",
-		"movie": {
-			"id": "c45274a3-19cd-43e0-930d-5197f9c0b1f1",
-			"title": "Test 3",
-			"duration": 90,
-			"summary": "Test movie 3",
-			"genres": [
-				"Action",
-				"Thriller"
-			],
-			"releasedate": "05-09-2024",
-			"showtime": "21:15 07-09-2024",
-			"director": "Mike Johnson"
-		},
-		"timestamp": 1684435200,
-		"numberOfSeats": 120,
-		"takenSeats": []
-	},
-	{
-		"showId": "c47e55dd-1447-4d47-96a9-25c7b4574c3b",
-		"movie": {
-			"id": "a3e1bfe0-080b-46b7-9f4f-9c3b81bca9f9",
-			"title": "Test 4",
-			"duration": 120,
-			"summary": "Test movie 4",
-			"genres": [
-				"Drama"
-			],
-			"releasedate": "18-07-2023",
-			"showtime": "16:45 20-07-2023",
-			"director": "Sarah Thompson"
-		},
-		"timestamp": 1684521600,
-		"numberOfSeats": 80,
-		"takenSeats": []
-	}
+  {
+    "showId": "61b0162b-5595-4241-a745-e4871fb7eea4",
+    "timestamp": 1686924000,
+    "takenSeats": [
+      "2-3"
+    ],
+    "numberOfSeats": 150,
+    "movie": {
+      "id": "01",
+      "title": "The Last Heist",
+      "duration": 110,
+      "summary": "A group of criminals plan a heist of a high-security bank.",
+      "genres": [
+        "Action",
+        "Thriller"
+      ],
+      "director": "Jane Smith",
+      "releasedate": "05-01-2025"
+    }
+  },
+  {
+    "showId": "f8541b6f-10e6-4a7e-b39f-952685ded1bb",
+    "timestamp": 1687003200,
+    "takenSeats": [
+      "3-5",
+      "3-7"
+    ],
+    "numberOfSeats": 150,
+    "movie": {
+      "id": "05",
+      "title": "The Perfect Heist",
+      "duration": 100,
+      "summary": "A group of thieves attempt to rob a casino.",
+      "genres": [
+        "Action",
+        "Crime"
+      ],
+      "director": "Olivia Smith",
+      "releasedate": "08-01-2019"
+    }
+  }
 ]

@@ -1,28 +1,40 @@
 namespace Views;
 
-public class AdminCancelReservationPage : ViewTemplate{
+public class AdminCancelReservationPage : ViewTemplate
+{
     private ReservationLogic _reservationLogic = new();
-    public AdminCancelReservationPage(ShowModel show = null) : base($"Cancel a reservation"){}
+    public AdminCancelReservationPage(ShowModel show = null) : base($"Cancel a reservation") { }
 
     public override void Render()
     {
         base.Render();
 
         List<ReservationModel> reservations = _reservationLogic.GetReservations();
-        
-        while(true){
+
+        if (reservations.Count == 0)
+        {
+            Helpers.WarningMessage("Currently there are no reservations.");
+            Helpers.Continue();
+
+            RouteHandeler.LastView();
+        }
+
+        while (true)
+        {
             Console.WriteLine("Please enter your unique reservation code or leave blank to return:");
             string uniqueCode = Console.ReadLine();
 
-            if(uniqueCode == ""){
+            if (uniqueCode == "")
+            {
                 break;
             }
 
             var reservation = from res in reservations
-                            where (res.ID == uniqueCode)
-                            select res;
-            
-            if(reservation.Count() == 0){
+                              where (res.ID == uniqueCode)
+                              select res;
+
+            if (reservation.Count() == 0)
+            {
                 Console.WriteLine("No reservation was found with this code...");
                 Thread.Sleep(5000);
                 continue;
@@ -30,12 +42,15 @@ public class AdminCancelReservationPage : ViewTemplate{
 
             ReservationModel customerReservation = reservation.ElementAt(0);
 
-            if(DateTime.Parse(Helpers.TimeStampToGMEFormat(customerReservation.Show.Timestamp)) > DateTime.Now){
+            if (DateTime.Parse(Helpers.TimeStampToGMEFormat(customerReservation.Show.Timestamp)) > DateTime.Now)
+            {
                 _reservationLogic.DeleteReservation(customerReservation, reservations);
                 Console.WriteLine("Reservation cancelled...");
                 Thread.Sleep(5000);
                 break;
-            }else{
+            }
+            else
+            {
                 Console.WriteLine("You can't cancel this reservation anymore...");
                 Thread.Sleep(5000);
             }

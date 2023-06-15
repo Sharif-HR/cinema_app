@@ -20,5 +20,27 @@
     "lastName": "som",
     "isStudent": true,
     "role": "customer"
+  },
+  {
+    "id": "a9004288-48a9-4d41-8334-a14af7a0c239",
+    "username": "martin",
+    "password": "P()12adibl",
+    "emailAddress": "martinpiet.2000@gmail.com",
+    "phoneNumber": null,
+    "firstName": "martin",
+    "lastName": "pietersen",
+    "isStudent": false,
+    "role": "customer"
+  },
+  {
+    "id": "3d5839e8-8207-4489-969b-0b89cf9e2fe6",
+    "username": "sharif",
+    "password": "P()12adibl",
+    "emailAddress": "sharif@mail.com",
+    "phoneNumber": "x",
+    "firstName": "sharif",
+    "lastName": "sharif",
+    "isStudent": false,
+    "role": "customer"
   }
 ]

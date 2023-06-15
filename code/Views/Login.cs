@@ -11,6 +11,7 @@ public class Login : ViewTemplate
         while (true)
         {
             base.Render();
+            base.GoBackMsg();
 
             // if(Environment.GetEnvironmentVariable("ENVIRONMENT") == "development") {
             //     RouteHandeler.View("DashboardPage");
@@ -29,14 +30,8 @@ public class Login : ViewTemplate
             }
             else
             {
-                Helpers.Divider();
-                Helpers.WarningMessage("Login failed. Do you want to try again?");
-            }
-
-            bool tryLogin = CheckboxInput("Press 'y' for Yes or 'n' for No");
-            if (tryLogin == false)
-            {
-                return;
+                Helpers.ErrorMessage("Login failed.");
+                Helpers.Continue();
             }
 
         }

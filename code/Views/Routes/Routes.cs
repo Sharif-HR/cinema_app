@@ -35,7 +35,7 @@ public static class Routes
             case "MenuPage":
                 new Menu().Render();
                 break;
-            case "ReservationsPageAdmin":
+            case "ManageReservationsPageAdmin":
                 new ReservationsAdmin().Render();
                 break;
             case "SeereservationsbycustomernamePageAdmin":
@@ -62,12 +62,12 @@ public static class Routes
             case "CancelReservationPageCustomer":
                 new CancelReservationPage().Render();
                 break;
-            case "ShowOverviewPageAdmin":
-                new ShowOverviewAdmin().Render();
+            case "ManageShowsPageAdmin":
+                new ManageShows().Render();
                 break;
-            case "ShowEventHandeler":
-                new ShowEventHandeler(LocalStorage.GetItem("SHOW_OPTION").ToString()).Render();
-                break;
+            // case "ShowEventHandeler":
+            //     new ShowEventHandeler(LocalStorage.GetItem("SHOW_OPTION").ToString()).Render();
+            //     break;
             case "CancelareservationPageAdmin":
                 new AdminCancelReservationPage().Render();
                 break;
@@ -76,6 +76,10 @@ public static class Routes
                 break;
             default:
                 Console.WriteLine("Page doesn't exist");
+                List<string> history = LocalStorage.localStorage["history"];
+                history.RemoveAt(history.Count - 1);
+                LocalStorage.WriteToStorage();
+                RouteHandeler.LastView();
                 break;
         }
     }

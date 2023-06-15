@@ -1,14 +1,23 @@
 namespace Views;
 
-public class ReservationsOverviewAdmin : ViewTemplate {
+public class ReservationsOverviewAdmin : ViewTemplate
+{
     private ReservationLogic _reservationLogic = new();
-    public ReservationsOverviewAdmin() : base("All the reservations") {}
+    public ReservationsOverviewAdmin() : base("All the reservations") { }
 
     public override void Render()
     {
         base.Render();
 
         List<ReservationModel> reservations = _reservationLogic.GetReservations();
+        if (reservations.Count == 0)
+        {
+            Helpers.WarningMessage("Currently there are no reservations.");
+            Helpers.Continue();
+
+            RouteHandeler.LastView();
+        }
+
         List<ReservationModel> reservationsPastX = new();
         int timestampNow = Convert.ToInt32(new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds());
 
@@ -16,18 +25,22 @@ public class ReservationsOverviewAdmin : ViewTemplate {
         {
             string days = InputField("How many days do you want to look back? (Enter * to see everything): ");
             int daysInSeconds;
-            if(days == "*") {
+            if (days == "*")
+            {
                 foreach (ReservationModel reservation in reservations)
                 {
                     Console.WriteLine($"ID: {reservation.ID}, Show: {reservation.Show.Movie.Title}, Customer: {reservation.User.FirstName} {reservation.User.LastName}");
                 }
                 break;
-            } else {
+            }
+            else
+            {
                 // Convert the given days into seconds (86400 seconds per day)
                 int convertedDays;
                 bool validNumber = int.TryParse(days, out convertedDays);
 
-                if(!validNumber) {
+                if (!validNumber)
+                {
                     Helpers.WarningMessage("Days are invalid. Try again");
                     Helpers.Continue();
                     continue;
