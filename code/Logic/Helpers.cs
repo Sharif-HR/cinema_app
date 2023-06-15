@@ -235,10 +235,10 @@ public static class Helpers
         var timestamp = dateToConvert.ToUnixTimeSeconds();
 
         // + 7200 seconds because of the GMT time difference
-        return Convert.ToInt32(timestamp.ToString()) + 7200;
+        return Convert.ToInt32(timestamp.ToString());
     }
 
     public static string TimeStampToGMEFormat(int timestamp, string format = "dd-MM-yyyy") {
-        return DateTimeOffset.FromUnixTimeSeconds(timestamp + 7200).ToString(format);
+        return DateTimeOffset.FromUnixTimeSeconds(timestamp).ToString(format);
     }
 }
