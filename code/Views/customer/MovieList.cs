@@ -37,6 +37,7 @@ public class MovieList : ViewTemplate
                     break;
 
                 case "5":
+                    RouteHandeler.LastView();
                     return;
 
                 default:
@@ -84,7 +85,7 @@ public class MovieList : ViewTemplate
 2. Search for a movie.
 3. Sort movie list.
 4. Filter movie list.
-5. Back to dashboard.");
+5. Back to dashboard");
         Helpers.Divider(false);
     }
     private List<string> Genres()
