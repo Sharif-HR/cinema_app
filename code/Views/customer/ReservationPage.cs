@@ -27,20 +27,6 @@ public class ReservationPage : ViewTemplate
         return total;
     }
 
-    // private string selectedSeatsList(List<SeatModel> seats)
-    // {
-    //     List<string> seatLocations = new List<string>();
-    //     foreach (var seat in seats)
-    //     {
-    //         seatLocations.Add($"{seat.Row + 1}-{seat.Column + 1}");
-    //     }
-
-
-    //     return string.Join(",", seatLocations);
-
-    //     // return seatLocations;
-    // }
-
     private List<string> selectedSeatList(List<SeatModel> seats)
     {
         List<string> seatLocations = new List<string>();
@@ -187,18 +173,20 @@ public class ReservationPage : ViewTemplate
                 ShowHall(hall);
                 Console.WriteLine("Select a seat by entering the [ROW],[SEAT NUMBER].");
                 Console.WriteLine("To deselect a seat, simply enter the same seat location with the [ROW] and [SEAT NUMBER].");
-                Helpers.WarningMessage("EXAMPLE: 6,5");
+                Helpers.WarningMessage("EXAMPLE: C,5");
                 Helpers.SuccessMessage("NOTE: After selecting a seat, you will be prompted to select another seat.");
 
                 Console.Write("> ");
                 var index = Console.ReadLine();
                 var splitIndex = index.Split(",");
 
-                bool validRow = int.TryParse(splitIndex[0], out int selectedRow);
+                string rowLetter = splitIndex[0];
+                int selectedRow = Array.IndexOf(Helpers.AlphabetArray(), rowLetter.ToUpper());
                 bool validColumn = int.TryParse(splitIndex[1], out int selectedColumn);
 
 
-                if (!validRow || !validColumn)
+
+                if (!validColumn)
                 {
                     Helpers.WarningMessage("Invalid row or column number");
                     Helpers.Continue();
@@ -208,7 +196,7 @@ public class ReservationPage : ViewTemplate
 
 
                 SeatModel selectedSeat;
-                selectedSeat = hall[selectedRow - 1][selectedColumn - 1];
+                selectedSeat = hall[selectedRow][selectedColumn - 1];
 
 
                 if (selectedSeat.Reserved)
@@ -325,10 +313,6 @@ public class ReservationPage : ViewTemplate
 
         Helpers.Divider(false);
         Console.WriteLine();
-
-
-
-
     }
 
     private static void XLine()
@@ -364,6 +348,7 @@ public class ReservationPage : ViewTemplate
 
     private static void Content(SeatModel[][] hall)
     {
+        string [] alphabet = Helpers.AlphabetArray();
 
         for (int row = 0; row < hall.Length; row++)
         {
@@ -375,30 +360,30 @@ public class ReservationPage : ViewTemplate
                     if (row == 5)
                     {
                         Console.Write("R");
-                        Console.Write($"  {row + 1} :  ");
+                        Console.Write($"  {alphabet[row]} :  ");
 
                     }
                     if (row == 6)
                     {
                         Console.Write("O");
-                        Console.Write($"  {row + 1} :  ");
+                        Console.Write($"  {alphabet[row]} :  ");
 
                     }
                     if (row == 7)
                     {
                         Console.Write("W");
-                        Console.Write($"  {row + 1} :  ");
+                        Console.Write($"  {alphabet[row]} :  ");
 
                     }
 
                     if (row >= 9)
                     {
-                        Console.Write($"   {row + 1}:  ");
+                        Console.Write($"   {alphabet[row]} :  ");
                     }
 
                     if (row < 9 && row is not (5 or 6 or 7))
                     {
-                        Console.Write($"   {row + 1} :  ");
+                        Console.Write($"   {alphabet[row]} :  ");
                     }
 
                 }

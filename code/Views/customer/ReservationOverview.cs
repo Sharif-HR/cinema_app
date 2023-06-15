@@ -27,7 +27,9 @@ public class ReservationOverviewCustomer : ViewTemplate {
             string seatString = "";
             foreach (SeatModel seat in reservation.Seats)
             {
-                seatString += $"[{seat.Column},{seat.Row}],";
+                string rowLetter = Helpers.AlphabetArray()[seat.Row];
+                int seatNumber = seat.Column + 1;
+                seatString += $"[{rowLetter},{seatNumber}],";
             }
             menuDict[$"{reservation.Show.Movie.Title} | Starts: {Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm")} | Seats: {seatString}"] = reservation;
         }
