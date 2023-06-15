@@ -44,5 +44,6 @@ public class ReservationsOverviewAdmin : ViewTemplate {
                 break;
             }
         }
+        Helpers.Continue();
     }
 }
