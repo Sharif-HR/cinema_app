@@ -1,21 +1,21 @@
 [
   {
     "id": "1",
-    "name": "Popcorn",
+    "name": "Konak kip paprika pizza",
     "isDrink": false,
-    "price": 3.2
+    "price": 4.55
   },
   {
     "id": "2",
-    "name": "Candy",
-    "isDrink": false,
-    "price": 12.1
+    "name": "Golden Power",
+    "isDrink": true,
+    "price": 2.3
   },
   {
     "id": "3",
-    "name": "Nachos",
-    "isDrink": false,
-    "price": 6.99
+    "name": "Izje Red Bull",
+    "isDrink": true,
+    "price": 57.83
   },
   {
     "id": "4",
@@ -46,5 +46,11 @@
     "name": "Coca Cola 33cl",
     "isDrink": true,
     "price": 3.8
+  },
+  {
+    "id": "e026ffae-cece-4aa6-a56f-40eb8ef630da",
+    "name": "Popcorn",
+    "isDrink": false,
+    "price": 3.33
   }
 ]

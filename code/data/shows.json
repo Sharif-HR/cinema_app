@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "showId": "7eea88b1-a1f5-41ff-807e-13c320f2dab8",
+    "timestamp": 1687282200,
+    "takenSeats": [
+      "7-6",
+      "7-7"
+    ],
+    "numberOfSeats": 150,
+    "movie": {
+      "id": "12",
+      "title": "The Circle",
+      "duration": 108,
+      "summary": "A tech company employee becomes entangled in a dangerous experiment that challenges her perception of reality.",
+      "genres": [
+        "Drama",
+        "Sci-Fi",
+        "Thriller"
+      ],
+      "director": "Michael Brown",
+      "releasedate": "25-04-2020"
+    }
+  }
+]

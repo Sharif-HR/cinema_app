@@ -175,9 +175,12 @@ public abstract class ViewTemplate
             Console.WriteLine(label);
             Console.Write("> ");
             string userInput = Console.ReadLine() ?? null;
-            string warningMessage = "Invalid input. Please enter y or n.";
+            string warningMessage = "Invalid input. Please enter y or n";
 
-            if (userInput == null || userInput == "") RouteHandeler.LastView();
+            if (String.IsNullOrEmpty(userInput))
+            {
+                RouteHandeler.LastView();
+            }
 
             if (string.IsNullOrWhiteSpace(userInput) == true)
             {
@@ -261,18 +264,19 @@ public abstract class ViewTemplate
                 Console.Write("> ");
                 string numberStr = Console.ReadLine();
 
-                if (Helpers.IsDigitsOrDotOnly(numberStr) && !string.IsNullOrWhiteSpace(numberStr))
-                {
-                    return Convert.ToDouble(numberStr);
-                }
-                else
+                bool convertedToDouble = Double.TryParse(numberStr, out double decimalNumber);
+
+                if (!convertedToDouble)
                 {
                     Helpers.WarningMessage("This field accepts numbers only.");
+                    continue;
                 }
+
+                return decimalNumber;
             }
             catch
             {
-                Helpers.WarningMessage("Number is to long enter a smaller number");
+                Helpers.ErrorMessage("Number is to long enter a smaller number");
             }
         }
     }
@@ -469,7 +473,8 @@ public abstract class ViewTemplate
         List<string> pagesWithGoBack = new(){
             "ManageShowsPageAdmin",
             "ManageMoviesPageAdmin",
-            "ManageReservationsPageAdmin"
+            "ManageReservationsPageAdmin",
+            "MakeReservationPageCustomer"
         };
 
         if (pagesWithGoBack.Contains(viewName))
@@ -593,14 +598,11 @@ public abstract class ViewTemplate
         var decorator = "\u001b[32m";
         ConsoleKeyInfo key;
         bool isSelected = false;
-        // List<string> routesList = routesDict.Keys.ToList();
+
         List<RefreshmentModel> refreshments = new RefreshmentAccess().LoadAll();
-
-        // Insert the go back option
-        // routesList.Insert(0, "Go Back");
-
         while (!isSelected)
         {
+
             Console.Clear();
             // render screen cant use the this.render due to an infinite while loop
             this.CinemaLogo();

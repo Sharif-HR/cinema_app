@@ -32,7 +32,7 @@ public class ReservationOverviewCustomer : ViewTemplate
                 int seatNumber = seat.Column + 1;
                 seatString += $"[{rowLetter},{seatNumber}],";
             }
-            menuDict[$"{reservation.Show.Movie.Title} | Starts: {Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm")} | Seats: {seatString}"] = reservation;
+            menuDict[$"{reservation.Show.Movie.Title} | Starts: {Helpers.TimeStampToGMEFormat(reservation.Show.Timestamp, "HH:mm dd-MM-yyyy")} | Seats: {seatString}"] = reservation;
         }
 
         int index = MenuList<ReservationModel>(menuDict, this, this);

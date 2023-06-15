@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Reflection;
 
 public static class Helpers
@@ -97,7 +98,7 @@ public static class Helpers
     {
         foreach (char c in str)
         {
-            if ((c < '0' || c > '9') && c != ',')
+            if ((c < '0' || c > '9') && c != '.')
                 return false;
         }
 

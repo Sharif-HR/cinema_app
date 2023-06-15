@@ -31,6 +31,8 @@ public class ReservationsOverviewAdmin : ViewTemplate
                 {
                     Console.WriteLine($"ID: {reservation.ID}, Show: {reservation.Show.Movie.Title}, Customer: {reservation.User.FirstName} {reservation.User.LastName}");
                 }
+                Helpers.Continue();
+                RouteHandeler.LastView();
                 break;
             }
             else
@@ -54,6 +56,7 @@ public class ReservationsOverviewAdmin : ViewTemplate
                 {
                     Console.WriteLine($"ID: {reservation.ID}, Show: {reservation.Show.Movie.Title}, Customer: {reservation.User.FirstName} {reservation.User.LastName}");
                 }
+                RouteHandeler.LastView();
                 break;
             }
         }

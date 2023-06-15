@@ -9,6 +9,9 @@ public class ReservationPage : ViewTemplate
 
     private ReservationLogic _reservationLogic = new();
     private ShowLogic _showLogic = new();
+
+    private RefreshmentsLogic _refreshmentsLogic = new();
+
     public ReservationPage(ShowModel show = null) : base($"Make Reservation") { this.Show = show; }
 
     private void loadEmptyHall()
@@ -77,28 +80,21 @@ public class ReservationPage : ViewTemplate
 
 
         // create all the data
-        string id = GenRandId();
-        List<RefreshmentModel> chosenRefreshments = new();
-        while (true)
+        List<RefreshmentModel> chosenRefreshments;
+
+        if (base.CheckboxInput("Would you like to add a snack to your reservation?"))
         {
-            bool wantsSnack = CheckboxInput("Do you want to add a snack? Enter y or n");
-            if (!wantsSnack)
-            {
-                break;
-            }
-            // refreshment list
-            chosenRefreshments.Add(RefreshmentsList(this));
+            chosenRefreshments = SelectRefreshment();
+        }
+        else
+        {
+            chosenRefreshments = new();
 
-            var shoppingCart = from chosenRefreshment in chosenRefreshments
-                               group chosenRefreshment by chosenRefreshment.Name into refreshmentGroup
-                               select refreshmentGroup;
-
-            foreach (var item in shoppingCart)
-            {
-                Console.WriteLine($"{item.Key} X{item.Count()}");
-            }
         }
 
+
+
+        // kosten berekenen
         if (chosenRefreshments.Count > 0)
         {
             for (int i = 0; i < chosenRefreshments.Count; i++)
@@ -111,6 +107,7 @@ public class ReservationPage : ViewTemplate
         {
             costs *= 0.90;
         }
+        string id = GenRandId();
 
         ReservationModel reservation = new(id, selectedSeats, costs, chosenRefreshments, (AccountModel)LocalStorage.GetAuthenticatedUser(), this.Show);
 
@@ -129,6 +126,57 @@ public class ReservationPage : ViewTemplate
 
         RouteHandeler.View("DashboardPage");
     }
+
+
+
+    private List<RefreshmentModel> SelectRefreshment()
+    {
+        Dictionary<string, int> showSelectedRefreshments = new();
+        List<RefreshmentModel> selectedRefreshments = new List<RefreshmentModel>();
+
+        bool loopSnacks = true;
+
+
+        while (loopSnacks)
+        {
+            var refreshments = _refreshmentsLogic.GetRefreshments();
+
+            Dictionary<string, RefreshmentModel> refreshmentDict = new();
+
+            foreach (RefreshmentModel r in refreshments)
+            {
+                refreshmentDict[$"{r.Name} | €{r.Price},-"] = r;
+            }
+
+            int index = MenuList(refreshmentDict, this, this);
+
+
+
+            var selectedSnack = refreshments[index].Name;
+
+
+            if (showSelectedRefreshments.ContainsKey(selectedSnack))
+            {
+                showSelectedRefreshments[selectedSnack] += 1;
+            }
+            else
+            {
+                showSelectedRefreshments[selectedSnack] = 1;
+            }
+
+            Console.WriteLine("Selected refreshments:");
+            foreach (var r in showSelectedRefreshments)
+            {
+                Console.WriteLine($"{r.Key} | {r.Value}X");
+            }
+
+            selectedRefreshments.Add(refreshments[index]);
+            loopSnacks = base.CheckboxInput("Would you like to add another refreshment?");
+        }
+
+        return selectedRefreshments;
+    }
+
 
     private string GenRandId()
     {
@@ -170,7 +218,9 @@ public class ReservationPage : ViewTemplate
             try
             {
                 base.Render();
+
                 ShowHall(hall);
+                base.GoBackMsg();
                 Console.WriteLine("Select a seat by entering the [ROW],[SEAT NUMBER].");
                 Console.WriteLine("To deselect a seat, simply enter the same seat location with the [ROW] and [SEAT NUMBER].");
                 Helpers.WarningMessage("EXAMPLE: C,5");
@@ -178,6 +228,13 @@ public class ReservationPage : ViewTemplate
 
                 Console.Write("> ");
                 var index = Console.ReadLine();
+
+                if (String.IsNullOrEmpty(index))
+                {
+                    RouteHandeler.LastView();
+                    return null;
+                }
+
                 var splitIndex = index.Split(",");
 
                 string rowLetter = splitIndex[0];
@@ -348,7 +405,7 @@ public class ReservationPage : ViewTemplate
 
     private static void Content(SeatModel[][] hall)
     {
-        string [] alphabet = Helpers.AlphabetArray();
+        string[] alphabet = Helpers.AlphabetArray();
 
         for (int row = 0; row < hall.Length; row++)
         {

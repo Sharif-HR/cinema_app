@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Views;
 
 public class ShowsByDate : ViewTemplate
@@ -34,8 +36,16 @@ public class ShowsByDate : ViewTemplate
             {
                 string date = InputField("Enter the date of the movies you wish to see:");
 
-                int timestampOfGivenDate = Helpers.DateToUnixTimeStamp(date);
-                int timestampNextDay = Helpers.DateToUnixTimeStamp(Convert.ToString(Convert.ToDateTime(date).AddDays(1.0)));
+                DateOnly inputDateOnly = DateOnly.ParseExact(date, "dd-MM-yyyy", new CultureInfo("nl-NL"));
+                DateTime inputDateTime = inputDateOnly.ToDateTime(TimeOnly.Parse("00:00 AM"));
+
+                DateTimeOffset dateToConvert = new DateTimeOffset(inputDateTime);
+                int timestampOfGivenDate = (int)dateToConvert.ToUnixTimeSeconds();
+
+                DateTime nextDay = inputDateTime.AddDays(1);
+                DateTimeOffset nextDayConvert = new DateTimeOffset(nextDay);
+                int timestampNextDay = (int)nextDayConvert.ToUnixTimeSeconds();
+
 
                 List<ShowModel> shows = _showAccess.LoadAll();
                 List<ShowModel> availableShows = shows.Where(s => s.Timestamp >= timestampOfGivenDate && s.Timestamp < timestampNextDay).ToList();

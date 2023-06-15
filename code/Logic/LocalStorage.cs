@@ -143,13 +143,24 @@ public static class LocalStorage
         File.WriteAllLines("data/localStorage.json", data);
     }
 
+
     public static void AddToHistory(string viewName)
     {
         if (LocalStorageKeyCheck("history"))
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
 
-            if (viewName == "RegisterPage" || viewName == "LoginPage" || viewName == "AboutusPage")
+            List<string> excludePages = new(){
+                "RegisterPage",
+                "LoginPage",
+                "AboutusPage",
+                "SeeallreservationsPageAdmin",
+                "SeereservationsbycustomernamePageAdmin",
+                "CancelareservationPageAdmin",
+                "CancelReservationPageCustomer"
+            };
+
+            if (excludePages.Contains(viewName))
             {
                 return;
             }

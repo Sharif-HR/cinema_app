@@ -67,7 +67,7 @@ public class ManageShows : ViewTemplate, IManage
         {
             if (show.Timestamp >= Helpers.DateToUnixTimeStamp(DateTime.Now.ToString()))
             {
-                showsDict[show.Movie.Title + " " + Helpers.TimeStampToGMEFormat(show.Timestamp)] = show;
+                showsDict[$"{show.Movie.Title} {Helpers.TimeStampToGMEFormat(show.Timestamp, "HH:mm dd-MM-yyyy")}"] = show;
             }
         }
 
@@ -97,7 +97,7 @@ public class ManageShows : ViewTemplate, IManage
         {
             if (show.Timestamp >= Helpers.DateToUnixTimeStamp(DateTime.Now.ToString()))
             {
-                showsDict[show.Movie.Title + " " + Helpers.TimeStampToGMEFormat(show.Timestamp)] = show;
+                showsDict[$"{show.Movie.Title} {Helpers.TimeStampToGMEFormat(show.Timestamp, "HH:mm dd-MM-yyyy")}"] = show;
             }
         }
 

@@ -9,6 +9,6 @@ public class ShowOverview : ViewTemplate
     {
         base.Render();
         List<string> menuOptions = new() { "Shows by date" };
-        MenuList(menuOptions, this, "ShowOverviewPageAdmin");
+        MenuList(menuOptions, this, "MakeReservationPageCustomer");
     }
 }

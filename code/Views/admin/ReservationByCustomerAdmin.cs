@@ -38,6 +38,8 @@ public class ReservationByCustomerAdmin : ViewTemplate
         foreach (ReservationModel reservation in customerReservations)
         {
             Console.WriteLine($"ID: {reservation.ID}, Email: {reservation.User.EmailAddress}");
+            Helpers.Continue();
+            RouteHandeler.LastView();
         }
     }
 }

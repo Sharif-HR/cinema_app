@@ -131,8 +131,8 @@ Price: {refreshments[refreshmentId].Price}
                         updatedValue = InputField("Enter new name:");
                         break;
 
-                    case "isDrink":
-                        updatedValue = InputBool("Enter true or false:");
+                    case "isdrink":
+                        updatedValue = base.CheckboxInput("Enter y if it is a drink, enter n if not.");
                         break;
 
                     case "price":
