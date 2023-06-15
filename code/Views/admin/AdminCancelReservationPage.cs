@@ -3,6 +3,7 @@ namespace Views;
 public class AdminCancelReservationPage : ViewTemplate
 {
     private ReservationLogic _reservationLogic = new();
+    private ShowLogic _showLogic = new();
     public AdminCancelReservationPage(ShowModel show = null) : base($"Cancel a reservation") { }
 
     public override void Render()
@@ -44,15 +45,32 @@ public class AdminCancelReservationPage : ViewTemplate
 
             if (DateTime.Parse(Helpers.TimeStampToGMEFormat(customerReservation.Show.Timestamp)) > DateTime.Now)
             {
+
                 _reservationLogic.DeleteReservation(customerReservation, reservations);
+                var bookedShow = _showLogic.GetShows().FirstOrDefault(s => s.showId == customerReservation.Show.showId);
+                List<string> takenSeats = bookedShow.TakenSeats;
+
+                foreach (SeatModel seat in customerReservation.Seats)
+                {
+                    var seatNumber = seat.Column + 1;
+                    var row = seat.Row + 1;
+
+                    bool foundSeat = takenSeats.Contains($"{row}-{seatNumber}");
+                    if (foundSeat)
+                    {
+                        takenSeats.Remove($"{row}-{seatNumber}");
+                        _showLogic.EditShow(bookedShow, false);
+                    }
+                }
+
                 Console.WriteLine("Reservation cancelled...");
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
                 break;
             }
             else
             {
                 Console.WriteLine("You can't cancel this reservation anymore...");
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
             }
         }
     }
