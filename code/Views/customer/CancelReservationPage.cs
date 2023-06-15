@@ -57,11 +57,8 @@ public class CancelReservationPage : ViewTemplate
                     if (foundSeat)
                     {
                         takenSeats.Remove($"{row}-{seatNumber}");
-                        _showLogic.EditShow(bookedShow);
-
+                        _showLogic.EditShow(bookedShow, false);
                     }
-
-
                 }
 
 
