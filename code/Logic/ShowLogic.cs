@@ -41,7 +41,7 @@ public class ShowLogic : LogicTemplate
         }
     }
 
-    public void EditShow(ShowModel UpdatedShow)
+    public void EditShow(ShowModel UpdatedShow , bool showMessage = true)
     {
         int indexShow = _showList.FindIndex(uS => uS.showId == UpdatedShow.showId);
         try
@@ -61,7 +61,10 @@ public class ShowLogic : LogicTemplate
             }
 
             _reservationLogic.UpdateReservations(reservations);
-            Helpers.SuccessMessage("Successfully edited the show!");
+
+            if(showMessage){
+                Helpers.SuccessMessage("Successfully edited the show!");
+            }
         }
         catch (ArgumentOutOfRangeException)
         {
