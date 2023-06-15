@@ -1,1 +1,8 @@
-{}
+{
+  "authenticated": false,
+  "user": null,
+  "history": [
+    "MenuPage",
+    "MenuPage"
+  ]
+}
