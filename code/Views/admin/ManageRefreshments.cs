@@ -194,7 +194,8 @@ Price: {refreshments[refreshmentId].Price}
                 {"Filter refreshments list", ""},
             };
 
-            string UserInput = Convert.ToString(MenuList(listDict, this, this) + 1);
+            // string UserInput = Convert.ToString(MenuList(listDict, this, this) + 1);
+            string UserInput = Console.ReadLine();
 
             switch (UserInput)
             {
