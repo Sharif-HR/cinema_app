@@ -42,5 +42,16 @@
     "lastName": "sharif",
     "isStudent": false,
     "role": "customer"
+  },
+  {
+    "id": "3f63db51-6bb3-4818-b255-5d51410227aa",
+    "username": "sharif",
+    "password": "Password123!@#",
+    "emailAddress": "sharif2@mail.com",
+    "phoneNumber": "c",
+    "firstName": "sharif",
+    "lastName": "shr",
+    "isStudent": true,
+    "role": "customer"
   }
 ]
