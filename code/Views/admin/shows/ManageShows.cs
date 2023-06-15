@@ -5,8 +5,11 @@ namespace Views;
 public class ManageShows : ViewTemplate, IManage
 {
     private ShowLogic _showLogic = new();
+    private ReservationLogic _reservationLogic = new();
     private List<MovieModel> _movies = new();
     private List<ShowModel> _shows = new();
+
+
 
     public ManageShows() : base("Manage shows")
     {
@@ -204,7 +207,18 @@ public class ManageShows : ViewTemplate, IManage
         }
 
         var show = SelectShowFromList();
+        var reservations = _reservationLogic.GetReservations();
+
+        bool hasReservation = reservations.Any(r => r.Show.showId == show.showId);
+
+        if (hasReservation)
+        {
+            ReservationModel reservation = reservations.Where(r => r.Show.showId == show.showId).First();
+            _reservationLogic.DeleteReservation(reservation, reservations);
+        }
+
         _showLogic.DeleteShow(show.showId);
+
         _shows = _showLogic.GetShows();
 
         Helpers.SuccessMessage("Show deleted.");
