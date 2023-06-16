@@ -6,9 +6,11 @@ public class ShowLogic : LogicTemplate
     private MovieLogic _movieLogic = new();
     private ReservationLogic _reservationLogic = new();
 
-    public ShowLogic()
+    public ShowLogic(bool isTestingEnv = false)
     {
-        this._showList = GetShows();
+        if(!isTestingEnv) {
+            this._showList = GetShows();
+        }
     }
 
     public List<MovieModel> GetMovies() => _movieLogic.GetMovies();
